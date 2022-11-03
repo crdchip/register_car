@@ -21,24 +21,21 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
 
   String valueTime = "";
 
-  final List<String> genderItems = [
-    'tai',
-    'con',
+  final List<Map<String, dynamic>> genderItems = [
+    {"value": "tai", "name": "Xe tải"},
+    {"value": "con", "name": "Xe container"},
   ];
-  final List<String> idTeamItems = [
-    'DN',
-    'TN',
+  final List<Map<String, dynamic>> idTeamItems = [
+    {'value': "DN", "name": "Doanh nghiệp"},
+    {'value': "TN", "name": "Tư nhân"},
   ];
-  final List<String> idKho = [
-    'k1',
-    'K2',
-    'K3',
-    'K4',
-    'K5',
-    'K6',
-    'K7',
-    'K8',
-    'Sóng thần',
+
+  final List<Map<String, dynamic>> idKho = [
+    {"value": "k1", "name": "Kho 1"},
+    {"value": "k2", "name": "Kho 2"},
+    {"value": "k3", "name": "Kho 3"},
+    {"value": "k4", "name": "Kho 4"},
+    {"value": "k5", "name": "Kho 5"},
   ];
 
   String? selectedTeamCar;
@@ -85,9 +82,9 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
                 text: "Đội xe",
                 items: idTeamItems
                     .map((item) => DropdownMenuItem<String>(
-                          value: item,
+                          value: item["value"],
                           child: Text(
-                            item,
+                            item["name"],
                             style: const TextStyle(
                               fontSize: 14,
                             ),
@@ -107,9 +104,9 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
                 text: "Xe",
                 items: genderItems
                     .map((item) => DropdownMenuItem<String>(
-                          value: item,
+                          value: item["value"],
                           child: Text(
-                            item,
+                            item["name"],
                             style: const TextStyle(
                               fontSize: 14,
                             ),
@@ -129,9 +126,9 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
                 text: "Warehome",
                 items: idKho
                     .map((item) => DropdownMenuItem<String>(
-                          value: item,
+                          value: item["value"],
                           child: Text(
-                            item,
+                            item["name"],
                             style: const TextStyle(
                               fontSize: 14,
                             ),
@@ -147,8 +144,8 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
                 },
               ),
 
-              formText(size, "Số xe / Cont", _registerController.numberCar,
-                  Icons.abc),
+              formText(
+                  size, "Biển số xe", _registerController.numberCar, Icons.abc),
               //check xem có hàng hóa k
               checkboxProduct(size, "Hàng hóa"),
 
@@ -168,13 +165,6 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
               formDate(size),
               formButton(
                 () {
-                  // print([
-                  //   selectedCar,
-                  //   selectedTeamCar,
-                  //   selectedWarehome,
-                  //   valueTime
-                  // ]);
-
                   _registerController.postRegisterCar(
                     selectedTeamCar.toString(),
                     selectedCar.toString(),

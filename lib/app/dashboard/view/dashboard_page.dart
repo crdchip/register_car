@@ -46,7 +46,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 // print(Get.isDarkMode);
                 String themeCode = value ? "dark" : "light";
                 setState(() {
-                  GetStorage('MyStorage').write(THEME_KEY, themeCode);
+                  GetStorage('MyStorage').write(AppConstants.THEME_KEY, themeCode);
                   Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
                   _value = value;
                 });

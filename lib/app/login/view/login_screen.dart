@@ -20,6 +20,8 @@ class _LoginScreenState extends State<LoginScreen> {
   final LoginController _loginController = LoginController();
 
   bool obscureText = true;
+
+  bool login = true;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;

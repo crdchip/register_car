@@ -6,8 +6,17 @@ import 'package:get/get.dart' hide Response;
 import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
 import 'package:register_driver_car/app/home/models/form_post_account.dart';
 import 'package:register_driver_car/app/login/controller/login_controller.dart';
+import 'package:register_driver_car/config/core/constants/constants.dart';
+import 'package:register_driver_car/config/model/token_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterCarController extends GetxController {
+  @override
+  void onInit() async {
+    // TODO: implement onInit
+    super.onInit();
+  }
+
   TextEditingController numberCar = TextEditingController();
 
   TextEditingController carfleedId = TextEditingController();
@@ -24,24 +33,6 @@ class RegisterCarController extends GetxController {
   TextEditingController cont2seal2 = TextEditingController();
   TextEditingController cont2seal3 = TextEditingController();
 
-  // register_car() {
-  //   return postRegisterCar(
-  //     carfleedId.text,
-  //     transportId.text,
-  //     licensePlate.text,
-  //     intendTime.text,
-  //     warehouse.text,
-  //     contNumber1.text,
-  //     cont1seal1.text,
-  //     cont1seal2.text,
-  //     cont1seal3.text,
-  //     contNumber2.text,
-  //     cont2seal1.text,
-  //     cont2seal2.text,
-  //     cont2seal3.text,
-  //   );
-  // }
-
   Future<void> postRegisterCar(
     String carfleedId,
     String transportId,
@@ -57,9 +48,9 @@ class RegisterCarController extends GetxController {
     String cont2seal2,
     String cont2seal3,
   ) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = TokenApi().getToken();
     Response response;
-    var token =
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0aWVuYSIsInBlcm1pc3Npb25faWQiOjF9.aKN6PsWWhGZIbq8Pk23terCbjh5h6_1Mwbu__1rj6DM';
     var _dio = Dio();
     Map<String, String> headers = {
       HttpHeaders.authorizationHeader: "Bearer $token",
