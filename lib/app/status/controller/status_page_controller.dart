@@ -5,8 +5,6 @@ import 'package:flutter/services.dart';
 import 'package:get/state_manager.dart';
 import 'package:register_driver_car/app/status/model/lane_model.dart';
 import 'package:register_driver_car/app/status/model/ware_home.dart';
-import 'package:register_driver_car/config/core/constants/constants.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class StatusController extends GetxController {
   @override
@@ -27,8 +25,7 @@ class StatusController extends GetxController {
     return data.map((e) => LaneCar.fromJson(e)).toList();
   }
 
-  Future<void> getStatusLine() async {
-    
+  Future<List<WareHome>?> getStatusLine() async {
     var _dio = Dio();
     Response response;
     var urlApi = "http://192.168.3.59:8000/tracking/test";
@@ -39,7 +36,12 @@ class StatusController extends GetxController {
 
     if (response.statusCode == 200) {
       print(response.data['data']);
-      return response.data['data'];
+      Map<String, dynamic> map = response.data;
+      List<dynamic> data = map["data"];
+
+      return data.map((e) => WareHome.fromJson(e)).toList();
+    } else {
+      return null;
     }
   }
 }

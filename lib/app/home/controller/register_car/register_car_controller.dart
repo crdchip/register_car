@@ -5,18 +5,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
 import 'package:register_driver_car/app/home/models/form_post_account.dart';
-import 'package:register_driver_car/app/login/controller/login_controller.dart';
-import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/model/token_api.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterCarController extends GetxController {
-  @override
-  void onInit() async {
-    // TODO: implement onInit
-    super.onInit();
-  }
-
   TextEditingController numberCar = TextEditingController();
 
   TextEditingController carfleedId = TextEditingController();
@@ -35,6 +26,7 @@ class RegisterCarController extends GetxController {
 
   Future<void> postRegisterCar(
     String carfleedId,
+    int companyId,
     String transportId,
     String licensePlate,
     String intendTime,
@@ -48,8 +40,11 @@ class RegisterCarController extends GetxController {
     String cont2seal2,
     String cont2seal3,
   ) async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    var token = TokenApi().getToken();
+    // SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = await TokenApi().getToken();
+    // var token =
+    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0aWVuYSIsInBlcm1pc3Npb25faWQiOjF9.aKN6PsWWhGZIbq8Pk23terCbjh5h6_1Mwbu__1rj6DM";
+    print(token);
     Response response;
     var _dio = Dio();
     Map<String, String> headers = {
@@ -57,6 +52,7 @@ class RegisterCarController extends GetxController {
     };
     var formRegister = FormRegisterCar(
       carfleedId: carfleedId,
+      companyId: companyId,
       transportId: transportId,
       licensePlate: licensePlate,
       intendTime: intendTime,

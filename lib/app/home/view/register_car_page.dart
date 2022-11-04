@@ -31,11 +31,11 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
   ];
 
   final List<Map<String, dynamic>> idKho = [
-    {"value": "k1", "name": "Kho 1"},
-    {"value": "k2", "name": "Kho 2"},
-    {"value": "k3", "name": "Kho 3"},
-    {"value": "k4", "name": "Kho 4"},
-    {"value": "k5", "name": "Kho 5"},
+    {"value": "K1", "name": "Kho 1"},
+    {"value": "K2", "name": "Kho 2"},
+    {"value": "K3", "name": "Kho 3"},
+    {"value": "K4", "name": "Kho 4"},
+    {"value": "K5", "name": "Kho 5"},
   ];
 
   String? selectedTeamCar;
@@ -165,22 +165,7 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
               formDate(size),
               formButton(
                 () {
-                  _registerController.postRegisterCar(
-                    selectedTeamCar.toString(),
-                    selectedCar.toString(),
-                    "",
-                    valueTime,
-                    selectedWarehome.toString(),
-                    "", "", "", "",
-                    // _registerController.contNumber1.text,
-                    // _registerController.cont1seal1.text,
-                    // _registerController.cont1seal2.text,
-                    // _registerController.cont1seal3.text,
-                    "",
-                    "",
-                    "",
-                    "",
-                  );
+                  postRegis();
                 },
                 size,
               )
@@ -367,6 +352,26 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
           )
         ],
       ),
+    );
+  }
+
+  postRegis() {
+    return _registerController.postRegisterCar(
+      selectedTeamCar.toString(),
+      1,
+      selectedCar.toString(),
+      "string",
+      valueTime,
+      selectedWarehome.toString(),
+      "", "", "", "",
+      // _registerController.contNumber1.text,
+      // _registerController.cont1seal1.text,
+      // _registerController.cont1seal2.text,
+      // _registerController.cont1seal3.text,
+      "",
+      "",
+      "",
+      "",
     );
   }
 }

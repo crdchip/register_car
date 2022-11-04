@@ -1,5 +1,6 @@
 class FormRegisterCar {
   String? carfleedId;
+  int? companyId;
   String? transportId;
   String? licensePlate;
   String? intendTime;
@@ -17,6 +18,7 @@ class FormRegisterCar {
 
   FormRegisterCar(
       {this.carfleedId,
+      this.companyId,
       this.transportId,
       this.licensePlate,
       this.intendTime,
@@ -34,6 +36,7 @@ class FormRegisterCar {
 
   FormRegisterCar.fromJson(Map<String, dynamic> json) {
     carfleedId = json['carfleedId'];
+    companyId = json['companyId'];
     transportId = json['transportId'];
     licensePlate = json['licensePlate'];
     intendTime = json['intendTime'];
@@ -53,6 +56,7 @@ class FormRegisterCar {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = Map<String, dynamic>();
     data['carfleedId'] = carfleedId;
+    data['companyId'] = companyId;
     data['transportId'] = transportId;
     data['licensePlate'] = licensePlate;
     data['intendTime'] = intendTime;
