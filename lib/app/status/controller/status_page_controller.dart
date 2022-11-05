@@ -28,7 +28,6 @@ class StatusController extends GetxController {
   }
 
   Future<void> getStatusLine() async {
-    
     var _dio = Dio();
     Response response;
     var urlApi = "http://192.168.3.59:8000/tracking/test";

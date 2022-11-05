@@ -202,17 +202,13 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
         type: DateTimePickerType.dateTimeSeparate,
         dateMask: 'd MMM, yyyy',
         initialValue: DateTime.now().toString(),
-        firstDate: DateTime(2022),
+        firstDate: DateTime(2021),
         lastDate: DateTime(2100),
         icon: const Icon(Icons.event),
         dateLabelText: 'Date',
         timeLabelText: "Hour",
         selectableDayPredicate: (date) {
           // Disable weekend days to select from the calendar
-          if (date.weekday == 6 || date.weekday == 7) {
-            return false;
-          }
-
           return true;
         },
         onChanged: (val) {

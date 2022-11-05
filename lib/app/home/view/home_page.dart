@@ -4,6 +4,7 @@ import 'package:get/state_manager.dart';
 import 'package:register_driver_car/app/dashboard/model/news_vietname_model.dart';
 import 'package:register_driver_car/app/dashboard/model/newsfeed_model.dart';
 import 'package:register_driver_car/app/home/controller/home/home_controller.dart';
+import 'package:register_driver_car/app/home/view/active_status_page.dart';
 
 import 'package:register_driver_car/app/home/view/register_car_page.dart';
 import 'package:register_driver_car/app/home/view/webview.dart';
@@ -118,7 +119,7 @@ class _HomePageState extends State<HomePage> {
               Card(
                 child: GestureDetector(
                   onTap: () {
-                    Get.to(() => RegisterCarPage());
+                    Get.to(() => ActiveStatusPage());
                   },
                   child: const Card(
                     child: ListTile(

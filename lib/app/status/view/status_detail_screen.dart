@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/status/model/lane_model.dart';
+import 'package:register_driver_car/app/status/model/ware_home.dart';
 
 class StatusDetailScreen extends StatefulWidget {
   const StatusDetailScreen({
@@ -13,6 +14,9 @@ class StatusDetailScreen extends StatefulWidget {
 
   final List<ClientLane>? client_right;
   final List<ClientLane>? client_left;
+
+  // final List<Gate>? gateRight;
+  // final List<Gate>? gateLeft;
 
   @override
   State<StatusDetailScreen> createState() => _StatusDetailScreenState();
