@@ -5,7 +5,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
 import 'package:register_driver_car/app/home/models/form_post_account.dart';
-import 'package:register_driver_car/config/model/token_api.dart';
+import 'package:register_driver_car/config/model/token/token_api.dart';
 
 class RegisterCarController extends GetxController {
   TextEditingController numberCar = TextEditingController();
@@ -40,11 +40,7 @@ class RegisterCarController extends GetxController {
     String cont2seal2,
     String cont2seal3,
   ) async {
-    // SharedPreferences prefs = await SharedPreferences.getInstance();
     var token = await TokenApi().getToken();
-    // var token =
-    //     "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwidXNlcm5hbWUiOiJ0aWVuYSIsInBlcm1pc3Npb25faWQiOjF9.aKN6PsWWhGZIbq8Pk23terCbjh5h6_1Mwbu__1rj6DM";
-    print(token);
     Response response;
     var _dio = Dio();
     Map<String, String> headers = {
@@ -80,7 +76,6 @@ class RegisterCarController extends GetxController {
       );
       print(response.statusCode);
       if (response.statusCode == 201) {
-        print(response.data);
         Get.to(() => DashBoardPage());
       }
     } catch (e) {

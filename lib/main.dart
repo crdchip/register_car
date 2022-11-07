@@ -5,14 +5,11 @@ import 'package:get_storage/get_storage.dart';
 import 'package:register_driver_car/app/splash/controller/splash_binding.dart';
 import 'package:register_driver_car/app/splash/view/splash_screen.dart';
 import 'package:register_driver_car/config/core/theme/theme_provider.dart';
-import 'package:register_driver_car/config/model/method.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
-import 'package:dio/dio.dart';
 
 import 'config/core/constants/constants.dart';
 
 void main() async {
-
   await GetStorage.init('MyStorage');
   final box = GetStorage('MyStorage');
   String? mode = box.read(AppConstants.THEME_KEY);
