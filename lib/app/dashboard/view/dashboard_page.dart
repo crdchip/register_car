@@ -6,13 +6,19 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:register_driver_car/app/dashboard/controller/dashboard_controller.dart';
 import 'package:register_driver_car/app/home/view/home_page.dart';
+import 'package:register_driver_car/app/login/model/login_user_token.dart';
 import 'package:register_driver_car/app/profile/view/profile_page.dart';
 
 import 'package:register_driver_car/app/status/view/status_screen.dart';
 import 'package:register_driver_car/config/core/constants/constants.dart';
 
+// ignore: must_be_immutable
 class DashBoardPage extends StatefulWidget {
-  const DashBoardPage({Key? key}) : super(key: key);
+  DashBoardPage({
+    Key? key,
+  }) : super(key: key);
+
+  Client? client;
 
   @override
   State<DashBoardPage> createState() => _DashBoardPageState();
@@ -24,18 +30,21 @@ class _DashBoardPageState extends State<DashBoardPage> {
   final List<Widget> screens = [
     const HomePage(),
     const StatusScreen(),
-    const ProfilePage(),
+    ProfilePage(
+      client: Client(),
+    ),
   ];
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = const HomePage();
   bool _value = true;
   @override
   Widget build(BuildContext context) {
+    var agr = ModalRoute.of(context)!.settings.arguments as Client;
     return GetBuilder<DashBoardController>(
       init: DashBoardController(),
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: const Text("TBS"),
+          title: Text("TBS"),
           centerTitle: true,
           automaticallyImplyLeading: false,
           actions: [
@@ -46,7 +55,8 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 // print(Get.isDarkMode);
                 String themeCode = value ? "dark" : "light";
                 setState(() {
-                  GetStorage('MyStorage').write(AppConstants.THEME_KEY, themeCode);
+                  GetStorage('MyStorage')
+                      .write(AppConstants.THEME_KEY, themeCode);
                   Get.changeThemeMode(value ? ThemeMode.dark : ThemeMode.light);
                   _value = value;
                 });
@@ -108,7 +118,15 @@ class _DashBoardPageState extends State<DashBoardPage> {
                 MaterialButton(
                   onPressed: () {
                     setState(() {
-                      currentScreen = const ProfilePage();
+                      currentScreen = ProfilePage(
+                        client: Client(
+                          name: agr.name,
+                          phone: agr.phone,
+                          address: agr.address,
+                          email: agr.email,
+                          dataimg: agr.dataimg,
+                        ),
+                      );
                       currentTab = 2;
                     });
                   },

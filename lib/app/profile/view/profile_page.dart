@@ -1,51 +1,61 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:register_driver_car/app/login/model/login_user_token.dart';
 import 'package:register_driver_car/app/login/view/login_screen.dart';
+import 'package:register_driver_car/app/profile/controller/profile_controller.dart';
 import 'package:register_driver_car/config/data/colors.dart';
-import 'package:register_driver_car/config/data/text.dart';
+import 'package:register_driver_car/config/model/image/image_api.dart';
 
 class ProfilePage extends StatefulWidget {
-  const ProfilePage({Key? key}) : super(key: key);
+  ProfilePage({Key? key, required this.client}) : super(key: key);
+
+  final Client client;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  var profileController = Get.put(ProfileController());
+  String dataImgae = "";
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    var arg = ModalRoute.of(context)!.settings.arguments as Client;
+    return GetBuilder<ProfileController>(
+      init: ProfileController(),
+      builder: (profileController) => Scaffold(
+        body: getBody(size),
+      ),
+    );
+  }
+
+  Widget getBody(Size size) {
     return SingleChildScrollView(
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            // getImageBase64("${widget.client.dataimg}"),
+            // getImageBase64(),
+            // profileController.getImageBase64(
+            //     userToken!.dictdata!.client!.dataimg.toString()),
             SizedBox(height: size.height * 0.075),
-            uploadImage(size),
+            uploadImage(size, "${widget.client.dataimg}"),
             SizedBox(height: size.height * 0.05),
-            textForm(size, "Name", "Adom Shafi"),
+            textForm(size, "Name", "${widget.client.name}"),
             SizedBox(height: size.height * 0.05),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                textForm(size, "BirthDate", "1/11/2001"),
-                SizedBox(width: size.width * 0.2),
-                textForm(size, "Gender", "Male"),
-              ],
-            ),
+
+            textForm(size, "Địa chỉ", "${widget.client.address}"),
             SizedBox(height: size.height * 0.05),
-            textForm(size, "Email", "helloword@gmail.com"),
+            textForm(size, "Email", "${widget.client.email}"),
             SizedBox(height: size.height * 0.05),
-            textForm(size, "Phone", "+84582369632"),
-            SizedBox(height: size.height * 0.05),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                textForm(size, "Country", "BD"),
-                SizedBox(width: size.width * 0.2),
-                textForm(size, "Zip code", "5696"),
-              ],
-            ),
+            textForm(size, "Phone", "${widget.client.phone}"),
+
             SizedBox(height: size.height * 0.05),
             buttonForm(
               size,
@@ -64,7 +74,7 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
-  Widget uploadImage(Size size) {
+  Widget uploadImage(Size size, String image) {
     return Container(
       width: size.width,
       height: size.width * 0.2,
@@ -75,14 +85,7 @@ class _ProfilePageState extends State<ProfilePage> {
             Container(
               height: size.width * 0.2,
               width: size.width * 0.2,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(100.0),
-                image: const DecorationImage(
-                  image: AssetImage("assets/images/image_profile.png"),
-                  fit: BoxFit.cover,
-                ),
-              ),
+              child: getImageBase64(image),
             ),
             Positioned(
               bottom: 0,
@@ -164,6 +167,21 @@ class _ProfilePageState extends State<ProfilePage> {
               color: Colors.white,
             ),
           )),
+    );
+  }
+
+  getImageBase64(String image) {
+    print("imgae : $image");
+    const Base64Codec base64 = Base64Codec();
+    Uint8List bytes = base64.decode(image);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(100.0),
+      child: Image.memory(
+        bytes,
+        width: 50,
+        height: 50,
+        fit: BoxFit.cover,
+      ),
     );
   }
 }

@@ -13,7 +13,7 @@ class SplashPage extends GetView<SplashController> {
       builder: (_) {
         return controller.userStatus == false
             ? const LoginScreen()
-            : const DashBoardPage();
+            : DashBoardPage();
       },
     );
   }

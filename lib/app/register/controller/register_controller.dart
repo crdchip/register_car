@@ -9,6 +9,9 @@ import 'package:register_driver_car/app/register/model/client.dart';
 import 'package:register_driver_car/app/register/model/driver.dart';
 import 'package:register_driver_car/app/register/model/user.dart';
 import 'package:http/http.dart' as http;
+import 'package:register_driver_car/config/core/constants/constants.dart';
+import 'package:register_driver_car/config/model/token/token_api.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class RegisterController extends GetxController {
   TextEditingController firstNameController = TextEditingController();
@@ -25,24 +28,6 @@ class RegisterController extends GetxController {
 
   TextEditingController accountController = TextEditingController();
   TextEditingController passController = TextEditingController();
-
-  @override
-  void onInit() {
-    // TODO: implement onInit
-    super.onInit();
-  }
-
-  @override
-  void onReady() {
-    // TODO: implement onReady
-    super.onReady();
-  }
-
-  @override
-  void onClose() {
-    // TODO: implement onClose
-    super.onClose();
-  }
 
   Future<void> createDrivers(
     String? firstName,
@@ -103,9 +88,11 @@ class RegisterController extends GetxController {
   ) async {
     Response response;
     var dio = Dio();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var token = await prefs.getString(AppConstants.KEY_ACCESS_TOKEN);
+
     Map<String, String> headers = {
-      HttpHeaders.authorizationHeader:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxIiwiZXhwIjoxNjY1ODE2NTY4fQ.S4TzqSqhvIfEh1aJ8XZQ3LCUAtETJWfcAwOc6m991Bw",
+      HttpHeaders.authorizationHeader: "Bearer $token",
     };
 
     var drivers = Clients(

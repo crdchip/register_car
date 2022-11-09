@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/home/controller/register_car/register_car_controller.dart';
 import 'package:register_driver_car/app/home/widgets/dropdownButton.dart';
-import 'package:register_driver_car/app/home/widgets/form_date.dart';
 
 class RegisterCarPage extends StatefulWidget {
   const RegisterCarPage({Key? key}) : super(key: key);

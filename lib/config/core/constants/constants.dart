@@ -5,4 +5,8 @@ class AppConstants {
   static const int RESPONSE_CODE_SUCCESS = 200;
   static const int RESPONSE_CODE_ERROR = 400;
   static const String KEY_ACCESS_TOKEN = "access_token";
+
+  //Role
+  static const String ROLE = "role";
+  static const String IMAGE = "image";
 }

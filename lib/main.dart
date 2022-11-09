@@ -14,19 +14,21 @@ void main() async {
   final box = GetStorage('MyStorage');
   String? mode = box.read(AppConstants.THEME_KEY);
   bool isLightMode = (mode != null && mode == "light");
-  runApp(GetMaterialApp(
-    debugShowCheckedModeBanner: false,
-    themeMode: isLightMode ? ThemeMode.light : ThemeMode.dark,
-    theme: MyThemes.lightTheme,
-    darkTheme: MyThemes.darkTheme,
-    defaultTransition: Transition.fade,
-    initialBinding: SplashBinding(),
-    initialRoute: Routes.SPLASH,
-    getPages: AppPages.pages,
-    home: AnimatedSplashScreen(
-      duration: 1500,
-      nextScreen: const SplashPage(),
-      splash: "assets/images/logo@2x.png",
+  runApp(
+    GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      themeMode: isLightMode ? ThemeMode.light : ThemeMode.dark,
+      theme: MyThemes.lightTheme,
+      darkTheme: MyThemes.darkTheme,
+      defaultTransition: Transition.fade,
+      initialBinding: SplashBinding(),
+      initialRoute: Routes.SPLASH,
+      getPages: AppPages.pages,
+      home: AnimatedSplashScreen(
+        duration: 1500,
+        nextScreen: const SplashPage(),
+        splash: "assets/images/logo@2x.png",
+      ),
     ),
-  ));
+  );
 }

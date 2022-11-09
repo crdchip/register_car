@@ -12,7 +12,7 @@ class StatusController extends GetxController {
     // TODO: implement onInit
     super.onInit();
     getStatusLine();
-    print(getStatusLine());
+    // print(getStatusLine());
   }
 
   Future<List<LaneCar>> ReadDataLane() async {
@@ -32,10 +32,10 @@ class StatusController extends GetxController {
 
     response = await _dio.get(urlApi);
 
-    print(response.statusCode);
+    // print(response.statusCode);
 
     if (response.statusCode == 200) {
-      print(response.data['data']);
+      // print(response.data['data']);
       Map<String, dynamic> map = response.data;
       List<dynamic> data = map["data"];
 
