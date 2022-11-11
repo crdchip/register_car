@@ -24,11 +24,7 @@ void main() async {
       initialBinding: SplashBinding(),
       initialRoute: Routes.SPLASH,
       getPages: AppPages.pages,
-      home: AnimatedSplashScreen(
-        duration: 1500,
-        nextScreen: const SplashPage(),
-        splash: "assets/images/logo@2x.png",
-      ),
+      home: SplashPage(),
     ),
   );
 }

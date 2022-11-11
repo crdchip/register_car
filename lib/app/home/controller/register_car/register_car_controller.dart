@@ -65,7 +65,7 @@ class RegisterCarController extends GetxController {
       lockState: false,
     );
     var jsonData = formRegister.toJson();
-    String url = "http://192.168.3.59:8000/dangtai/";
+    String url = "http://192.168.3.59:8000/dangtai/create_formin";
     try {
       response = await _dio.post(
         url,

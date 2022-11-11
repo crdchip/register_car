@@ -27,6 +27,7 @@ class _RegisterCarPageState extends State<RegisterCarPage> {
   final List<Map<String, dynamic>> idTeamItems = [
     {'value': "DN", "name": "Doanh nghiệp"},
     {'value': "TN", "name": "Tư nhân"},
+    {'value': "TN", "name": "Nhà nước"},
   ];
 
   final List<Map<String, dynamic>> idKho = [

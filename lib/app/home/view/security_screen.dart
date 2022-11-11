@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/home/controller/active_status/active_status_controller.dart';
 import 'package:register_driver_car/app/home/view/active_status/details_active_status_page.dart';
@@ -8,14 +7,14 @@ import 'package:register_driver_car/app/home/widgets/custom_list_title.dart';
 import 'package:register_driver_car/app/home/widgets/custom_nav_list_title.dart';
 import 'package:register_driver_car/config/widget/search_navbar.dart';
 
-class ActiveStatusPage extends StatefulWidget {
-  const ActiveStatusPage({Key? key}) : super(key: key);
+class SecurityScreen extends StatefulWidget {
+  const SecurityScreen({super.key});
 
   @override
-  State<ActiveStatusPage> createState() => _ActiveStatusPageState();
+  State<SecurityScreen> createState() => _SecurityScreenState();
 }
 
-class _ActiveStatusPageState extends State<ActiveStatusPage> {
+class _SecurityScreenState extends State<SecurityScreen> {
   late ScrollController _scrollController;
   bool _showAppbar = false;
   bool isScrollingDown = false;

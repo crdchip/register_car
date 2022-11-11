@@ -1,16 +1,16 @@
 import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/login/model/login_user_token.dart';
-import 'package:register_driver_car/app/login/view/login_screen.dart';
 import 'package:register_driver_car/app/profile/controller/profile_controller.dart';
 import 'package:register_driver_car/config/data/colors.dart';
-import 'package:register_driver_car/config/model/image/image_api.dart';
 
 class ProfilePage extends StatefulWidget {
-  ProfilePage({Key? key, required this.client}) : super(key: key);
+  const ProfilePage({
+    Key? key,
+    required this.client,
+  }) : super(key: key);
 
   final Client client;
 
@@ -21,11 +21,9 @@ class ProfilePage extends StatefulWidget {
 class _ProfilePageState extends State<ProfilePage> {
   var profileController = Get.put(ProfileController());
   String dataImgae = "";
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    var arg = ModalRoute.of(context)!.settings.arguments as Client;
     return GetBuilder<ProfileController>(
       init: ProfileController(),
       builder: (profileController) => Scaffold(
@@ -36,42 +34,40 @@ class _ProfilePageState extends State<ProfilePage> {
 
   Widget getBody(Size size) {
     return SingleChildScrollView(
-      child: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // getImageBase64("${widget.client.dataimg}"),
-            // getImageBase64(),
-            // profileController.getImageBase64(
-            //     userToken!.dictdata!.client!.dataimg.toString()),
-            SizedBox(height: size.height * 0.075),
-            uploadImage(size, "${widget.client.dataimg}"),
-            SizedBox(height: size.height * 0.05),
-            textForm(size, "Name", "${widget.client.name}"),
-            SizedBox(height: size.height * 0.05),
-
-            textForm(size, "Địa chỉ", "${widget.client.address}"),
-            SizedBox(height: size.height * 0.05),
-            textForm(size, "Email", "${widget.client.email}"),
-            SizedBox(height: size.height * 0.05),
-            textForm(size, "Phone", "${widget.client.phone}"),
-
-            SizedBox(height: size.height * 0.05),
-            buttonForm(
-              size,
-              () {
-                print("oke");
-                Get.to(() => const LoginScreen());
-                // _loginController.loginDrivers(
-                //   _loginController.accountController.text,
-                //   _loginController.passController.text,
-                // );
-              },
+        child: FutureBuilder(
+      builder: ((context, snapshot) {
+        if (snapshot.hasData) {
+          var items = snapshot.data;
+          // print("items : ${items["name"]} ");
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(height: size.height * 0.05),
+                uploadImage(size, "${items["dataimg"]}"),
+                SizedBox(height: size.height * 0.05),
+                textForm(size, "Name", "${items["name"]}"),
+                SizedBox(height: size.height * 0.05),
+                textForm(size, "Địa chỉ", "${items["address"]}"),
+                SizedBox(height: size.height * 0.05),
+                textForm(size, "Email", "${items["email"]}"),
+                SizedBox(height: size.height * 0.05),
+                textForm(size, "Phone", "${items["phone"]}"),
+                SizedBox(height: size.height * 0.05),
+                buttonForm(
+                  size,
+                  () {
+                    profileController.postLogout();
+                  },
+                ),
+              ],
             ),
-          ],
-        ),
-      ),
-    );
+          );
+        }
+        return Container();
+      }),
+      future: profileController.getUser(),
+    ));
   }
 
   Widget uploadImage(Size size, String image) {

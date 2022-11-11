@@ -2,6 +2,7 @@ import 'package:get/get.dart';
 import 'package:register_driver_car/app/dashboard/controller/dashboard_binding.dart';
 import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
 import 'package:register_driver_car/app/home/controller/register_car/register_car_binding.dart';
+import 'package:register_driver_car/app/home/view/home_page.dart';
 import 'package:register_driver_car/app/home/view/register_car/register_car_page.dart';
 import 'package:register_driver_car/app/home/view/register_car/show_information_register.dart';
 
@@ -19,7 +20,7 @@ abstract class AppPages {
   static final pages = [
     GetPage(
       name: Routes.SPLASH,
-      page: () => const SplashPage(),
+      page: () => SplashPage(),
       binding: SplashBinding(),
       preventDuplicates: false,
     ),
@@ -31,7 +32,7 @@ abstract class AppPages {
     ),
     GetPage(
       name: Routes.HOME,
-      page: () => const SplashPage(),
+      page: () => HomePage(),
       binding: SplashBinding(),
       preventDuplicates: false,
     ),

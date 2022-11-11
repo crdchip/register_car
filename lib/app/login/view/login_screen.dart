@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
         borderRadius: const BorderRadius.all(Radius.circular(20.0)),
       ),
       width: size.width * 0.9,
-      height: 50,
+      height: 60,
       child: TextFormField(
         controller: controller,
         decoration: InputDecoration(
@@ -146,6 +146,7 @@ class _LoginScreenState extends State<LoginScreen> {
           contentPadding: const EdgeInsets.only(top: 20),
           isDense: true,
           hintText: text,
+          // hintStyle: TextStyle(height: 10),
           prefixIcon: Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Icon(

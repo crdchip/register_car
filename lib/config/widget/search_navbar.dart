@@ -22,6 +22,7 @@ class _MyWidgetState extends State<SearchNavbar> {
       child: TextFormField(
         controller: widget.searchController,
         decoration: InputDecoration(
+          // label: Text("Hello"),
           border: InputBorder.none,
           hintText: widget.hintText,
           hintStyle: TextStyle(
@@ -29,7 +30,7 @@ class _MyWidgetState extends State<SearchNavbar> {
             fontSize: 16,
           ),
           hintTextDirection: TextDirection.ltr,
-          contentPadding: EdgeInsets.only(top: 5),
+          contentPadding: const EdgeInsets.only(top: 5),
         ),
       ),
     );

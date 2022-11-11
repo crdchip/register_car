@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
 
 import 'package:register_driver_car/app/home/controller/home/home_controller.dart';
 import 'package:register_driver_car/app/home/view/active_status/active_status_page.dart';
@@ -21,14 +22,23 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   // final const String role = RoleApi.getRole().toString;
 
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    // setState(() {
+    //   switchPage();
+    // });
+  }
+
   void switchPage() async {
     var role = await RoleApi().getRole();
     switch (role) {
       case "Bảo vệ":
         Get.to(() => const StatusScreen());
         break;
-      case "admin":
-        Get.to(() => const ActiveStatusPage());
+      case "khách hàng":
+        Get.to(() => const HomePage());
         break;
 
       default:

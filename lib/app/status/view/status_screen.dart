@@ -18,6 +18,21 @@ class _StatusScreenState extends State<StatusScreen> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            color: Colors.white.withOpacity(0.4),
+            onPressed: () {},
+          ),
+          title: Text(
+            "Thông tin ra chưa vào",
+            style: TextStyle(
+              color: Colors.black.withOpacity(0.4),
+              fontSize: 16,
+            ),
+          ),
+          centerTitle: true,
+        ),
         body: GetBuilder<StatusController>(
           builder: (controller) {
             return _getBody(size);

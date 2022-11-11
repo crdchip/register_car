@@ -18,13 +18,14 @@ class DashBoardPage extends StatefulWidget {
     Key? key,
   }) : super(key: key);
 
-  Client? client;
+  // Client? client;
 
   @override
   State<DashBoardPage> createState() => _DashBoardPageState();
 }
 
 class _DashBoardPageState extends State<DashBoardPage> {
+  final String routes = "/dash_board";
   int currentTab = 0;
   bool isFloatButton = false;
   final List<Widget> screens = [
@@ -39,7 +40,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
   bool _value = true;
   @override
   Widget build(BuildContext context) {
-    var agr = ModalRoute.of(context)!.settings.arguments as Client;
+    // var agr = ModalRoute.of(context)!.settings.arguments as Client;
     return GetBuilder<DashBoardController>(
       init: DashBoardController(),
       builder: (_) => Scaffold(
@@ -74,76 +75,69 @@ class _DashBoardPageState extends State<DashBoardPage> {
           child: SizedBox(
             height: 50,
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      currentScreen = const HomePage();
-                      currentTab = 0;
-                    });
-                  },
-                  minWidth: 80,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.dashboard,
-                        color:
-                            currentTab == 0 ? Colors.blueAccent : Colors.grey,
-                      ),
-                    ],
-                  ),
-                ),
-                MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      currentScreen = StatusScreen();
-                      currentTab = 1;
-                    });
-                  },
-                  minWidth: 80,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.chat,
-                        color:
-                            currentTab == 1 ? Colors.blueAccent : Colors.grey,
-                      ),
-                    ],
-                  ),
-                ),
-                MaterialButton(
-                  onPressed: () {
-                    setState(() {
-                      currentScreen = ProfilePage(
-                        client: Client(
-                          name: agr.name,
-                          phone: agr.phone,
-                          address: agr.address,
-                          email: agr.email,
-                          dataimg: agr.dataimg,
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = const HomePage();
+                        currentTab = 0;
+                      });
+                    },
+                    minWidth: 80,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.dashboard,
+                          color:
+                              currentTab == 0 ? Colors.blueAccent : Colors.grey,
                         ),
-                      );
-                      currentTab = 2;
-                    });
-                  },
-                  minWidth: 80,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        Icons.chat,
-                        color:
-                            currentTab == 2 ? Colors.blueAccent : Colors.grey,
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
-                ),
-              ],
-            ),
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = StatusScreen();
+                        currentTab = 1;
+                      });
+                    },
+                    minWidth: 80,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.chat,
+                          color:
+                              currentTab == 1 ? Colors.blueAccent : Colors.grey,
+                        ),
+                      ],
+                    ),
+                  ),
+                  MaterialButton(
+                    onPressed: () {
+                      setState(() {
+                        currentScreen = ProfilePage(
+                          client: Client(),
+                        );
+                        currentTab = 1;
+                      });
+                    },
+                    minWidth: 80,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.chat,
+                          color:
+                              currentTab == 1 ? Colors.blueAccent : Colors.grey,
+                        ),
+                      ],
+                    ),
+                  ),
+                ]),
           ),
         ),
       ),
