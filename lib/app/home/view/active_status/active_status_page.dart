@@ -62,49 +62,6 @@ class _ActiveStatusPageState extends State<ActiveStatusPage> {
     return GetBuilder<ActiveStatusController>(
       init: ActiveStatusController(),
       builder: (_) => Scaffold(
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back_ios_new,
-              size: 24,
-              color: Colors.white.withOpacity(0.4),
-            ),
-            onPressed: () {
-              Get.back();
-            },
-          ),
-          title: showSearch
-              ? const Text("Tình trạng xe")
-              : SearchNavbar(
-                  searchController: _searchController,
-                  hintText: "Nhập số xe",
-                  hintColor: Colors.white,
-                ),
-          centerTitle: true,
-          actions: [
-            showSearch
-                ? IconButton(
-                    icon: const Icon(Icons.search),
-                    onPressed: () {
-                      setState(() {
-                        showSearch = false;
-                      });
-                    },
-                  )
-                : IconButton(
-                    icon: const Icon(Icons.close),
-                    onPressed: () {
-                      setState(() {
-                        showSearch = true;
-                        _searchController.text = "";
-                      });
-                    },
-                  ),
-            const SizedBox(
-              width: 30,
-            )
-          ],
-        ),
         body: body(size),
       ),
     );
@@ -128,11 +85,12 @@ class _ActiveStatusPageState extends State<ActiveStatusPage> {
                 : InkWell(
                     onTap: () {
                       setState(() {
-                        Get.to(() => DetailsActiveStatusPage());
+                        Get.to(() => const DetailsActiveStatusPage());
                       });
                     },
                     child: CustomListTitle(
                       Stt: '$index',
+                      image: "",
                       nameDriver: 'Hà Văn Cừ',
                       numberPhone: '0346578932',
                       customer: 'Hà Thị Hoa',

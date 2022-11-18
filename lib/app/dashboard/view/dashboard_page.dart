@@ -1,20 +1,15 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:register_driver_car/app/dashboard/controller/dashboard_controller.dart';
 import 'package:register_driver_car/app/home/view/home_page.dart';
-import 'package:register_driver_car/app/login/model/login_user_token.dart';
 import 'package:register_driver_car/app/profile/view/profile_page.dart';
-
 import 'package:register_driver_car/app/status/view/status_screen.dart';
 import 'package:register_driver_car/config/core/constants/constants.dart';
 
 // ignore: must_be_immutable
 class DashBoardPage extends StatefulWidget {
-  DashBoardPage({
+  const DashBoardPage({
     Key? key,
   }) : super(key: key);
 
@@ -31,9 +26,9 @@ class _DashBoardPageState extends State<DashBoardPage> {
   final List<Widget> screens = [
     const HomePage(),
     const StatusScreen(),
-    ProfilePage(
-      client: Client(),
-    ),
+    const ProfilePage(
+        // client: Client(),
+        ),
   ];
   final PageStorageBucket bucket = PageStorageBucket();
   Widget currentScreen = const HomePage();
@@ -45,7 +40,7 @@ class _DashBoardPageState extends State<DashBoardPage> {
       init: DashBoardController(),
       builder: (_) => Scaffold(
         appBar: AppBar(
-          title: Text("TBS"),
+          title: const Text("TBS"),
           centerTitle: true,
           automaticallyImplyLeading: false,
           actions: [
@@ -119,9 +114,9 @@ class _DashBoardPageState extends State<DashBoardPage> {
                   MaterialButton(
                     onPressed: () {
                       setState(() {
-                        currentScreen = ProfilePage(
-                          client: Client(),
-                        );
+                        currentScreen = const ProfilePage(
+                            // client: Client(),
+                            );
                         currentTab = 1;
                       });
                     },

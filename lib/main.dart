@@ -19,12 +19,12 @@ void main() async {
       debugShowCheckedModeBanner: false,
       themeMode: isLightMode ? ThemeMode.light : ThemeMode.dark,
       theme: MyThemes.lightTheme,
-      darkTheme: MyThemes.darkTheme,
+      darkTheme: MyThemes.lightTheme,
       defaultTransition: Transition.fade,
       initialBinding: SplashBinding(),
       initialRoute: Routes.SPLASH,
       getPages: AppPages.pages,
-      home: SplashPage(),
+      home: const SplashPage(),
     ),
   );
 }

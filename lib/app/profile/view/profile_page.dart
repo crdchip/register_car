@@ -9,10 +9,9 @@ import 'package:register_driver_car/config/data/colors.dart';
 class ProfilePage extends StatefulWidget {
   const ProfilePage({
     Key? key,
-    required this.client,
   }) : super(key: key);
 
-  final Client client;
+  // final Client client;
 
   @override
   State<ProfilePage> createState() => _ProfilePageState();
@@ -167,7 +166,7 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   getImageBase64(String image) {
-    print("imgae : $image");
+    // print("imgae : $image");
     const Base64Codec base64 = Base64Codec();
     Uint8List bytes = base64.decode(image);
     return ClipRRect(

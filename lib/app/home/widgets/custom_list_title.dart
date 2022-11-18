@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -8,12 +11,14 @@ class CustomListTitle extends StatefulWidget {
       required this.nameDriver,
       required this.numberPhone,
       required this.customer,
-      required this.status});
+      required this.status,
+      required this.image});
   final String Stt;
   final String nameDriver;
   final String numberPhone;
   final String customer;
   final String status;
+  final String image;
 
   @override
   State<CustomListTitle> createState() => _CustomListTitleState();
@@ -44,14 +49,7 @@ class _CustomListTitleState extends State<CustomListTitle> {
                       ),
                     ),
                     const SizedBox(width: 15),
-                    Container(
-                      height: 50,
-                      width: 50,
-                      decoration: BoxDecoration(
-                        color: Colors.redAccent,
-                        borderRadius: BorderRadius.circular(100),
-                      ),
-                    ),
+                    getImageBase64(widget.image),
                     Expanded(
                         // flex: 1,
                         child: Column(
@@ -83,6 +81,60 @@ class _CustomListTitleState extends State<CustomListTitle> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  Widget uploadImage(Size size, String image) {
+    return Container(
+      width: size.width,
+      height: size.width * 0.2,
+      // color: Colors.amberAccent,
+      child: Center(
+        child: Stack(
+          children: [
+            Container(
+              height: size.width * 0.2,
+              width: size.width * 0.2,
+              child: getImageBase64(image),
+            ),
+            Positioned(
+              bottom: 0,
+              right: 0,
+              child: Container(
+                height: 25,
+                width: 25,
+                decoration: BoxDecoration(
+                  // border: Border.all(width: 1.0),
+                  // color: Colors.amberAccent,
+                  borderRadius: BorderRadius.circular(100.0),
+                ),
+                child: const Center(
+                  child: Icon(
+                    Icons.add_a_photo,
+                    size: 24,
+                    color: Colors.blueGrey,
+                  ),
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+    );
+  }
+
+  getImageBase64(String image) {
+    // print("imgae : $image");
+    const Base64Codec base64 = Base64Codec();
+    Uint8List bytes = base64.decode(image);
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(100.0),
+      child: Image.memory(
+        bytes,
+        width: 50,
+        height: 50,
+        fit: BoxFit.cover,
       ),
     );
   }

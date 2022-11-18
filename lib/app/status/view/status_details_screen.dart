@@ -70,60 +70,67 @@ class _StatusDetailsScreenState extends State<StatusDetailsScreen> {
       child: ListView.builder(
         itemCount: widget.gateLeft!.length,
         itemBuilder: ((context, index) {
-          return Column(
-            children: [
-              Center(child: Text("Door ${index + 1}")),
-              showLane(
-                "${widget.gateLeft![index].lines![0].name}",
-                widget.gateLeft![index].lines![0].status == false
-                    ? Colors.red
-                    : Colors.green,
-                () {
-                  setState(() {
-                    if (widget.gateLeft![index].lines![0].status == false) {
-                      widget.gateLeft![index].lines![0].status = true;
-                    } else if (widget.gateLeft![index].lines![0].status ==
-                        true) {
-                      widget.gateLeft![index].lines![0].status = false;
-                    }
-                  });
-                },
-              ),
-              showLane(
-                "${widget.gateLeft![index].lines![1].name}",
-                widget.gateLeft![index].lines![1].status == false
-                    ? Colors.red
-                    : Colors.green,
-                () {
-                  setState(() {
-                    if (widget.gateLeft![index].lines![1].status == false) {
-                      widget.gateLeft![index].lines![1].status = true;
-                    } else if (widget.gateLeft![index].lines![1].status ==
-                        true) {
-                      widget.gateLeft![index].lines![1].status = false;
-                    }
-                  });
-                },
-              ),
-              showLane(
-                "${widget.gateLeft![index].lines![2].name}",
-                widget.gateLeft![index].lines![2].status == false
-                    ? Colors.red
-                    : Colors.green,
-                () {
-                  setState(() {
-                    if (widget.gateLeft![index].lines![2].status == false) {
-                      widget.gateLeft![index].lines![2].status = true;
-                    } else if (widget.gateLeft![index].lines![2].status ==
-                        true) {
-                      widget.gateLeft![index].lines![2].status = false;
-                    }
-                  });
-                },
-              ),
-              const SizedBox(height: 10),
-            ],
-          );
+          var lengthLeft = widget.gateLeft!.length;
+          print("lengthLeft : $lengthLeft");
+          return lengthLeft == null
+              ? Container()
+              : Column(
+                  children: [
+                    Center(child: Text("Door left ${index + 1}")),
+                    showLane(
+                      "${widget.gateLeft![index].lines![0].name}",
+                      widget.gateLeft![index].lines![0].status == false
+                          ? Colors.red
+                          : Colors.green,
+                      () {
+                        setState(() {
+                          if (widget.gateLeft![index].lines![0].status ==
+                              false) {
+                            widget.gateLeft![index].lines![0].status = true;
+                          } else if (widget.gateLeft![index].lines![0].status ==
+                              true) {
+                            widget.gateLeft![index].lines![0].status = false;
+                          }
+                        });
+                      },
+                    ),
+                    showLane(
+                      "${widget.gateLeft![index].lines![1].name}",
+                      widget.gateLeft![index].lines![1].status == false
+                          ? Colors.red
+                          : Colors.green,
+                      () {
+                        setState(() {
+                          if (widget.gateLeft![index].lines![1].status ==
+                              false) {
+                            widget.gateLeft![index].lines![1].status = true;
+                          } else if (widget.gateLeft![index].lines![1].status ==
+                              true) {
+                            widget.gateLeft![index].lines![1].status = false;
+                          }
+                        });
+                      },
+                    ),
+                    showLane(
+                      "${widget.gateLeft![index].lines![2].name}",
+                      widget.gateLeft![index].lines![2].status == false
+                          ? Colors.red
+                          : Colors.green,
+                      () {
+                        setState(() {
+                          if (widget.gateLeft![index].lines![2].status ==
+                              false) {
+                            widget.gateLeft![index].lines![2].status = true;
+                          } else if (widget.gateLeft![index].lines![2].status ==
+                              true) {
+                            widget.gateLeft![index].lines![2].status = false;
+                          }
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                );
         }),
       ),
     );
@@ -135,60 +142,70 @@ class _StatusDetailsScreenState extends State<StatusDetailsScreen> {
       child: ListView.builder(
         itemCount: widget.gateRight!.length,
         itemBuilder: ((context, index) {
-          return Column(
-            children: [
-              Text("Door ${index + 0}"),
-              showLane(
-                "${widget.gateRight![index].lines![0].name}",
-                widget.gateRight![index].lines![0].status == false
-                    ? Colors.red
-                    : Colors.green,
-                () {
-                  setState(() {
-                    if (widget.gateRight![index].lines![0].status == false) {
-                      widget.gateRight![index].lines![0].status = true;
-                    } else if (widget.gateRight![index].lines![0].status ==
-                        true) {
-                      widget.gateRight![index].lines![0].status = false;
-                    }
-                  });
-                },
-              ),
-              showLane(
-                "${widget.gateRight![index].lines![1].name}",
-                widget.gateRight![index].lines![1].status == false
-                    ? Colors.red
-                    : Colors.green,
-                () {
-                  setState(() {
-                    if (widget.gateRight![index].lines![1].status == false) {
-                      widget.gateRight![index].lines![1].status = true;
-                    } else if (widget.gateRight![index].lines![1].status ==
-                        true) {
-                      widget.gateRight![index].lines![1].status = false;
-                    }
-                  });
-                },
-              ),
-              showLane(
-                "${widget.gateRight![index].lines![2].name}",
-                widget.gateRight![index].lines![2].status == false
-                    ? Colors.red
-                    : Colors.green,
-                () {
-                  setState(() {
-                    if (widget.gateRight![index].lines![2].status == false) {
-                      widget.gateRight![index].lines![2].status = true;
-                    } else if (widget.gateRight![index].lines![2].status ==
-                        true) {
-                      widget.gateRight![index].lines![2].status = false;
-                    }
-                  });
-                },
-              ),
-              const SizedBox(height: 10),
-            ],
-          );
+          var lengthRight = widget.gateRight!.length;
+          print("lengthRight : $lengthRight");
+          return lengthRight == null
+              ? Container()
+              : Column(
+                  children: [
+                    Text("Door right ${index + 0}"),
+                    showLane(
+                      "${widget.gateRight![index].lines![0].name}",
+                      widget.gateRight![index].lines![0].status == false
+                          ? Colors.red
+                          : Colors.green,
+                      () {
+                        setState(() {
+                          if (widget.gateRight![index].lines![0].status ==
+                              false) {
+                            widget.gateRight![index].lines![0].status = true;
+                          } else if (widget
+                                  .gateRight![index].lines![0].status ==
+                              true) {
+                            widget.gateRight![index].lines![0].status = false;
+                          }
+                        });
+                      },
+                    ),
+                    showLane(
+                      "${widget.gateRight![index].lines![1].name}",
+                      widget.gateRight![index].lines![1].status == false
+                          ? Colors.red
+                          : Colors.green,
+                      () {
+                        setState(() {
+                          if (widget.gateRight![index].lines![1].status ==
+                              false) {
+                            widget.gateRight![index].lines![1].status = true;
+                          } else if (widget
+                                  .gateRight![index].lines![1].status ==
+                              true) {
+                            widget.gateRight![index].lines![1].status = false;
+                          }
+                        });
+                      },
+                    ),
+                    showLane(
+                      "${widget.gateRight![index].lines![2].name}",
+                      widget.gateRight![index].lines![2].status == false
+                          ? Colors.red
+                          : Colors.green,
+                      () {
+                        setState(() {
+                          if (widget.gateRight![index].lines![2].status ==
+                              false) {
+                            widget.gateRight![index].lines![2].status = true;
+                          } else if (widget
+                                  .gateRight![index].lines![2].status ==
+                              true) {
+                            widget.gateRight![index].lines![2].status = false;
+                          }
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 10),
+                  ],
+                );
         }),
       ),
     );

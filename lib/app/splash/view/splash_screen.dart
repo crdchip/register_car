@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:register_driver_car/app/splash/controller/splash_controller.dart';
 
 class SplashPage extends GetView<SplashController> {
-  SplashPage({super.key});
+  const SplashPage({super.key});
 
   @override
   Widget build(BuildContext context) {

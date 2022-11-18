@@ -1,6 +1,12 @@
 import 'package:get/get.dart';
+import 'package:register_driver_car/app/coordinators/view/coordinators_page.dart';
+import 'package:register_driver_car/app/coordinators/view/coordinators_screen.dart';
 import 'package:register_driver_car/app/dashboard/controller/dashboard_binding.dart';
 import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
+import 'package:register_driver_car/app/history_tracking1/view/history_page.dart';
+import 'package:register_driver_car/app/history_tracking1/view/history_sreen.dart';
+import 'package:register_driver_car/app/leader_page/view/leader_screen.dart';
+import 'package:register_driver_car/app/sercurity_page/view/dashboard_security_page.dart';
 import 'package:register_driver_car/app/home/controller/register_car/register_car_binding.dart';
 import 'package:register_driver_car/app/home/view/home_page.dart';
 import 'package:register_driver_car/app/home/view/register_car/register_car_page.dart';
@@ -9,6 +15,7 @@ import 'package:register_driver_car/app/home/view/register_car/show_information_
 import 'package:register_driver_car/app/home/view/webview.dart';
 import 'package:register_driver_car/app/login/view/login_screen.dart';
 import 'package:register_driver_car/app/register/view/register_page.dart';
+import 'package:register_driver_car/app/sercurity_page/view/details_screen.dart';
 
 import 'package:register_driver_car/app/splash/controller/splash_binding.dart';
 import 'package:register_driver_car/app/splash/view/splash_screen.dart';
@@ -27,6 +34,20 @@ abstract class AppPages {
     GetPage(
       name: Routes.DASHBOARD,
       page: () => DashBoardPage(),
+      binding: DashBoardBinding(),
+      preventDuplicates: false,
+    ),
+    GetPage(
+      name: Routes.DASHBOARD_SECURITY,
+      page: () => DashBoardSecurityPage(),
+      binding: DashBoardBinding(),
+      preventDuplicates: false,
+    ),
+    GetPage(
+      name: Routes.DETAILS_SERCURITY,
+      page: () => DetailsSercurity(
+        dataform: null,
+      ),
       binding: DashBoardBinding(),
       preventDuplicates: false,
     ),
@@ -71,6 +92,21 @@ abstract class AppPages {
     GetPage(
       name: Routes.WEBVIEW_SCREEN,
       page: () => WebViewScreen(),
+      // binding: RegisterCarBinding(),
+    ),
+    GetPage(
+      name: Routes.HISTORY_SCREEN,
+      page: () => HistorySercurityPage(),
+      // binding: RegisterCarBinding(),
+    ),
+    GetPage(
+      name: Routes.COORDINATOR_PAGE,
+      page: () => CoordinatorsPage(),
+      // binding: RegisterCarBinding(),
+    ),
+    GetPage(
+      name: Routes.LEADER_SCREEN,
+      page: () => LeaderScreen(),
       // binding: RegisterCarBinding(),
     )
   ];

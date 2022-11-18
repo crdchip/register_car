@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 import 'package:get/state_manager.dart';
-import 'package:register_driver_car/app/dashboard/model/news_vietname_model.dart';
+
 import 'package:register_driver_car/app/dashboard/model/newsfeed_model.dart';
 
 class HomeController extends GetxController {

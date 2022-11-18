@@ -27,7 +27,7 @@ class _StatusScreenState extends State<StatusScreen> {
           title: Text(
             "Thông tin ra chưa vào",
             style: TextStyle(
-              color: Colors.black.withOpacity(0.4),
+              color: Colors.white.withOpacity(0.4),
               fontSize: 16,
             ),
           ),

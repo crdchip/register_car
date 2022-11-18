@@ -23,6 +23,7 @@ class _CustomNavListTitleState extends State<CustomNavListTitle> {
     Size size = MediaQuery.of(context).size;
     return Card(
       child: Container(
+        color: Colors.amber,
         width: size.width,
         height: widget.height,
         padding: const EdgeInsets.all(5),

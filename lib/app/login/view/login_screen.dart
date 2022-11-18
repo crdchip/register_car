@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
+import 'package:register_driver_car/app/sercurity_page/view/dashboard_security_page.dart';
 import 'package:register_driver_car/app/login/controller/login_controller.dart';
 import 'package:register_driver_car/app/register/view/register_page.dart';
 import "package:register_driver_car/config/data/colors.dart";
@@ -88,7 +89,7 @@ class _LoginScreenState extends State<LoginScreen> {
               size,
               () {
                 print("oke");
-                // Get.to(() => const DashBoardPage());
+                // Get.to(() => const DashBoardSecurityPage());
                 _loginController.loginDrivers(
                   _loginController.accountController.text,
                   _loginController.passController.text,
@@ -146,7 +147,6 @@ class _LoginScreenState extends State<LoginScreen> {
           contentPadding: const EdgeInsets.only(top: 20),
           isDense: true,
           hintText: text,
-          // hintStyle: TextStyle(height: 10),
           prefixIcon: Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Icon(

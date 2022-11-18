@@ -49,16 +49,18 @@ dependencies:
   page_transition: ^2.0.9
   webview_flutter: ^3.0.4
   timeline_list: ^0.0.6
+  flutter_dialogs: ^3.0.0
+  rename: ^2.0.1
   # bubble_timeline: ^1.0.5
   # flutter_launcher_icons: ^0.10.0
   # firebase_core: ^1.24.0
   # firebase_messaging: ^13.1.0
   # flutterfire_ui: ^0.4.3+14
 
-# flutter_icons:
+flutter_icons:
 #   image_path: "icon/icon.png" 
-#   Android: true
-#   ios: true
+  Android: true
+  ios: true
 dev_dependencies:
   flutter_test:
     sdk: flutter
