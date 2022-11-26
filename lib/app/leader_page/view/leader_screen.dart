@@ -54,7 +54,6 @@ class _LeaderScreenState extends State<LeaderScreen> {
     switch (items) {
       case 0:
         currentScreen = HistorySercurityScreen(
-          scrollController: ScrollController(),
           arg: "",
         );
         break;

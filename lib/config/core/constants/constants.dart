@@ -9,4 +9,8 @@ class AppConstants {
   //Role
   static const String ROLE = "role";
   static const String IMAGE = "image";
+  static const String USER = "user";
+
+  //Url
+  static const String urlBase = "http://192.168.3.59:8000";
 }

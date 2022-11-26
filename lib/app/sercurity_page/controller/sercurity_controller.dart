@@ -31,8 +31,34 @@ class SercurityController extends GetxController {
       if (response.statusCode == 200) {
         List<dynamic> tracking = response.data;
 
-        print(
-            "tracing : ${tracking.map((e) => Trackinglv0.fromJson(e)).toList()}");
+        // print(
+        // "tracing : ${tracking.map((e) => Trackinglv0.fromJson(e)).toList()}");
+        return tracking.map((e) => Trackinglv0.fromJson(e)).toList();
+      } else {
+        return response.data;
+      }
+    } catch (e) {
+      rethrow;
+    }
+  }
+
+  Future<List<Trackinglv0>> getTracking4() async {
+    var dio = Dio();
+    Response response;
+    var token = await TokenApi().getToken();
+    Map<String, dynamic> headers = {
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    };
+
+    const url = "http://192.168.3.59:8000/tracking/Lv4";
+
+    try {
+      response = await dio.get(url, options: Options(headers: headers));
+      if (response.statusCode == 200) {
+        List<dynamic> tracking = response.data;
+
+        // print(
+        //     "tracing : ${tracking.map((e) => Trackinglv0.fromJson(e)).toList()}");
         return tracking.map((e) => Trackinglv0.fromJson(e)).toList();
       } else {
         return response.data;
@@ -57,10 +83,34 @@ class SercurityController extends GetxController {
     const url = "http://192.168.3.59:8000/tracking/lv1";
     response =
         await dio.put(url, options: Options(headers: headers), data: jsonData);
-    print(response.statusCode);
+    // print(response.statusCode);
     if (response.statusCode == 200) {
       print("oke");
-      Get.toNamed(Routes.DASHBOARD_SECURITY);
+      Get.toNamed(Routes.DASHBOARD_SECURITY_PAGE);
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  Future putTrackinglv5(int? id) async {
+    var dio = Dio();
+    Response response;
+    var token = await TokenApi().getToken();
+    Map<String, dynamic> headers = {
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    };
+    var idModel = IdModel(id: id);
+
+    var jsonData = idModel.toJson();
+    // print(jsonData);
+
+    const url = "http://192.168.3.59:8000/tracking/lv5";
+    response =
+        await dio.put(url, options: Options(headers: headers), data: jsonData);
+    // print(response.statusCode);
+    if (response.statusCode == 200) {
+      print("oke");
+      Get.toNamed(Routes.DASHBOARD_SECURITY_PAGE);
     } else {
       print(response.statusCode);
     }

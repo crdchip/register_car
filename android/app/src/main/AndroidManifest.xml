@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.register_driver_car">
+    package="com.tbslogistic.register_driver_car">
    <application
         android:label="TBS"
         android:name="${applicationName}"

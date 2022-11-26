@@ -30,21 +30,17 @@ class _CoordinatorsScreenState extends State<CoordinatorsScreen> {
                   scrollDirection: Axis.vertical,
                   itemCount: items.length,
                   itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        // print(index);
-                        Get.to(
-                          () => CoordinatorDetailsScreen(
-                            gateLeft: items[index].gateLeft,
-                            gateRight: items[index].gateRight,
-                          ),
-                        );
-                        print(items[index].gateLeft!.length);
-                      },
-                      child: Card(
-                        child: ListTile(
-                          title: Text("${items[index].name}"),
-                        ),
+                    return Card(
+                      child: ListTile(
+                        onTap: () {
+                          Get.to(
+                            () => CoordinatorDetailsScreen(
+                              gateLeft: items[index].gateLeft,
+                              gateRight: items[index].gateRight,
+                            ),
+                          );
+                        },
+                        title: Text("${items[index].name}"),
                       ),
                     );
                   },

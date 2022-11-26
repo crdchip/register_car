@@ -50,7 +50,9 @@ class LoginController extends GetxController {
         // Lưu roleName vào  SharedPrefer
         var roleName = await prefs.setString(
             AppConstants.ROLE, "${tokens.dictdata!.role!.roleName}");
-        print(tokens.dictdata!.role!.roleName);
+
+        var username = tokens.dictdata!.client!.name;
+        print(username);
         var roles = tokens.dictdata!.role!.roleName;
         //Chuyển page theo role
         print(roles);
@@ -59,13 +61,13 @@ class LoginController extends GetxController {
           case "Bảo vệ":
             Future.delayed(
               const Duration(seconds: 1),
-              () => Get.toNamed(Routes.DASHBOARD_SECURITY),
+              () => Get.toNamed(Routes.DASHBOARD_SECURITY_PAGE),
             );
             break;
           case "khách hàng":
             Future.delayed(
               const Duration(seconds: 1),
-              () => Get.toNamed(Routes.DASHBOARD),
+              () => Get.toNamed(Routes.CUSTOMER_PAGE),
             );
             break;
           case "Điều phối":
@@ -83,13 +85,16 @@ class LoginController extends GetxController {
           case "tài xế":
             Future.delayed(
               const Duration(seconds: 1),
-              () => Get.toNamed(Routes.DASHBOARD),
+              () => Get.toNamed(
+                Routes.DRIVER_PAGE,
+                arguments: username,
+              ),
             );
             break;
           case "Tallyman":
             Future.delayed(
               const Duration(seconds: 1),
-              () => Get.toNamed(Routes.DASHBOARD),
+              () => Get.toNamed(Routes.TALLYMAN_PAGE),
             );
             break;
           default:

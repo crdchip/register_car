@@ -8,6 +8,12 @@ import 'package:register_driver_car/config/model/token/token_api.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
 
 class HistoryTracking1Controller extends GetxController {
+  @override
+  void onInit() {
+    super.onInit();
+    getTrackinglv1();
+  }
+
   Future<List<Trackinglv0>> getTrackinglv1() async {
     var dio = Dio();
     Response response;
@@ -20,6 +26,7 @@ class HistoryTracking1Controller extends GetxController {
 
     try {
       response = await dio.get(url, options: Options(headers: headers));
+      print(response.data);
       if (response.statusCode == 200) {
         List<dynamic> tracking = response.data;
 

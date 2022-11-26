@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:get/get.dart';
+import 'package:register_driver_car/app/coordinators/controller/coordinator_controller.dart';
 import 'package:register_driver_car/app/status/model/ware_home.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
 
@@ -26,45 +27,47 @@ class _CoordinatorDetailsScreenState extends State<CoordinatorDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
-    return Scaffold(
-      appBar: AppBar(
-        // automaticallyImplyLeading: false,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-          ),
-          onPressed: () {
-            Get.back();
-          },
-        ),
-        title: Text(
-          "${widget.gateRight!.length} + ${widget.gateLeft!.length}",
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-          ),
-        ),
-        centerTitle: true,
-        actions: [
-          IconButton(
-            onPressed: () {
-              Get.toNamed(
-                Routes.HISTORY_SCREEN,
-              );
-            },
-            icon: const Icon(
-              Icons.check_sharp,
-              color: Colors.black,
-            ),
-          ),
-          const SizedBox(
-            width: 15,
-          ),
-        ],
-        backgroundColor: Colors.amber,
-      ),
-      body: _getBody(),
-    );
+    return GetBuilder<CoordinatorController>(
+        init: CoordinatorController(),
+        builder: (controller) => Scaffold(
+              appBar: AppBar(
+                // automaticallyImplyLeading: false,
+                leading: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                  ),
+                  onPressed: () {
+                    Get.back();
+                  },
+                ),
+                title: Text(
+                  "${widget.gateRight!.length} + ${widget.gateLeft!.length}",
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                  ),
+                ),
+                centerTitle: true,
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Get.toNamed(
+                        Routes.HISTORY_SCREEN,
+                      );
+                    },
+                    icon: const Icon(
+                      Icons.check_sharp,
+                      color: Colors.black,
+                    ),
+                  ),
+                  const SizedBox(
+                    width: 15,
+                  ),
+                ],
+                backgroundColor: Colors.amber,
+              ),
+              body: _getBody(),
+            ));
   }
 
   Widget _getBody() {
@@ -142,6 +145,30 @@ class _CoordinatorDetailsScreenState extends State<CoordinatorDetailsScreen> {
                           : Colors.green,
                       () {
                         setState(() {
+                          showPlatformDialog(
+                            context: context,
+                            builder: (context) => BasicDialogAlert(
+                              title: const Text("Bạn có xác nhận !"),
+                              content: Text(
+                                  "${widget.gateLeft![index].lines![0].id}"),
+                              actions: <Widget>[
+                                BasicDialogAction(
+                                  title: const Text("Oke"),
+                                  onPressed: () {
+                                    Get.toNamed(Routes.HISTORY_SCREEN,
+                                        arguments: widget
+                                            .gateLeft![index].lines![0].id);
+                                  },
+                                ),
+                                BasicDialogAction(
+                                  title: const Text("Hủy"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
                           if (widget.gateLeft![index].lines![1].status ==
                               false) {
                             widget.gateLeft![index].lines![1].status = true;
@@ -159,6 +186,30 @@ class _CoordinatorDetailsScreenState extends State<CoordinatorDetailsScreen> {
                           : Colors.green,
                       () {
                         setState(() {
+                          showPlatformDialog(
+                            context: context,
+                            builder: (context) => BasicDialogAlert(
+                              title: const Text("Bạn có xác nhận !"),
+                              content: Text(
+                                  "${widget.gateLeft![index].lines![0].id}"),
+                              actions: <Widget>[
+                                BasicDialogAction(
+                                  title: const Text("Oke"),
+                                  onPressed: () {
+                                    Get.toNamed(Routes.HISTORY_SCREEN,
+                                        arguments: widget
+                                            .gateLeft![index].lines![0].id);
+                                  },
+                                ),
+                                BasicDialogAction(
+                                  title: const Text("Hủy"),
+                                  onPressed: () {
+                                    Navigator.pop(context);
+                                  },
+                                ),
+                              ],
+                            ),
+                          );
                           if (widget.gateLeft![index].lines![2].status ==
                               false) {
                             widget.gateLeft![index].lines![2].status = true;

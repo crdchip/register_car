@@ -7,9 +7,8 @@ import 'package:register_driver_car/app/home/widgets/custom_nav_list_title.dart'
 import 'package:register_driver_car/config/model/tracking/form_tracking.dart';
 
 class HistorySercurityScreen extends StatefulWidget {
-  const HistorySercurityScreen(
-      {super.key, required this.scrollController, required this.arg});
-  final ScrollController scrollController;
+  const HistorySercurityScreen({super.key, required this.arg});
+
   final String arg;
 
   @override
@@ -18,7 +17,7 @@ class HistorySercurityScreen extends StatefulWidget {
 
 class _HistorySercurityScreenState extends State<HistorySercurityScreen> {
   bool _showAppbar = false;
-  var historyTracking1Controller = HistoryTracking1Controller();
+  var historyTracking1Controller = Get.put(HistoryTracking1Controller());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -30,18 +29,13 @@ class _HistorySercurityScreenState extends State<HistorySercurityScreen> {
           builder: ((context, snapshot) {
             if (snapshot.hasData) {
               var items = snapshot.data as List<Trackinglv0>;
-              print("items : ${items.length + 1}");
-
               return ListView.builder(
-                controller: widget.scrollController,
                 scrollDirection: Axis.vertical,
                 itemCount: items.length + 1,
                 itemBuilder: (context, index) {
-                  // print("items: ${items[index].id}");
                   return index == 0
                       ? const CustomNavListTitle(
                           height: 60,
-                          // nameDriver: "",
                           nameDriver: 'Tài xế',
                           customer: "Khánh Hàng",
                           status: "Trạng thái",
@@ -74,7 +68,7 @@ class _HistorySercurityScreenState extends State<HistorySercurityScreen> {
                 },
               );
             }
-            return Container();
+            return const Center(child: CircularProgressIndicator());
           }),
         ),
         Positioned(

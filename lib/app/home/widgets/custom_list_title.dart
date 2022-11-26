@@ -5,14 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
 class CustomListTitle extends StatefulWidget {
-  const CustomListTitle(
-      {super.key,
-      required this.Stt,
-      required this.nameDriver,
-      required this.numberPhone,
-      required this.customer,
-      required this.status,
-      required this.image});
+  const CustomListTitle({
+    super.key,
+    required this.Stt,
+    required this.nameDriver,
+    required this.numberPhone,
+    required this.customer,
+    required this.status,
+    required this.image,
+  });
   final String Stt;
   final String nameDriver;
   final String numberPhone;
@@ -50,6 +51,7 @@ class _CustomListTitleState extends State<CustomListTitle> {
                     ),
                     const SizedBox(width: 15),
                     getImageBase64(widget.image),
+                    // uploadImage(size, widget.image),
                     Expanded(
                         // flex: 1,
                         child: Column(
@@ -125,7 +127,6 @@ class _CustomListTitleState extends State<CustomListTitle> {
   }
 
   getImageBase64(String image) {
-    // print("imgae : $image");
     const Base64Codec base64 = Base64Codec();
     Uint8List bytes = base64.decode(image);
     return ClipRRect(

@@ -37,17 +37,16 @@ class _DetailsActiveStatusPageState extends State<DetailsActiveStatusPage> {
         centerTitle: true,
       ),
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 15),
         child: Timeline(
           children: <TimelineModel>[
             TimelineModel(
               Column(
                 children: [
                   Container(
+                    decoration: const BoxDecoration(color: Colors.amber),
                     height: 100,
-                    child: Center(
-                      child: Text("Chưa vào"),
-                    ),
+                    child: const Center(child: Text("Chưa vào")),
                   ),
                 ],
               ),
@@ -57,11 +56,9 @@ class _DetailsActiveStatusPageState extends State<DetailsActiveStatusPage> {
             TimelineModel(
               Container(
                 height: 100,
-                child: Center(
-                  child: Text("Đã vào cổng"),
-                ),
+                child: const Center(child: Text("Đã vào cổng")),
               ),
-              icon: Icon(Icons.android, color: Colors.white),
+              icon: const Icon(Icons.android, color: Colors.white),
               iconBackground: Colors.cyan,
             ),
             TimelineModel(

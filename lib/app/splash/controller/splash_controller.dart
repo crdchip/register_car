@@ -21,14 +21,18 @@ class SplashController extends GetxController {
     if (token != null) {
       if (role == "Bảo vệ") {
         print("true");
-        Get.toNamed(Routes.DASHBOARD_SECURITY);
+        Get.toNamed(Routes.DASHBOARD_SECURITY_PAGE);
         print("true1");
       } else if (role == "khách hàng") {
-        Get.toNamed(Routes.DASHBOARD);
+        Get.toNamed(Routes.CUSTOMER_PAGE);
       } else if (role == "Điều phối") {
         Get.toNamed(Routes.COORDINATOR_PAGE);
       } else if (role == "Leader hiện trường") {
         Get.toNamed(Routes.LEADER_SCREEN);
+      } else if (role == "tài xế") {
+        Get.toNamed(Routes.DRIVER_PAGE);
+      } else if (role == "Tallyman") {
+        Get.toNamed(Routes.TALLYMAN_PAGE);
       }
 
       // checkPage();

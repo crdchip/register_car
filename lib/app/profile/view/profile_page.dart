@@ -37,7 +37,6 @@ class _ProfilePageState extends State<ProfilePage> {
       builder: ((context, snapshot) {
         if (snapshot.hasData) {
           var items = snapshot.data;
-          // print("items : ${items["name"]} ");
           return Center(
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -166,7 +165,6 @@ class _ProfilePageState extends State<ProfilePage> {
   }
 
   getImageBase64(String image) {
-    // print("imgae : $image");
     const Base64Codec base64 = Base64Codec();
     Uint8List bytes = base64.decode(image);
     return ClipRRect(

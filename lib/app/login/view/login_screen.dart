@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
-import 'package:register_driver_car/app/sercurity_page/view/dashboard_security_page.dart';
+import 'package:register_driver_car/app/sercurity_page/dashboard_security_page.dart';
 import 'package:register_driver_car/app/login/controller/login_controller.dart';
 import 'package:register_driver_car/app/register/view/register_page.dart';
 import "package:register_driver_car/config/data/colors.dart";
 import 'package:register_driver_car/config/data/text.dart';
+import 'package:register_driver_car/config/model/token/token_api.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -23,6 +24,41 @@ class _LoginScreenState extends State<LoginScreen> {
   bool obscureText = true;
 
   bool login = true;
+
+  void _fetchData(BuildContext context) async {
+    // show the loading dialog
+    showDialog(
+        // The user CANNOT close this dialog  by pressing outsite it
+        barrierDismissible: false,
+        context: context,
+        builder: (_) {
+          return Dialog(
+            // The background color
+            backgroundColor: Colors.white,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(vertical: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: const [
+                  // The loading indicator
+                  CircularProgressIndicator(),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  // Some text
+                  Text('Loading...')
+                ],
+              ),
+            ),
+          );
+        });
+
+    // Tính toán không đồng bộ của bạn ở đây (tìm nạp dữ liệu từ API, xử lý tệp, chèn thứ gì đó vào cơ sở dữ liệu, v.v.)
+    await Future.delayed(const Duration(seconds: 3));
+
+    // Đóng hộp thoại theo chương trình
+  }
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -87,9 +123,8 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
             buttonForm(
               size,
-              () {
-                print("oke");
-                // Get.to(() => const DashBoardSecurityPage());
+              () async {
+                _fetchData(context);
                 _loginController.loginDrivers(
                   _loginController.accountController.text,
                   _loginController.passController.text,
