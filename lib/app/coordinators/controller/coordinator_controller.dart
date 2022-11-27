@@ -7,12 +7,38 @@ import 'package:get/get.dart' hide Response;
 
 import 'package:register_driver_car/app/status/model/lane_model.dart';
 import 'package:register_driver_car/app/status/model/ware_home.dart';
+import 'package:register_driver_car/config/core/constants/constants.dart';
+import 'package:register_driver_car/config/model/token/token_api.dart';
 
 class CoordinatorController extends GetxController {
   @override
   void onInit() {
     super.onInit();
     getStatusLine();
+    getData();
+  }
+
+  Future<dynamic> getData() async {
+    var dio = Dio();
+    var token = await TokenApi().getToken();
+    Map<String, dynamic> headers = {
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    };
+    final url = '${AppConstants.urlBase}/Client/getuser';
+
+    try {
+      final response = await dio.get(url, options: Options(headers: headers));
+
+      if (response.statusCode == 200) {
+        var userModel = response.data["data"];
+        return userModel;
+      } else {
+        print('${response.statusCode} : ${response.data.toString()}');
+        return response.data;
+      }
+    } catch (error) {
+      rethrow;
+    }
   }
 
   Future<List<LaneCar>> ReadDataLane() async {

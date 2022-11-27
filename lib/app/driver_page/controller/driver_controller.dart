@@ -6,6 +6,7 @@ import 'package:get/get.dart' hide Response;
 import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
 import 'package:register_driver_car/app/driver_page/view/driver_detail_page.dart';
 import 'package:register_driver_car/app/home/models/form_post_account.dart';
+import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/model/token/token_api.dart';
 
 class DriverController extends GetxController {
@@ -25,6 +26,35 @@ class DriverController extends GetxController {
   TextEditingController cont2seal1 = TextEditingController();
   TextEditingController cont2seal2 = TextEditingController();
   TextEditingController cont2seal3 = TextEditingController();
+
+  @override
+  void onInit() {
+    super.onInit();
+    getData();
+  }
+
+  Future<dynamic> getData() async {
+    var dio = Dio();
+    var token = await TokenApi().getToken();
+    Map<String, dynamic> headers = {
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    };
+    final url = '${AppConstants.urlBase}/Client/getuser';
+
+    try {
+      final response = await dio.get(url, options: Options(headers: headers));
+
+      if (response.statusCode == 200) {
+        var userModel = response.data["data"];
+        return userModel;
+      } else {
+        print('${response.statusCode} : ${response.data.toString()}');
+        return response.data;
+      }
+    } catch (error) {
+      rethrow;
+    }
+  }
 
   Future<void> postRegisterCar(
     String carfleedId,

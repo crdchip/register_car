@@ -23,7 +23,7 @@ class LoginController extends GetxController {
     var jsonResponse;
     Response response;
     // Tokens tokens;
-    UserToken dictData;
+
     UserToken tokens;
     Role role;
     var dio = Dio();
@@ -54,6 +54,7 @@ class LoginController extends GetxController {
         var username = tokens.dictdata!.client!.name;
         print(username);
         var roles = tokens.dictdata!.role!.roleName;
+        var user = tokens.dictdata;
         //Chuyển page theo role
         print(roles);
 
@@ -61,7 +62,11 @@ class LoginController extends GetxController {
           case "Bảo vệ":
             Future.delayed(
               const Duration(seconds: 1),
-              () => Get.toNamed(Routes.DASHBOARD_SECURITY_PAGE),
+              () {
+                print(user);
+                Get.toNamed(Routes.DASHBOARD_SECURITY_PAGE,
+                    arguments: tokens.dictdata);
+              },
             );
             break;
           case "khách hàng":
