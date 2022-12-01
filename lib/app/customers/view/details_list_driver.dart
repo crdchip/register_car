@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_state_manager/src/simple/get_state.dart';
 import 'package:register_driver_car/app/customers/controller/customer_controller.dart';
-import 'package:register_driver_car/app/customers/model/list_driver_company_model.dart';
+import 'package:register_driver_car/config/data/colors.dart';
+import 'package:register_driver_car/config/model/tracking/form_status.dart';
 import 'package:timeline_list/timeline.dart';
 import 'package:timeline_list/timeline_model.dart';
 
@@ -14,27 +14,25 @@ class DetailsListDriver extends StatefulWidget {
 }
 
 class _DetailsListDriverState extends State<DetailsListDriver> {
-  final String routes = "details_list_driver";
+  final String routes = "/details_list_driver";
+
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    if (Get.arguments != null) {
-      print("oke");
-    }
-    print("object");
+    if (Get.arguments != null && Get.arguments is TrackingStatus) {}
   }
 
-  var items = Get.arguments as ListDriverCompanyModel;
+  var items = Get.arguments as TrackingStatus;
+
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    var length = items.statustracking!.length;
     return GetBuilder<CustomerController>(
       init: CustomerController(),
       builder: (controller) => SafeArea(
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("Trạng thái tài xê"),
+            title: const Text("Trạng thái tài xê "),
             centerTitle: true,
             leading: IconButton(
               onPressed: () {
@@ -46,67 +44,117 @@ class _DetailsListDriverState extends State<DetailsListDriver> {
                 size: 16,
               ),
             ),
+            backgroundColor: CustomColor.backgroundAppbar,
           ),
           body: Container(
-            padding: EdgeInsets.symmetric(horizontal: 15),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [
+                  Colors.orangeAccent.withOpacity(0.4),
+                  Colors.white.withOpacity(0.4)
+                ],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+                stops: const [0.4, 0.7],
+              ),
+            ),
+            // padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Timeline(
               children: <TimelineModel>[
-                TimelineModel(
-                  Container(
-                      height: 100, child: Center(child: Text("Chưa vào"))),
-                  icon: Icon(Icons.android, color: Colors.white),
-                  iconBackground: Colors.cyan,
-                ),
-                TimelineModel(
-                  Container(
-                      height: 100, child: Center(child: Text("Đã vào cổng"))),
-                  icon: Icon(Icons.android, color: Colors.white),
-                  iconBackground: Colors.cyan,
-                ),
-                TimelineModel(
-                  Container(
-                    height: 100,
-                    child: Center(
-                      child: Text("Đang đợi lên hàng"),
-                    ),
-                  ),
-                  icon: Icon(Icons.ios_share),
-                  iconBackground: Colors.cyan,
-                ),
-                TimelineModel(
-                  Container(
-                    height: 100,
-                    child: Center(
-                      child: Text("Đang lên hàng"),
-                    ),
-                  ),
-                  icon: Icon(Icons.ios_share),
-                  iconBackground: Colors.cyan,
-                ),
-                TimelineModel(
-                  Container(
-                    height: 100,
-                    child: Center(
-                      child: Text("Đã xog"),
-                    ),
-                  ),
-                  icon: Icon(Icons.ios_share),
-                  iconBackground: Colors.cyan,
-                ),
-                TimelineModel(
-                  Container(
-                    height: 100,
-                    child: Center(
-                      child: Text("Đã ra cổng"),
-                    ),
-                  ),
-                  icon: Icon(Icons.ios_share),
-                  iconBackground: Colors.cyan,
-                ),
+                length >= 1
+                    ? TimelineModel(
+                        const SizedBox(
+                            height: 100,
+                            child: Center(child: Text("Chưa vào"))),
+                        icon: const Icon(Icons.local_shipping,
+                            color: Colors.white),
+                        iconBackground: Colors.cyan,
+                        position: TimelineItemPosition.left,
+                      )
+                    : TimelineModel(
+                        Container(height: 100),
+                        icon: const Icon(Icons.local_shipping,
+                            color: Colors.white),
+                        iconBackground: Colors.cyan,
+                      ),
+                length >= 2
+                    ? TimelineModel(
+                        const SizedBox(
+                            height: 100,
+                            child: Center(child: Text("Đã vào cổng"))),
+                        icon:
+                            const Icon(Icons.meeting_room, color: Colors.white),
+                        iconBackground: Colors.cyan,
+                        position: TimelineItemPosition.right,
+                      )
+                    : TimelineModel(
+                        Container(height: 100),
+                        icon:
+                            const Icon(Icons.meeting_room, color: Colors.white),
+                        iconBackground: Colors.cyan,
+                      ),
+                length >= 3
+                    ? TimelineModel(
+                        const SizedBox(
+                            height: 100,
+                            child: Center(child: Text("Đã vào line"))),
+                        icon: const Icon(Icons.table_rows, color: Colors.white),
+                        iconBackground: Colors.cyan,
+                        position: TimelineItemPosition.left,
+                      )
+                    : TimelineModel(
+                        Container(height: 100),
+                        icon: const Icon(Icons.table_rows, color: Colors.white),
+                        iconBackground: Colors.cyan,
+                      ),
+                length >= 4
+                    ? TimelineModel(
+                        const SizedBox(
+                            height: 100,
+                            child: Center(child: Text("Đang lên hàng"))),
+                        icon: const Icon(Icons.local_shipping,
+                            color: Colors.white),
+                        iconBackground: Colors.cyan,
+                        position: TimelineItemPosition.right,
+                      )
+                    : TimelineModel(
+                        Container(height: 100),
+                        icon: const Icon(Icons.android, color: Colors.white),
+                        iconBackground: Colors.cyan,
+                      ),
+                length >= 5
+                    ? TimelineModel(
+                        const SizedBox(
+                            height: 100, child: Center(child: Text("Đã xong"))),
+                        icon: const Icon(Icons.done, color: Colors.white),
+                        iconBackground: Colors.cyan,
+                        position: TimelineItemPosition.left,
+                      )
+                    : TimelineModel(
+                        Container(height: 100),
+                        icon: const Icon(Icons.done, color: Colors.white),
+                        iconBackground: Colors.cyan,
+                      ),
+                length >= 6
+                    ? TimelineModel(
+                        const SizedBox(
+                            height: 100,
+                            child: Center(child: Text("Đã xuất cổng"))),
+                        icon:
+                            const Icon(Icons.meeting_room, color: Colors.white),
+                        iconBackground: Colors.cyan,
+                        position: TimelineItemPosition.right,
+                      )
+                    : TimelineModel(
+                        Container(height: 100),
+                        icon:
+                            const Icon(Icons.meeting_room, color: Colors.white),
+                        iconBackground: Colors.cyan,
+                      ),
               ],
-              position: TimelinePosition.Left,
+              // position: TimelinePosition.Left,
               iconSize: 40,
-              lineColor: Colors.blue,
+              lineColor: Colors.orangeAccent.withOpacity(0.4),
             ),
           ),
         ),

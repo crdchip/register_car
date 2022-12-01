@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:register_driver_car/app/history_tracking1/view/history_page.dart';
-import 'package:register_driver_car/app/history_tracking1/view/history_sreen.dart';
 import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -60,8 +58,8 @@ class DrawerScreen extends StatelessWidget {
                   children: [
                     Card(
                       child: ListTile(
-                        title: Text("Settings"),
-                        leading: Icon(Icons.settings),
+                        title: const Text("Settings"),
+                        leading: const Icon(Icons.settings),
                         tileColor: Colors.black.withOpacity(0.4),
                         // trailing: Icon(Icons.skip_next),
                       ),
@@ -69,7 +67,7 @@ class DrawerScreen extends StatelessWidget {
                     Card(
                       child: ListTile(
                         onTap: () {
-                          Get.to(() => const HistorySercurityPage());
+                          // Get.to(() => const HistorySercurityPage());
                         },
                         title: const Text("History"),
                         leading: const Icon(Icons.book),

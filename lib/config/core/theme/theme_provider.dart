@@ -21,7 +21,6 @@ class MyThemes {
       primaryColor: Colors.white,
       primaryColorDark: Colors.black,
       primaryColorLight: const Color(0xffFFFBFB),
-      buttonColor: const Color(0xff353638),
       cardColor: const Color.fromARGB(255, 78, 78, 78),
       colorScheme: const ColorScheme.dark(),
       iconTheme: const IconThemeData(

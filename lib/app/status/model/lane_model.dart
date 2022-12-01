@@ -1,7 +1,11 @@
+// ignore_for_file: non_constant_identifier_names
+
 class LaneCar {
   int? id;
   String? name;
+
   List<ClientLane>? client_right;
+
   List<ClientLane>? client_left;
 
   LaneCar({this.id, this.name, this.client_right, this.client_left});
@@ -24,7 +28,7 @@ class LaneCar {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
     if (client_right != null) {
@@ -51,7 +55,7 @@ class ClientLane {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (lane1 != null) {
       data['lane1'] = lane1!.toJson();
     }
@@ -77,7 +81,7 @@ class Lane {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['status_children'] = statusChildren;
     return data;

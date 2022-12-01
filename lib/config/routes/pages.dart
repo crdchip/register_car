@@ -1,33 +1,30 @@
 import 'package:get/get.dart';
-import 'package:register_driver_car/app/coordinators/view/coordinators_page.dart';
-import 'package:register_driver_car/app/coordinators/view/coordinators_screen.dart';
+import 'package:register_driver_car/app/admin/admin_page.dart';
+
+import 'package:register_driver_car/app/admin/view/admin_screen.dart';
+import 'package:register_driver_car/app/coordinator/coordinator_page.dart';
+import 'package:register_driver_car/app/coordinator/view/coordinator_details_screen.dart';
+import 'package:register_driver_car/app/coordinator/view/status_lines_details_screen.dart';
+import 'package:register_driver_car/app/coordinator/view/status_lines_screen.dart';
+import 'package:register_driver_car/app/coordinator/view/warehouse_details_screen.dart';
+import 'package:register_driver_car/app/coordinator/view/warehouse_screen.dart';
+
 import 'package:register_driver_car/app/customers/customer_page.dart';
 import 'package:register_driver_car/app/customers/view/details_list_driver.dart';
 import 'package:register_driver_car/app/customers/view/list_driver.dart';
-import 'package:register_driver_car/app/dashboard/controller/dashboard_binding.dart';
-import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
+import 'package:register_driver_car/app/driver_page/view/driver_detail_page.dart';
 import 'package:register_driver_car/app/driver_page/view/driver_page.dart';
 import 'package:register_driver_car/app/driver_page/view/driver_screen.dart';
-import 'package:register_driver_car/app/history_driver_page/model/history_driver_model.dart';
 import 'package:register_driver_car/app/history_driver_page/view/history_form_details_screen.dart';
 import 'package:register_driver_car/app/history_driver_page/view/history_form_driver_page.dart';
 import 'package:register_driver_car/app/history_list_driver_company/history_list_driver_company_page.dart';
 import 'package:register_driver_car/app/history_list_driver_company/view/details_history_list_driver_company_screen.dart';
 import 'package:register_driver_car/app/history_list_driver_company/view/history_list_driver_company_screen.dart';
-import 'package:register_driver_car/app/history_tracking1/view/history_page.dart';
-import 'package:register_driver_car/app/history_tracking1/view/history_sreen.dart';
 import 'package:register_driver_car/app/leader_page/view/leader_screen.dart';
 import 'package:register_driver_car/app/sercurity_page/controller/sercurity_bindings.dart';
-import 'package:register_driver_car/app/sercurity_page/controller/sercurity_controller.dart';
 import 'package:register_driver_car/app/sercurity_page/dashboard_security_page.dart';
-import 'package:register_driver_car/app/home/controller/register_car/register_car_binding.dart';
-import 'package:register_driver_car/app/home/view/home_page.dart';
-import 'package:register_driver_car/app/home/view/register_car/register_car_page.dart';
-import 'package:register_driver_car/app/home/view/register_car/show_information_register.dart';
-
-import 'package:register_driver_car/app/home/view/webview.dart';
 import 'package:register_driver_car/app/login/view/login_screen.dart';
-import 'package:register_driver_car/app/register/view/register_page.dart';
+
 import 'package:register_driver_car/app/sercurity_page/view/dashboard_sercurity_screen.dart';
 import 'package:register_driver_car/app/sercurity_page/view/details_screen.dart';
 import 'package:register_driver_car/app/sercurity_page/view/sercurity_final_details_screen.dart';
@@ -46,181 +43,192 @@ part './routes.dart';
 
 abstract class AppPages {
   static final pages = [
+    //ADMIN
+    GetPage(
+      name: Routes.ADMIN_PAGE,
+      page: () => const AdminPage(),
+      // binding: AdminBindings(),
+      preventDuplicates: false,
+    ),
+    GetPage(
+      name: Routes.ADMIN_SCREEN,
+      page: () => const AdminScreen(),
+      // binding: AdminBindings(),
+      preventDuplicates: false,
+    ),
+    //
     GetPage(
       name: Routes.SPLASH,
-      page: () => SplashPage(),
+      page: () => const SplashPage(),
       binding: SplashBinding(),
       preventDuplicates: false,
     ),
-    GetPage(
-      name: Routes.DASHBOARD,
-      page: () => DashBoardPage(),
-      binding: DashBoardBinding(),
-      preventDuplicates: false,
-    ),
+
     GetPage(
       name: Routes.DASHBOARD_SECURITY_PAGE,
-      page: () => DashBoardSecurityPage(),
+      page: () => const DashBoardSecurityPage(),
       binding: SercurityBindings(),
       preventDuplicates: false,
     ),
     GetPage(
       name: Routes.DASHBOARD_SECURITY_SCREEN,
-      page: () => DashBoardSercurityScreen(),
+      page: () => const DashBoardSercurityScreen(),
       binding: SercurityBindings(),
       preventDuplicates: false,
     ),
     GetPage(
       name: Routes.SERCURITY_FINAL_SCREEN,
-      page: () => SercurityFinalScreen(),
+      page: () => const SercurityFinalScreen(),
       binding: SercurityBindings(),
       preventDuplicates: false,
     ),
     GetPage(
       name: Routes.SERCURITY_FINAL_DETAILS_SCREEN,
-      page: () => SercurityFinalDetailsScreen(),
+      page: () => const SercurityFinalDetailsScreen(),
       binding: SercurityBindings(),
       preventDuplicates: false,
     ),
     GetPage(
       name: Routes.DETAILS_SERCURITY,
-      page: () => DetailsSercurity(
+      page: () => const DetailsSercurity(
         dataform: null,
       ),
-      binding: DashBoardBinding(),
+      binding: SercurityBindings(),
       preventDuplicates: false,
     ),
-    GetPage(
-      name: Routes.HOME,
-      page: () => HomePage(),
-      binding: SplashBinding(),
-      preventDuplicates: false,
-    ),
+
     GetPage(
       name: Routes.LOGIN,
       page: () => const LoginScreen(),
       binding: SplashBinding(),
       preventDuplicates: false,
     ),
-    GetPage(
-      name: Routes.REGISTER,
-      page: () => const RegisterPage(),
-      binding: SplashBinding(),
-      preventDuplicates: false,
-    ),
-    GetPage(
-      name: Routes.REGISTER_CAR,
-      page: () => const RegisterCarPage(),
-      binding: RegisterCarBinding(),
-    ),
-    GetPage(
-      name: Routes.INFOR_DRIVER,
-      page: () => const ShowInformationPage(),
-      // binding: RegisterCarBinding(),
-    ),
+
+    // GetPage(
+    //   name: Routes.INFOR_DRIVER,
+    //   page: () => const ShowInformationPage(),
+    //   // binding: RegisterCarBinding(),
+    // ),
     GetPage(
       name: Routes.STATUS_SCREEN,
       page: () => const StatusScreen(),
       // binding: RegisterCarBinding(),
     ),
-    // GetPage(
-    //   name: Routes.STATUS_SCREEN_DETAIL,
-    //   page: () => StatusDetailScreen(),
-    //   // binding: RegisterCarBinding(),
-    // ),
-    GetPage(
-      name: Routes.WEBVIEW_SCREEN,
-      page: () => WebViewScreen(),
-      // binding: RegisterCarBinding(),
-    ),
-    GetPage(
-      name: Routes.HISTORY_SCREEN,
-      page: () => HistorySercurityPage(),
-      // binding: RegisterCarBinding(),
-    ),
+
+    //Coordinator_page
+
     GetPage(
       name: Routes.COORDINATOR_PAGE,
-      page: () => CoordinatorsPage(),
+      page: () => const CoordinatorPage(),
       // binding: RegisterCarBinding(),
     ),
+    GetPage(
+      name: Routes.COORDINATOR_DETAILS_SCREEN,
+      page: () => const CoordinatorDetailsScreen(),
+      // binding: RegisterCarBinding(),
+    ),
+    GetPage(
+      name: Routes.STATUS_LINES_SCREEN,
+      page: () => const StatusLinesScreen(),
+    ),
+    GetPage(
+      name: Routes.STATUS_LINES_DETAILS_SCREEN,
+      page: () => const StatusLinesDetailsScreen(),
+    ),
+    GetPage(
+      name: Routes.WAREHOUSE_SCREEN,
+      page: () => const WareHouseScreen(),
+    ),
+    GetPage(
+      name: Routes.WAREHOUSE_DETAILS_SCREEN,
+      page: () => const WareHouseDetailsScreen(),
+    ),
+
+    //
     GetPage(
       name: Routes.LEADER_SCREEN,
-      page: () => LeaderScreen(),
+      page: () => const LeaderScreen(),
+      // binding: RegisterCarBinding(),
+    ),
+    //DRIVER
+    GetPage(
+      name: Routes.DRIVER_PAGE,
+      page: () => const DriverPage(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
-      name: Routes.DRIVER_PAGE,
-      page: () => DriverPage(),
+      name: Routes.DRIVER_DETAILS_PAGE,
+      page: () => const DriverDetailsPage(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.HISTORY_DRIVER_PAGE,
-      page: () => HistoryFormDriverPage(),
+      page: () => const HistoryFormDriverPage(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.HISTORY_FORM_DETAILS_SCREEN,
-      page: () => HistoryFormDetailsScreen(),
+      page: () => const HistoryFormDetailsScreen(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.CUSTOMER_PAGE,
-      page: () => CustomerPage(),
+      page: () => const CustomerPage(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.LIST_DRIVER_SCREEN,
-      page: () => ListDriverScreen(),
+      page: () => const ListDriverScreen(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.DRIVER_SCREEN,
-      page: () => DriverScreen(),
+      page: () => const DriverScreen(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.DRIVER_LIST_DRIVER_SCREEN,
-      page: () => DetailsListDriver(),
+      page: () => const DetailsListDriver(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.HISTORY_LIST_DRIVER_COMPANY_PAGE,
-      page: () => HistoryListDriverCompanyPage(),
+      page: () => const HistoryListDriverCompanyPage(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.HISTORY_LIST_DRIVER_COMPANY_SCREEN,
-      page: () => HistoryListDriverCompanyScreen(),
+      page: () => const HistoryListDriverCompanyScreen(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.DETAILS_HISTORY_LIST_DRIVER_COMPANY_SCREEN,
-      page: () => DetailsHistoryListDriverCompanyScreen(),
+      page: () => const DetailsHistoryListDriverCompanyScreen(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.TALLYMAN_PAGE,
-      page: () => TallymanPage(),
+      page: () => const TallymanPage(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.TALLYMAN_DETAILS_SCREEN,
-      page: () => TallyManDetailsScreen(),
+      page: () => const TallyManDetailsScreen(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.TALLYMAN_WORKING_SCREEN,
-      page: () => TallymanWorkingScreen(),
+      page: () => const TallymanWorkingScreen(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.TALLYMAN_WORKING_DETAILS_SCREEN,
-      page: () => TallymanWorkingDetailsScreen(),
+      page: () => const TallymanWorkingDetailsScreen(),
       // binding: RegisterCarBinding(),
     ),
     GetPage(
       name: Routes.TALLYMAN_FINAL_SCREEN,
-      page: () => TallymanFinalScreen(),
+      page: () => const TallymanFinalScreen(),
       // binding: RegisterCarBinding(),
     )
   ];

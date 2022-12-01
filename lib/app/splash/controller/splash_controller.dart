@@ -20,19 +20,19 @@ class SplashController extends GetxController {
     var role = await RoleApi().getRole();
     if (token != null) {
       if (role == "Bảo vệ") {
-        print("true");
         Get.toNamed(Routes.DASHBOARD_SECURITY_PAGE);
-        print("true1");
       } else if (role == "khách hàng") {
         Get.toNamed(Routes.CUSTOMER_PAGE);
       } else if (role == "Điều phối") {
         Get.toNamed(Routes.COORDINATOR_PAGE);
-      } else if (role == "Leader hiện trường") {
+      } else if (role == "Leader") {
         Get.toNamed(Routes.LEADER_SCREEN);
-      } else if (role == "tài xế") {
+      } else if (role == "Tài xế") {
         Get.toNamed(Routes.DRIVER_PAGE);
       } else if (role == "Tallyman") {
         Get.toNamed(Routes.TALLYMAN_PAGE);
+      } else if (role == "admin") {
+        Get.toNamed(Routes.ADMIN_PAGE);
       }
 
       // checkPage();

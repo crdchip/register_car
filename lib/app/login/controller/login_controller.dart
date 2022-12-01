@@ -1,69 +1,65 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
-
+import 'package:flutter/foundation.dart';
 import 'package:register_driver_car/app/login/model/login_user_token.dart';
 
-import 'package:register_driver_car/app/register/model/user.dart';
-import 'package:http/http.dart' as http;
 import 'package:get/get.dart' hide Response;
+import 'package:register_driver_car/app/login/model/user.dart';
 import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginController extends GetxController {
-  TextEditingController accountController = TextEditingController(text: "son1");
-  TextEditingController passController = TextEditingController(text: "son1");
+  TextEditingController accountController = TextEditingController();
+  TextEditingController passController = TextEditingController();
 
   Future<void> loginDrivers(
     String? username,
     String? password,
   ) async {
+    // ignore: prefer_typing_uninitialized_variables
     var jsonResponse;
     Response response;
     // Tokens tokens;
 
     UserToken tokens;
-    Role role;
     var dio = Dio();
     var user = Users(
       username: username,
       password: password,
     );
     var jsonData = user.toJson();
-    String url = "http://192.168.3.59:8000/login";
+    String url = "${AppConstants.urlBase}/login";
     try {
       response = await dio.post(
         url,
         data: jsonData,
       );
-      print(response.statusCode);
+
       if (response.statusCode == 200) {
         jsonResponse = response.data;
         tokens = UserToken.fromJson(jsonResponse);
         // khai báo SharePrefer
         SharedPreferences prefs = await SharedPreferences.getInstance();
         // Lưu access_token vào  SharedPrefer
-        var access_token = await prefs.setString(
+        // ignore: unused_local_variable
+        var accessToken = await prefs.setString(
             AppConstants.KEY_ACCESS_TOKEN, "${tokens.accessToken}");
         // Lưu roleName vào  SharedPrefer
+        // ignore: unused_local_variable
         var roleName = await prefs.setString(
             AppConstants.ROLE, "${tokens.dictdata!.role!.roleName}");
 
-        var username = tokens.dictdata!.client!.name;
-        print(username);
         var roles = tokens.dictdata!.role!.roleName;
-        var user = tokens.dictdata;
+
         //Chuyển page theo role
-        print(roles);
 
         switch (roles) {
           case "Bảo vệ":
             Future.delayed(
               const Duration(seconds: 1),
               () {
-                print(user);
                 Get.toNamed(Routes.DASHBOARD_SECURITY_PAGE,
                     arguments: tokens.dictdata);
               },
@@ -81,18 +77,18 @@ class LoginController extends GetxController {
               () => Get.toNamed(Routes.COORDINATOR_PAGE),
             );
             break;
-          case "Leader hiện trường":
+          case "Leader":
             Future.delayed(
               const Duration(seconds: 1),
               () => Get.toNamed(Routes.LEADER_SCREEN),
             );
             break;
-          case "tài xế":
+          case "Tài xế":
             Future.delayed(
               const Duration(seconds: 1),
               () => Get.toNamed(
                 Routes.DRIVER_PAGE,
-                arguments: username,
+                arguments: tokens.dictdata!.client!.name,
               ),
             );
             break;
@@ -102,26 +98,24 @@ class LoginController extends GetxController {
               () => Get.toNamed(Routes.TALLYMAN_PAGE),
             );
             break;
+          case "admin":
+            Future.delayed(
+              const Duration(seconds: 1),
+              () => Get.toNamed(Routes.ADMIN_PAGE),
+            );
+            break;
           default:
-            print("Lỗi sai account");
+            if (kDebugMode) {
+              print("Lỗi sai account");
+            }
         }
+      } else if (response.statusCode == 401) {
+        printError();
       }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
-  }
-
-  _showDialog(BuildContext context) {
-    return CupertinoAlertDialog(
-      content: Text("Đăng nhập thất bại"),
-      actions: [
-        CupertinoDialogAction(
-          child: Text("Oke"),
-          onPressed: () {
-            Navigator.pop(context);
-          },
-        )
-      ],
-    );
   }
 }

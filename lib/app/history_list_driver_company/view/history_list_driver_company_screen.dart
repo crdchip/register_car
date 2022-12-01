@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/state_manager.dart';
+
 import 'package:register_driver_car/app/history_list_driver_company/controller/history_list_driver_company_controller.dart';
 import 'package:register_driver_car/app/history_list_driver_company/model/history_list_driver_company_model.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
@@ -18,7 +18,6 @@ class _HistoryListDriverCompanyScreenState
   final String routes = "/history_list_driver_company_screen";
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GetBuilder<HistoryListDriverCompanyController>(
       init: HistoryListDriverCompanyController(),
       builder: (controller) {

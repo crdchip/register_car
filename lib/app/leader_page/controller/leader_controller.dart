@@ -18,7 +18,7 @@ class LeaderController extends GetxController {
     Map<String, dynamic> headers = {
       HttpHeaders.authorizationHeader: "Bearer $token"
     };
-    final url = '${AppConstants.urlBase}/Client/getuser';
+    const url = '${AppConstants.urlBase}/Client/getuser';
 
     try {
       final response = await dio.get(url, options: Options(headers: headers));
@@ -27,7 +27,6 @@ class LeaderController extends GetxController {
         var userModel = response.data["data"];
         return userModel;
       } else {
-        print('${response.statusCode} : ${response.data.toString()}');
         return response.data;
       }
     } catch (error) {

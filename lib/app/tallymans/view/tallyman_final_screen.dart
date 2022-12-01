@@ -20,7 +20,7 @@ class _TallymanFinalScreenState extends State<TallymanFinalScreen> {
       builder: ((context, snapshot) {
         if (snapshot.hasData) {
           var items = snapshot.data as List<Trackinglv0>;
-          return items.length != 0
+          return items.isNotEmpty
               ? ListView.builder(
                   itemCount: items.length,
                   itemBuilder: ((context, index) {

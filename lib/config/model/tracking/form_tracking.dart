@@ -18,6 +18,7 @@ class Trackinglv0 {
     id = json['id'];
     formId = json['formId'];
     lineId = json['lineId'];
+
     lines = json['lines'] != null ? Lines.fromJson(json['lines']) : null;
     formIns =
         json['formIns'] != null ? FormIns.fromJson(json['formIns']) : null;
@@ -30,44 +31,17 @@ class Trackinglv0 {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['formId'] = formId;
     data['lineId'] = lineId;
-    if (lines != null) {
-      data['lines'] = lines!.toJson();
-    }
+    data['lines'] = lines;
     if (formIns != null) {
       data['formIns'] = formIns!.toJson();
     }
     if (statustracking != null) {
       data['statustracking'] = statustracking!.map((v) => v.toJson()).toList();
     }
-    return data;
-  }
-}
-
-class Lines {
-  bool? status;
-  String? name;
-  int? gateId;
-  int? id;
-
-  Lines({this.status, this.name, this.gateId, this.id});
-
-  Lines.fromJson(Map<String, dynamic> json) {
-    status = json['status'];
-    name = json['name'];
-    gateId = json['gateId'];
-    id = json['id'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    data['status'] = this.status;
-    data['name'] = this.name;
-    data['gateId'] = this.gateId;
-    data['id'] = this.id;
     return data;
   }
 }
@@ -87,7 +61,7 @@ class FormIns {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (clientInformation != null) {
       data['client_information'] = clientInformation!.toJson();
     }
@@ -104,8 +78,8 @@ class ClientInformation {
   String? phone;
   String? email;
   String? address;
-  String? imgdata;
   int? companyId;
+  String? imgdata;
   String? companyname;
 
   ClientInformation(
@@ -114,8 +88,8 @@ class ClientInformation {
       this.phone,
       this.email,
       this.address,
-      this.imgdata,
       this.companyId,
+      this.imgdata,
       this.companyname});
 
   ClientInformation.fromJson(Map<String, dynamic> json) {
@@ -124,20 +98,20 @@ class ClientInformation {
     phone = json['phone'];
     email = json['email'];
     address = json['address'];
-    imgdata = json['imgdata'];
     companyId = json['companyId'];
+    imgdata = json['imgdata'];
     companyname = json['companyname'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
     data['phone'] = phone;
     data['email'] = email;
     data['address'] = address;
-    data['imgdata'] = imgdata;
     data['companyId'] = companyId;
+    data['imgdata'] = imgdata;
     data['companyname'] = companyname;
     return data;
   }
@@ -160,6 +134,7 @@ class Dataform {
   String? cont2seal3;
   bool? onlySeal;
   bool? lockState;
+  bool? status;
 
   Dataform(
       {this.id,
@@ -177,7 +152,8 @@ class Dataform {
       this.cont2seal2,
       this.cont2seal3,
       this.onlySeal,
-      this.lockState});
+      this.lockState,
+      this.status});
 
   Dataform.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -196,48 +172,76 @@ class Dataform {
     cont2seal3 = json['cont2seal3'];
     onlySeal = json['onlySeal'];
     lockState = json['lockState'];
+    status = json['status'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
-    data['id'] = this.id;
-    data['carfleedId'] = this.carfleedId;
-    data['transportId'] = this.transportId;
-    data['licensePlate'] = this.licensePlate;
-    data['intendTime'] = this.intendTime;
-    data['warehouse'] = this.warehouse;
-    data['contNumber1'] = this.contNumber1;
-    data['cont1seal1'] = this.cont1seal1;
-    data['cont1seal2'] = this.cont1seal2;
-    data['cont1seal3'] = this.cont1seal3;
-    data['contNumber2'] = this.contNumber2;
-    data['cont2seal1'] = this.cont2seal1;
-    data['cont2seal2'] = this.cont2seal2;
-    data['cont2seal3'] = this.cont2seal3;
-    data['onlySeal'] = this.onlySeal;
-    data['lockState'] = this.lockState;
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['carfleedId'] = carfleedId;
+    data['transportId'] = transportId;
+    data['licensePlate'] = licensePlate;
+    data['intendTime'] = intendTime;
+    data['warehouse'] = warehouse;
+    data['contNumber1'] = contNumber1;
+    data['cont1seal1'] = cont1seal1;
+    data['cont1seal2'] = cont1seal2;
+    data['cont1seal3'] = cont1seal3;
+    data['contNumber2'] = contNumber2;
+    data['cont2seal1'] = cont2seal1;
+    data['cont2seal2'] = cont2seal2;
+    data['cont2seal3'] = cont2seal3;
+    data['onlySeal'] = onlySeal;
+    data['lockState'] = lockState;
+    data['status'] = status;
+    return data;
+  }
+}
+
+class Lines {
+  int? id;
+  int? gateId;
+  String? name;
+  bool? status;
+
+  Lines({this.id, this.name, this.status, this.gateId});
+
+  Lines.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    gateId = json['gateId'];
+    name = json['name'];
+    status = json['status'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['gateId'] = gateId;
+    data['name'] = name;
+    data['status'] = status;
     return data;
   }
 }
 
 class Statustracking {
-  String? lv;
   String? name;
   int? id;
+  String? lv;
 
-  Statustracking({this.lv, this.name, this.id});
+  Statustracking({this.name, this.id, this.lv});
 
   Statustracking.fromJson(Map<String, dynamic> json) {
-    lv = json['lv'];
     name = json['name'];
     id = json['id'];
+    lv = json['lv'];
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['lv'] = lv;
     data['name'] = name;
     data['id'] = id;
+
     return data;
   }
 }

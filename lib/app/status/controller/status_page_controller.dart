@@ -5,16 +5,16 @@ import 'package:flutter/services.dart';
 import 'package:get/state_manager.dart';
 import 'package:register_driver_car/app/status/model/lane_model.dart';
 import 'package:register_driver_car/app/status/model/ware_home.dart';
+import 'package:register_driver_car/config/core/constants/constants.dart';
 
 class StatusController extends GetxController {
   @override
   void onInit() {
-    // TODO: implement onInit
     super.onInit();
     getStatusLine();
-    // print(getStatusLine());
   }
 
+  // ignore: non_constant_identifier_names
   Future<List<LaneCar>> ReadDataLane() async {
     //read json file
     final jsondata = await rootBundle.loadString("assets/datas/ware_home.json");
@@ -26,11 +26,11 @@ class StatusController extends GetxController {
   }
 
   Future<List<WareHome>?> getStatusLine() async {
-    var _dio = Dio();
+    var dio = Dio();
     Response response;
-    var urlApi = "http://192.168.3.59:8000/tracking/test";
+    var urlApi = "${AppConstants.urlBase}/tracking/test";
 
-    response = await _dio.get(urlApi);
+    response = await dio.get(urlApi);
 
     // print(response.statusCode);
 

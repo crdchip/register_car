@@ -16,7 +16,6 @@ class _HistoryFormDriverPageState extends State<HistoryFormDriverPage> {
   var historyDriverController = HistoryDriverController();
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GetBuilder<HistoryDriverController>(
       init: HistoryDriverController(),
       builder: (controller) => SafeArea(

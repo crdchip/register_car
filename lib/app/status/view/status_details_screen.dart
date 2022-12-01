@@ -1,8 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:register_driver_car/app/status/model/lane_model.dart';
+
 import 'package:register_driver_car/app/status/model/ware_home.dart';
 
 class StatusDetailsScreen extends StatefulWidget {
@@ -23,7 +21,6 @@ class _StatusDetailsScreenState extends State<StatusDetailsScreen> {
   final String routes = "/status_screen_detail";
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         // automaticallyImplyLeading: false,
@@ -71,7 +68,8 @@ class _StatusDetailsScreenState extends State<StatusDetailsScreen> {
         itemCount: widget.gateLeft!.length,
         itemBuilder: ((context, index) {
           var lengthLeft = widget.gateLeft!.length;
-          print("lengthLeft : $lengthLeft");
+
+          // ignore: unnecessary_null_comparison
           return lengthLeft == null
               ? Container()
               : Column(
@@ -143,7 +141,8 @@ class _StatusDetailsScreenState extends State<StatusDetailsScreen> {
         itemCount: widget.gateRight!.length,
         itemBuilder: ((context, index) {
           var lengthRight = widget.gateRight!.length;
-          print("lengthRight : $lengthRight");
+
+          // ignore: unnecessary_null_comparison
           return lengthRight == null
               ? Container()
               : Column(
@@ -225,7 +224,7 @@ class _StatusDetailsScreenState extends State<StatusDetailsScreen> {
         child: Center(
           child: Text(
             text,
-            style: TextStyle(color: Colors.white),
+            style: const TextStyle(color: Colors.white),
           ),
         ),
       ),

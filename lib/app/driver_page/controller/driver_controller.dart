@@ -1,13 +1,13 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
-import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
-import 'package:register_driver_car/app/driver_page/view/driver_detail_page.dart';
-import 'package:register_driver_car/app/home/models/form_post_account.dart';
 import 'package:register_driver_car/config/core/constants/constants.dart';
+import 'package:register_driver_car/config/model/driver/form_post_account.dart';
 import 'package:register_driver_car/config/model/token/token_api.dart';
+import 'package:register_driver_car/config/routes/pages.dart';
 
 class DriverController extends GetxController {
   TextEditingController numberCar = TextEditingController();
@@ -39,7 +39,7 @@ class DriverController extends GetxController {
     Map<String, dynamic> headers = {
       HttpHeaders.authorizationHeader: "Bearer $token"
     };
-    final url = '${AppConstants.urlBase}/Client/getuser';
+    const url = '${AppConstants.urlBase}/Client/getuser';
 
     try {
       final response = await dio.get(url, options: Options(headers: headers));
@@ -48,7 +48,6 @@ class DriverController extends GetxController {
         var userModel = response.data["data"];
         return userModel;
       } else {
-        print('${response.statusCode} : ${response.data.toString()}');
         return response.data;
       }
     } catch (error) {
@@ -75,7 +74,7 @@ class DriverController extends GetxController {
     var token = await TokenApi().getToken();
 
     Response response;
-    var _dio = Dio();
+    var dio = Dio();
     Map<String, String> headers = {
       HttpHeaders.authorizationHeader: "Bearer $token",
     };
@@ -98,27 +97,46 @@ class DriverController extends GetxController {
       lockState: false,
     );
     var jsonData = formRegister.toJson();
-    String url = "http://192.168.3.59:8000/dangtai/create_formin";
+    String url = "${AppConstants.urlBase}/dangtai/create_formin";
     try {
-      response = await _dio.post(
+      response = await dio.post(
         url,
         options: Options(
           headers: headers,
         ),
         data: jsonData,
       );
-      print(response.data);
 
       if (response.statusCode == 201) {
-        print(response.statusCode);
         if (response.data["status_code"] == 204) {
-          print("Đã đăng ký");
         } else {
-          Get.to(() => const DriverDetailsPage());
+          Get.toNamed(
+            Routes.DRIVER_DETAILS_PAGE,
+            arguments: FormRegisterCar(
+              carfleedId: carfleedId,
+              companyId: companyId,
+              transportId: transportId,
+              licensePlate: licensePlate,
+              intendTime: intendTime,
+              warehouse: warehouse,
+              contNumber1: contNumber1,
+              cont1seal1: cont1seal1,
+              cont1seal2: cont1seal2,
+              cont1seal3: cont1seal3,
+              contNumber2: contNumber2,
+              cont2seal1: cont2seal1,
+              cont2seal2: cont2seal2,
+              cont2seal3: cont2seal3,
+              onlySeal: false,
+              lockState: false,
+            ),
+          );
         }
       }
     } catch (e) {
-      print(e);
+      if (kDebugMode) {
+        print(e);
+      }
     }
   }
 }

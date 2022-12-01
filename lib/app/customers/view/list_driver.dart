@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/customers/controller/customer_controller.dart';
 import 'package:register_driver_car/app/customers/model/list_driver_company_model.dart';
-import 'package:register_driver_car/app/customers/view/details_list_driver.dart';
-import 'package:register_driver_car/config/routes/pages.dart';
 
 class ListDriverScreen extends StatefulWidget {
   const ListDriverScreen({super.key});
@@ -15,7 +14,6 @@ class ListDriverScreen extends StatefulWidget {
 class _ListDriverScreenState extends State<ListDriverScreen> {
   final String routes = "/list_driver_screen";
 
-  var _customerController = Get.put(CustomerController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -23,6 +21,17 @@ class _ListDriverScreenState extends State<ListDriverScreen> {
       init: CustomerController(),
       builder: (controller) => SingleChildScrollView(
         child: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [
+                Colors.orangeAccent.withOpacity(0.4),
+                Colors.white.withOpacity(0.4)
+              ],
+              begin: Alignment.topRight,
+              end: Alignment.bottomLeft,
+              stops: const [0.4, 0.9],
+            ),
+          ),
           height: size.height,
           padding: const EdgeInsets.all(10),
           child: FutureBuilder(
@@ -33,24 +42,42 @@ class _ListDriverScreenState extends State<ListDriverScreen> {
                 return ListView.builder(
                   itemCount: items.length,
                   itemBuilder: (context, index) {
-                    return ListTile(
-                      onTap: () {
-                        Get.toNamed("/details_list_driver",
-                            arguments: items[index] as ListDriverCompanyModel);
-                      },
-                      leading: _urlIamge(
-                          "https://i.pinimg.com/736x/c8/d0/c9/c8d0c9ecf1324757eda4f815543cba64.jpg"),
-                      title: Text("${items[index].clientCompany!.name}"),
-                      subtitle: Text("${items[index].clientCompany!.email}"),
-                      trailing: items[index].clientCompany!.status == true
-                          ? const Icon(
-                              Icons.adjust,
-                              color: Colors.green,
-                            )
-                          : const Icon(
-                              Icons.adjust,
-                              color: Colors.red,
-                            ),
+                    int id = items[index].clientCompany!.id!.toInt();
+                    return Card(
+                      shape: RoundedRectangleBorder(
+                        side: const BorderSide(color: Colors.white, width: 1),
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: ListTile(
+                        onTap: () {
+                          controller.postStatusS(id);
+                        },
+                        leading: _urlIamge(
+                            "https://i.pinimg.com/736x/c8/d0/c9/c8d0c9ecf1324757eda4f815543cba64.jpg"),
+                        title: Text(
+                          "${items[index].clientCompany!.name}",
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.8),
+                            fontSize: 16,
+                          ),
+                        ),
+                        subtitle: Text(
+                          "${items[index].clientCompany!.email}",
+                          style: TextStyle(
+                            color: Colors.black.withOpacity(0.8),
+                            fontSize: 14,
+                          ),
+                        ),
+                        trailing: items[index].clientCompany!.status == true
+                            ? const Icon(
+                                Icons.adjust,
+                                color: Colors.green,
+                              )
+                            : const Icon(
+                                Icons.adjust,
+                                color: Colors.red,
+                              ),
+                      ),
                     );
                   },
                 );
@@ -59,7 +86,7 @@ class _ListDriverScreenState extends State<ListDriverScreen> {
                 child: CircularProgressIndicator(),
               );
             }),
-            future: _customerController.getDriverCompany(),
+            future: controller.getDriverCompany(),
           ),
         ),
       ),

@@ -1,12 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:register_driver_car/app/dashboard/view/dashboard_page.dart';
-import 'package:register_driver_car/app/sercurity_page/dashboard_security_page.dart';
+
 import 'package:register_driver_car/app/login/controller/login_controller.dart';
-import 'package:register_driver_car/app/register/view/register_page.dart';
-import "package:register_driver_car/config/data/colors.dart";
-import 'package:register_driver_car/config/data/text.dart';
-import 'package:register_driver_car/config/model/token/token_api.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({Key? key}) : super(key: key);
@@ -18,7 +13,6 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   final String routes = "/login_screen";
 
-  // ignore: unused_field
   final LoginController _loginController = LoginController();
 
   bool obscureText = true;
@@ -35,27 +29,27 @@ class _LoginScreenState extends State<LoginScreen> {
           return Dialog(
             // The background color
             backgroundColor: Colors.white,
+
             child: Padding(
               padding: const EdgeInsets.symmetric(vertical: 20),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
-                children: const [
+                children: [
                   // The loading indicator
-                  CircularProgressIndicator(),
-                  SizedBox(
-                    height: 15,
-                  ),
+                  CircularProgressIndicator(
+                      color: Colors.orangeAccent.withOpacity(0.4)),
+                  const SizedBox(height: 15),
                   // Some text
-                  Text('Loading...')
+                  Text('Loading...',
+                      style: TextStyle(
+                          color: Colors.orangeAccent.withOpacity(0.4)))
                 ],
               ),
             ),
           );
         });
-
     // Tính toán không đồng bộ của bạn ở đây (tìm nạp dữ liệu từ API, xử lý tệp, chèn thứ gì đó vào cơ sở dữ liệu, v.v.)
     await Future.delayed(const Duration(seconds: 3));
-
     // Đóng hộp thoại theo chương trình
   }
 
@@ -64,8 +58,10 @@ class _LoginScreenState extends State<LoginScreen> {
     Size size = MediaQuery.of(context).size;
     return GetBuilder<LoginController>(
       init: LoginController(),
-      builder: (_loginController) => Scaffold(
-        body: getBody(size, context),
+      builder: (controller) => SafeArea(
+        child: Scaffold(
+          body: getBody(size, context),
+        ),
       ),
     );
   }
@@ -73,29 +69,53 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget getBody(Size size, BuildContext context) {
     return SingleChildScrollView(
       child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-        // width: size.width,
-        decoration: const BoxDecoration(
-          color: CustomColor.backgroundLight,
+        height: size.height,
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.orangeAccent.withOpacity(0.4),
+              Colors.white.withOpacity(0.4)
+            ],
+            begin: Alignment.topRight,
+            end: Alignment.bottomLeft,
+            stops: const [0.4, 0.9],
+          ),
         ),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children: [
             Container(
               height: size.height * 0.3,
-              width: size.width * 0.8,
+              width: size.width,
               decoration: const BoxDecoration(
-                  image: DecorationImage(
-                alignment: Alignment.center,
-                image: AssetImage(
-                  "assets/images/logo@2x.png",
+                borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(30),
+                  bottomRight: Radius.circular(30),
                 ),
-                fit: BoxFit.contain,
-              )),
+                image: DecorationImage(
+                  alignment: Alignment.center,
+                  image: AssetImage(
+                    "assets/images/background.png",
+                  ),
+                  fit: BoxFit.cover,
+                ),
+              ),
             ),
-            SizedBox(
+            SizedBox(height: size.width * 0.05),
+            Container(
               height: size.height * 0.1,
+              width: size.width,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  alignment: Alignment.center,
+                  image: AssetImage(
+                    "assets/images/logo@2x.png",
+                  ),
+                  fit: BoxFit.contain,
+                ),
+              ),
             ),
+            SizedBox(height: size.height * 0.05),
             textForm(
               size,
               "Account",
@@ -108,19 +128,6 @@ class _LoginScreenState extends State<LoginScreen> {
               Icons.lock,
               _loginController.passController,
             ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: const [
-                  Text(
-                    "Forgot password ?",
-                    style: CustomTextStyle.primaryStyle,
-                    textAlign: TextAlign.right,
-                  ),
-                ],
-              ),
-            ),
             buttonForm(
               size,
               () async {
@@ -131,32 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                 );
               },
             ),
-            SizedBox(
-              height: size.height * 0.2,
-            ),
-            Container(
-              padding: EdgeInsets.symmetric(horizontal: size.width * 0.05),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  const Text(
-                    "Bạn chưa có tài khoản ?",
-                    style: CustomTextStyle.primaryStyle,
-                    textAlign: TextAlign.right,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      Get.to(() => const RegisterPage());
-                    },
-                    child: const Text(
-                      " Đăng ký tài khoản",
-                      style: CustomTextStyle.blueStyle,
-                      textAlign: TextAlign.right,
-                    ),
-                  ),
-                ],
-              ),
-            ),
+            Expanded(child: Container())
           ],
         ),
       ),
@@ -170,7 +152,8 @@ class _LoginScreenState extends State<LoginScreen> {
           horizontal: size.width * 0.05, vertical: size.width * 0.025),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(width: 1, color: Colors.grey),
+        border:
+            Border.all(width: 1, color: Colors.orangeAccent.withOpacity(0.3)),
         borderRadius: const BorderRadius.all(Radius.circular(20.0)),
       ),
       width: size.width * 0.9,
@@ -182,6 +165,7 @@ class _LoginScreenState extends State<LoginScreen> {
           contentPadding: const EdgeInsets.only(top: 20),
           isDense: true,
           hintText: text,
+          iconColor: Colors.orangeAccent.withOpacity(0.4),
           prefixIcon: Padding(
             padding: const EdgeInsets.only(top: 5),
             child: Icon(
@@ -201,11 +185,12 @@ class _LoginScreenState extends State<LoginScreen> {
           horizontal: size.width * 0.05, vertical: size.width * 0.025),
       decoration: BoxDecoration(
         color: Colors.white,
-        border: Border.all(width: 1, color: Colors.grey),
+        border:
+            Border.all(width: 1, color: Colors.orangeAccent.withOpacity(0.3)),
         borderRadius: const BorderRadius.all(Radius.circular(20.0)),
       ),
       width: size.width * 0.9,
-      height: 50,
+      height: 60,
       child: TextFormField(
         controller: controller,
         obscureText: obscureText,
@@ -250,20 +235,24 @@ class _LoginScreenState extends State<LoginScreen> {
       margin: EdgeInsets.symmetric(
           horizontal: size.width * 0.05, vertical: size.width * 0.025),
       decoration: BoxDecoration(
-        color: CustomColor.colorButton,
-        border: Border.all(width: 1, color: Colors.grey),
+        color: Colors.orangeAccent.withOpacity(0.8),
+        border:
+            Border.all(width: 1, color: Colors.orangeAccent.withOpacity(0.4)),
         borderRadius: const BorderRadius.all(Radius.circular(20.0)),
       ),
       width: size.width * 0.9,
       height: 50,
       child: TextButton(
-          onPressed: onPressed,
-          child: const Text(
-            "Login",
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          )),
+        onPressed: onPressed,
+        child: const Text(
+          "Login",
+          style: TextStyle(
+            color: Colors.grey,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+      ),
     );
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:get/state_manager.dart';
-import 'package:register_driver_car/app/dashboard/controller/dashboard_controller.dart';
+import 'package:get/get.dart';
 import 'package:register_driver_car/config/model/tracking/form_tracking.dart';
-import 'package:intl/intl.dart';
 import 'package:register_driver_car/app/sercurity_page/controller/sercurity_controller.dart';
 import 'package:register_driver_car/config/data/colors.dart';
+// ignore: depend_on_referenced_packages
+import 'package:intl/intl.dart';
 
 class DetailsSercurity extends StatefulWidget {
   const DetailsSercurity({super.key, this.dataform, this.tracking0});
@@ -27,15 +27,42 @@ class _DetailsSercurityState extends State<DetailsSercurity> {
     String dateTime = widget.dataform!.intendTime.toString();
     final day = DateFormat('yyyy-MM-dd ');
     final hour = DateFormat('hh:mm');
-    return GetBuilder<DashBoardController>(
-        init: DashBoardController(),
-        builder: (context) => Scaffold(
-            appBar: AppBar(
-              title: Text("Details Page "),
+    return GetBuilder<SercurityController>(
+      init: SercurityController(),
+      builder: (context) => Scaffold(
+        appBar: AppBar(
+          leading: IconButton(
+            onPressed: () {
+              Get.back();
+            },
+            icon: Icon(
+              Icons.arrow_back_ios_new,
+              color: Colors.white.withOpacity(0.4),
             ),
-            body: SingleChildScrollView(
-              child: Padding(
-                padding: EdgeInsets.only(top: 50),
+          ),
+          title: const Text(
+            "Details Page ",
+            style: TextStyle(color: Colors.blueGrey),
+          ),
+          backgroundColor: CustomColor.backgroundAppbar,
+        ),
+        body: Stack(
+          children: [
+            SingleChildScrollView(
+              child: Container(
+                height: size.height * 1.1,
+                padding: const EdgeInsets.only(top: 10),
+                decoration: BoxDecoration(
+                  gradient: LinearGradient(
+                    colors: [
+                      Colors.orangeAccent.withOpacity(0.4),
+                      Colors.white.withOpacity(0.4)
+                    ],
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    stops: const [0.4, 0.7],
+                  ),
+                ),
                 child: Column(
                   children: [
                     textForm(
@@ -111,13 +138,20 @@ class _DetailsSercurityState extends State<DetailsSercurity> {
                         )
                       ],
                     ),
-                    buttonForm(size, () {
-                      sercurityController.putTrackinglv1(widget.tracking0!.id);
-                    })
                   ],
                 ),
               ),
-            )));
+            ),
+            Positioned(
+              bottom: 0,
+              child: buttonForm(size, () {
+                sercurityController.putTrackinglv1(widget.tracking0!.id);
+              }),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   Widget textForm(Size size, String title, String text) {
@@ -131,7 +165,7 @@ class _DetailsSercurityState extends State<DetailsSercurity> {
               Text(
                 title,
                 style: TextStyle(
-                  color: Colors.black.withOpacity(0.3),
+                  color: Colors.blueGrey.withOpacity(0.8),
                   fontSize: 15,
                 ),
               ),
@@ -143,8 +177,8 @@ class _DetailsSercurityState extends State<DetailsSercurity> {
             children: [
               Text(
                 text,
-                style: const TextStyle(
-                  color: Colors.black,
+                style: TextStyle(
+                  color: Colors.black.withOpacity(0.8),
                   fontSize: 18,
                 ),
               ),
@@ -160,20 +194,25 @@ class _DetailsSercurityState extends State<DetailsSercurity> {
       padding: EdgeInsets.symmetric(
           horizontal: size.width * 0.05, vertical: size.width * 0.025),
       decoration: BoxDecoration(
-        color: CustomColor.colorButton,
+        color: CustomColor.backgroundAppbar.withOpacity(0.8),
         border: Border.all(width: 1, color: Colors.grey),
-        borderRadius: const BorderRadius.all(Radius.circular(20.0)),
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
+        ),
       ),
-      width: size.width * 0.9,
-      height: 50,
+      width: size.width,
+      height: 60,
       child: TextButton(
-          onPressed: onPressed,
-          child: const Text(
-            "Submit",
-            style: TextStyle(
-              color: Colors.white,
-            ),
-          )),
+        onPressed: onPressed,
+        child: Text(
+          "Submit",
+          style: TextStyle(
+            color: Colors.blueGrey.withOpacity(0.8),
+            fontSize: 20,
+          ),
+        ),
+      ),
     );
   }
 }

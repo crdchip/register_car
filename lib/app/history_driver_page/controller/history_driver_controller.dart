@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:register_driver_car/app/history_driver_page/model/history_driver_model.dart';
+import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/model/token/token_api.dart';
 
 class HistoryDriverController extends GetxController {
@@ -20,7 +21,7 @@ class HistoryDriverController extends GetxController {
       HttpHeaders.authorizationHeader: " Bearer $token"
     };
 
-    const url = "http://192.168.3.59:8000/dangtai/list/getformindriver";
+    const url = "${AppConstants.urlBase}/dangtai/list/getformindriver";
 
     try {
       response = await dio.get(url, options: Options(headers: headers));

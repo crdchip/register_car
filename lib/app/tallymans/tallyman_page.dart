@@ -5,10 +5,13 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
 import 'package:register_driver_car/app/tallymans/controller/tallyman_controller.dart';
+import 'package:register_driver_car/app/tallymans/view/tallyman_final_screen.dart';
 
 import 'package:register_driver_car/app/tallymans/view/tallyman_screen.dart';
+import 'package:register_driver_car/app/tallymans/view/tallyman_woking_screen.dart';
 
 import 'package:register_driver_car/config/core/constants/constants.dart';
+import 'package:register_driver_car/config/data/colors.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -22,166 +25,197 @@ class TallymanPage extends StatefulWidget {
 class _TallymanPageState extends State<TallymanPage> {
   final String routes = "tallyman_page";
   PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = TallymanScreen();
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  Widget currentScreen = const TallymanScreen();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
 
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return GetBuilder<TallyManController>(
       init: TallyManController(),
-      builder: (controller) => Scaffold(
-        key: _scaffoldKey,
-        appBar: AppBar(
-          title: Text("TallyMan Page"),
-          centerTitle: true,
+      builder: (controller) => SafeArea(
+        child: Scaffold(
+          key: _scaffoldKey,
+          appBar: AppBar(
+            title: const Text("TallyMan Page"),
+            centerTitle: true,
+            backgroundColor: CustomColor.backgroundAppbar,
+            actions: [
+              IconButton(onPressed: () {}, icon: const Icon(Icons.home))
+            ],
+          ),
+          body: PageStorage(
+            bucket: bucket,
+            child: currentScreen,
+          ),
+          drawer: Drawer(child: _drawer(size, controller)),
         ),
-        body: PageStorage(
-          bucket: bucket,
-          child: currentScreen,
-        ),
-        drawer: Drawer(child: _drawer(size, controller)),
       ),
     );
   }
 
   Widget _drawer(Size size, TallyManController controller) {
-    return Column(
-      children: [
-        Column(
-          children: [
-            FutureBuilder(
-              future: controller.getData(),
-              builder: ((context, snapshot) {
-                if (snapshot.hasData) {
-                  var items = snapshot.data;
-                  print("items: $items");
-                  return Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: Image.network(
-                                "https://anhdepfree.com/wp-content/uploads/2020/11/hinh-anh-background-troi-dem-day-sao-1920x1080.jpg")
-                            .image,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    height: size.height * 0.3,
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(left: 10),
-                          height: size.height * 0.2,
-                          alignment: Alignment.centerLeft,
-                          child: Container(
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.orangeAccent.withOpacity(0.4),
+            Colors.white.withOpacity(0.4)
+          ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: const [0.4, 0.9],
+        ),
+      ),
+      child: Column(
+        children: [
+          Column(
+            children: [
+              FutureBuilder(
+                future: controller.getData(),
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    var items = snapshot.data;
+                    return SizedBox(
+                      height: size.height * 0.3,
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(left: 10),
+                            height: size.height * 0.15,
+                            alignment: Alignment.centerLeft,
+                            child: Container(
                               height: size.height * 0.1,
                               width: size.height * 0.1,
                               decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(100),
                                 color: Colors.redAccent,
                               ),
-                              child:
-                                  // getImageBase64("${items["client"]["dataimg"]}"),
-                                  _urlIamge(
-                                      "https://th.bing.com/th/id/OIP.AFt9Z1kjCPEqviYmS5C7QwHaHa?pid=ImgDet&rs=1")),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 10),
-                          height: size.height * 0.1,
-                          width: size.width,
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Họ và tên : ${items["client"]["name"]}",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 5),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Số điện thoại : ${items["client"]["phone"]}",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              SizedBox(height: 5),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Chức vụ : ${items["role"]["roleName"]}",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
+                              child: _urlIamge(
+                                  "https://th.bing.com/th/id/OIP.AFt9Z1kjCPEqviYmS5C7QwHaHa?pid=ImgDet&rs=1"),
+                            ),
                           ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                return Container();
-              }),
-            ),
-            ListTile(
-              onTap: () {
-                setState(() {
-                  // currentScreen = HistorySercurityScreen(arg: "");
-                  closeDrawer();
-                });
-              },
-              leading: const Icon(Icons.home),
-              title: const Text("Home Page"),
-            ),
-            Divider(
-                height: 5,
-                indent: size.width * 0.1,
-                endIndent: size.width * 0.1,
-                thickness: 2),
-            ListTile(
-              onTap: () {
-                // Get.to(() => HistoryListDriverCompanyScreen());
-                setState(() {
-                  // currentScreen = const CoordinatorsScreen();
-
-                  closeDrawer();
-                });
-              },
-              leading: const Icon(Icons.menu_book),
-              title: const Text("History Form Driver"),
-            ),
-            Divider(
-                height: 5,
-                indent: size.width * 0.1,
-                endIndent: size.width * 0.1,
-                thickness: 2),
-            ListTile(
-              onTap: () {},
-              leading: const Icon(Icons.settings),
-              title: const Text("Settings"),
-            ),
-            Divider(
-                height: 5,
-                indent: size.width * 0.1,
-                endIndent: size.width * 0.1,
-                thickness: 2),
-            ListTile(
-              onTap: () {
-                postLogout();
-              },
-              leading: const Icon(Icons.logout),
-              title: const Text("Logout"),
-            ),
-          ],
-        )
-      ],
+                          Container(
+                            padding: const EdgeInsets.only(left: 10),
+                            height: size.height * 0.1,
+                            width: size.width,
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Họ và tên : ${items["client"]["name"]}",
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Số điện thoại : ${items["client"]["phone"]}",
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Chức vụ : ${items["role"]["roleName"]}",
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  return Container();
+                }),
+              ),
+              Divider(
+                  height: 5,
+                  indent: size.width * 0.05,
+                  endIndent: size.width * 0.05,
+                  thickness: 2),
+              ListTile(
+                onTap: () {
+                  setState(() {
+                    currentScreen = const TallymanScreen();
+                    closeDrawer();
+                  });
+                },
+                leading: const Icon(Icons.home),
+                title: const Text("Home Page"),
+              ),
+              Divider(
+                  height: 5,
+                  indent: size.width * 0.05,
+                  endIndent: size.width * 0.05,
+                  thickness: 2),
+              ListTile(
+                onTap: () {
+                  setState(() {
+                    currentScreen = const TallymanWorkingScreen();
+                    closeDrawer();
+                  });
+                },
+                leading: const Icon(Icons.menu_book),
+                title: const Text("Woking "),
+              ),
+              Divider(
+                  height: 5,
+                  indent: size.width * 0.05,
+                  endIndent: size.width * 0.05,
+                  thickness: 2),
+              ListTile(
+                onTap: () {
+                  // Get.to(() => HistoryListDriverCompanyScreen());
+                  setState(() {
+                    currentScreen = const TallymanFinalScreen();
+                    closeDrawer();
+                  });
+                },
+                leading: const Icon(Icons.menu_book),
+                title: const Text("Final"),
+              ),
+              Divider(
+                  height: 5,
+                  indent: size.width * 0.05,
+                  endIndent: size.width * 0.05,
+                  thickness: 2),
+              ListTile(
+                onTap: () {},
+                leading: const Icon(Icons.settings),
+                title: const Text("Settings"),
+              ),
+              Divider(
+                  height: 5,
+                  indent: size.width * 0.05,
+                  endIndent: size.width * 0.05,
+                  thickness: 2),
+              ListTile(
+                onTap: () {
+                  postLogout();
+                },
+                leading: const Icon(Icons.logout),
+                title: const Text("Logout"),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 

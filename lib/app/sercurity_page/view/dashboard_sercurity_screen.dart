@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:register_driver_car/app/home/widgets/custom_list_title.dart';
-import 'package:register_driver_car/app/home/widgets/custom_nav_list_title.dart';
 import 'package:register_driver_car/app/sercurity_page/controller/sercurity_controller.dart';
 import 'package:register_driver_car/app/sercurity_page/view/details_screen.dart';
 import 'package:register_driver_car/config/model/tracking/form_tracking.dart';
+import 'package:register_driver_car/config/widget/custom_list_title.dart';
+import 'package:register_driver_car/config/widget/custom_nav_list_title.dart';
 
 class DashBoardSercurityScreen extends StatefulWidget {
   const DashBoardSercurityScreen({super.key});
@@ -21,7 +21,6 @@ class _DashBoardSercurityScreenState extends State<DashBoardSercurityScreen> {
   bool showSearch = false;
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return GetBuilder<SercurityController>(
       init: SercurityController(),
       builder: (sercurityController) => Stack(
@@ -36,53 +35,56 @@ class _DashBoardSercurityScreenState extends State<DashBoardSercurityScreen> {
               ),
             ),
             child: FutureBuilder(
-                future: sercurityController.getTracking(),
-                builder: ((context, snapshot) {
-                  if (snapshot.hasData) {
-                    var items = snapshot.data as List<Trackinglv0>;
-                    return ListView.builder(
-                      itemCount: items.length + 1,
-                      itemBuilder: ((context, index) {
-                        return index == 0
-                            ? const CustomNavListTitle(
-                                nameDriver: "Tài xế",
-                                customer: "Khách hàng",
-                                status: "Trạng thái",
-                                height: 60,
-                              )
-                            : InkWell(
-                                onTap: () {
-                                  setState(() {
-                                    Get.to(
-                                      () => DetailsSercurity(
-                                        dataform:
-                                            items[index - 1].formIns!.dataform,
-                                        tracking0: items[index - 1],
-                                      ),
-                                    );
-                                  });
-                                },
-                                child: CustomListTitle(
-                                  Stt: "$index",
-                                  nameDriver:
-                                      "${items[index - 1].formIns!.clientInformation!.name}",
-                                  numberPhone:
-                                      "${items[index - 1].formIns!.clientInformation!.phone}",
-                                  customer:
-                                      "${items[index - 1].formIns!.clientInformation!.companyname}",
-                                  status:
-                                      "${items[index - 1].statustracking![0].name}",
-                                  image:
-                                      "${items[index - 1].formIns!.clientInformation!.imgdata}",
-                                ),
-                              );
-                      }),
-                    );
-                  }
-                  return const Center(
-                    child: CircularProgressIndicator(),
+              future: sercurityController.getTracking(),
+              builder: ((context, snapshot) {
+                if (snapshot.hasData) {
+                  var items = snapshot.data as List<Trackinglv0>;
+                  return ListView.builder(
+                    itemCount: items.length + 1,
+                    itemBuilder: ((context, index) {
+                      return index == 0
+                          ? const CustomNavListTitle(
+                              nameDriver: "Tài xế",
+                              customer: "Khách hàng",
+                              status: "Trạng thái",
+                              height: 60,
+                            )
+                          : InkWell(
+                              onTap: () {
+                                setState(() {
+                                  Get.to(
+                                    () => DetailsSercurity(
+                                      dataform:
+                                          items[index - 1].formIns!.dataform,
+                                      tracking0: items[index - 1],
+                                    ),
+                                  );
+                                });
+                              },
+                              child: CustomListTitle(
+                                Stt: "$index",
+                                nameDriver:
+                                    "${items[index - 1].formIns!.clientInformation!.name}",
+                                numberPhone:
+                                    "${items[index - 1].formIns!.clientInformation!.phone}",
+                                customer:
+                                    "${items[index - 1].formIns!.clientInformation!.companyname}",
+                                status:
+                                    "${items[index - 1].statustracking![0].name}",
+                                image:
+                                    "${items[index - 1].formIns!.clientInformation!.imgdata}",
+                              ),
+                            );
+                    }),
                   );
-                })),
+                }
+                return Center(
+                  child: CircularProgressIndicator(
+                    color: Colors.orangeAccent.withOpacity(0.4),
+                  ),
+                );
+              }),
+            ),
           ),
           const Positioned(
             child: CustomNavListTitle(

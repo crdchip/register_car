@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/history_driver_page/controller/history_driver_controller.dart';
 import 'package:register_driver_car/app/history_driver_page/model/history_driver_model.dart';
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 
 class HistoryFormDriverScreen extends StatefulWidget {
@@ -43,8 +44,7 @@ class _HistoryFormDriverScreenState extends State<HistoryFormDriverScreen> {
                             padding: const EdgeInsets.only(top: 5),
                             child: Text("$index")),
                         title: Text("${items[index].companyname}"),
-                        subtitle:
-                            Text("${day.format((DateTime.parse(dateTime)))}"),
+                        subtitle: Text(day.format((DateTime.parse(dateTime)))),
                       ),
                     );
                   },

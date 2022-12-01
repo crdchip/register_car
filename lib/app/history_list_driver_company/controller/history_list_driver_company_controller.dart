@@ -11,7 +11,6 @@ class HistoryListDriverCompanyController extends GetxController {
   void onInit() {
     super.onInit();
     getListFormCompany();
-    print(getListFormCompany());
   }
 
   Future<List<ListFormCompany>> getListFormCompany() async {

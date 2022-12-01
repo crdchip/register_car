@@ -13,7 +13,7 @@ class ListFormCompany {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (clientInformation != null) {
       data['client_information'] = clientInformation!.toJson();
     }
@@ -62,7 +62,7 @@ class ClientInformation {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['phone'] = phone;
     data['address'] = address;
@@ -136,7 +136,7 @@ class Dataform {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['carfleedId'] = carfleedId;
     data['transportId'] = transportId;

@@ -3,10 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-import 'package:register_driver_car/app/coordinators/view/coordinators_screen.dart';
-import 'package:register_driver_car/app/history_tracking1/view/history_sreen.dart';
+import 'package:register_driver_car/app/coordinator/view/coordinator_screen.dart';
+
 import 'package:register_driver_car/app/leader_page/controller/leader_controller.dart';
-import 'package:register_driver_car/app/sercurity_page/view/drawer.dart';
 import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/data/colors.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -22,9 +21,9 @@ class _LeaderScreenState extends State<LeaderScreen> {
   final String routes = "/leader_page";
 
   PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = CoordinatorsScreen();
+  Widget currentScreen = const CoordinatorScreen();
   var leaderController = Get.put(LeaderController());
-  GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -42,7 +41,7 @@ class _LeaderScreenState extends State<LeaderScreen> {
             actions: [
               IconButton(
                 onPressed: () {},
-                icon: Icon(Icons.home),
+                icon: const Icon(Icons.home),
               )
             ],
             backgroundColor: CustomColor.backgroundAppbar,
@@ -66,7 +65,7 @@ class _LeaderScreenState extends State<LeaderScreen> {
               builder: ((context, snapshot) {
                 if (snapshot.hasData) {
                   var items = snapshot.data;
-                  print("items: $items");
+
                   return Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
@@ -106,27 +105,27 @@ class _LeaderScreenState extends State<LeaderScreen> {
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "Họ và tên : ${items["client"]["name"]}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 5),
+                              const SizedBox(height: 5),
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "Số điện thoại : ${items["client"]["phone"]}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                   ),
                                 ),
                               ),
-                              SizedBox(height: 5),
+                              const SizedBox(height: 5),
                               Container(
                                 alignment: Alignment.centerLeft,
                                 child: Text(
                                   "Chức vụ : ${items["role"]["roleName"]}",
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                     color: Colors.white,
                                   ),
                                 ),
@@ -144,7 +143,7 @@ class _LeaderScreenState extends State<LeaderScreen> {
             ListTile(
               onTap: () {
                 setState(() {
-                  currentScreen = HistorySercurityScreen(arg: "");
+                  // currentScreen = HistorySercurityScreen(arg: "");
                   closeDrawer();
                 });
               },
@@ -160,7 +159,7 @@ class _LeaderScreenState extends State<LeaderScreen> {
               onTap: () {
                 // Get.to(() => HistoryListDriverCompanyScreen());
                 setState(() {
-                  currentScreen = const CoordinatorsScreen();
+                  currentScreen = const CoordinatorScreen();
 
                   closeDrawer();
                 });

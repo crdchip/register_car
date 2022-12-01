@@ -1,3 +1,5 @@
+// ignore_for_file: constant_identifier_names
+
 class AppConstants {
   static const String THEME_KEY = "dark";
 
@@ -12,5 +14,5 @@ class AppConstants {
   static const String USER = "user";
 
   //Url
-  static const String urlBase = "http://192.168.3.59:8000";
+  static const String urlBase = "http://192.168.1.249:8000";
 }

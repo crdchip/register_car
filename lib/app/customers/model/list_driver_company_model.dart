@@ -12,7 +12,7 @@ class ListDriverCompanyModel {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     if (userCompany != null) {
       data['User'] = userCompany!.toJson();
     }
@@ -39,7 +39,7 @@ class UserCompany {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['status'] = status;
     data['username'] = username;
@@ -86,7 +86,7 @@ class ClientCompany {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['name'] = name;
     data['phone'] = phone;
     data['address'] = address;

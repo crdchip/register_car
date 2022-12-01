@@ -16,36 +16,42 @@ class _TallymanWorkingScreenState extends State<TallymanWorkingScreen> {
   var tallymanController = Get.put(TallyManController());
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: tallymanController.getTrackinglv3(),
-      builder: ((context, snapshot) {
-        if (snapshot.hasData) {
-          var items = snapshot.data as List<Trackinglv0>;
-          return items.length != 0
-              ? ListView.builder(
-                  itemCount: items.length,
-                  itemBuilder: ((context, index) {
-                    int statusChecking = items[index].statustracking!.length;
-                    return ListTile(
-                      onTap: () {
-                        Get.toNamed(Routes.TALLYMAN_WORKING_DETAILS_SCREEN,
-                            arguments: items[index]);
-                      },
-                      title: Text(
-                          "${items[index].formIns!.clientInformation!.name}"),
-                      subtitle: Text(
-                          "${items[index].formIns!.clientInformation!.companyname}"),
-                      trailing: Text(
-                          "${items[index].statustracking![statusChecking - 1].name}"),
-                    );
-                  }),
-                )
-              : const Center(
-                  child: Text("Không có xe"),
-                );
-        }
-        return const Center(child: CircularProgressIndicator());
-      }),
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
+      child: FutureBuilder(
+        future: tallymanController.getTrackinglv3(),
+        builder: ((context, snapshot) {
+          if (snapshot.hasData) {
+            var items = snapshot.data as List<Trackinglv0>;
+            return items.isNotEmpty
+                ? ListView.builder(
+                    itemCount: items.length,
+                    itemBuilder: ((context, index) {
+                      int statusChecking = items[index].statustracking!.length;
+                      return Card(
+                        child: ListTile(
+                          tileColor: Colors.orangeAccent.withOpacity(0.4),
+                          onTap: () {
+                            Get.toNamed(Routes.TALLYMAN_WORKING_DETAILS_SCREEN,
+                                arguments: items[index]);
+                          },
+                          title: Text(
+                              "${items[index].formIns!.clientInformation!.name}"),
+                          subtitle: Text(
+                              "${items[index].formIns!.clientInformation!.companyname}"),
+                          trailing: Text(
+                              "${items[index].statustracking![statusChecking - 1].name}"),
+                        ),
+                      );
+                    }),
+                  )
+                : const Center(
+                    child: Text("Không có xe"),
+                  );
+          }
+          return const Center(child: CircularProgressIndicator());
+        }),
+      ),
     );
   }
 }

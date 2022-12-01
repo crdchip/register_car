@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:register_driver_car/app/history_driver_page/controller/history_driver_controller.dart';
 import 'package:register_driver_car/app/history_driver_page/model/history_driver_model.dart';
 import "package:get/get.dart";
+// ignore: depend_on_referenced_packages
 import 'package:intl/intl.dart';
 
 class HistoryFormDetailsScreen extends StatefulWidget {
@@ -17,9 +18,7 @@ class _HistoryFormDetailsScreenState extends State<HistoryFormDetailsScreen> {
   var agr = Get.arguments as ListFormDriver;
   @override
   void initState() {
-    if (Get.arguments != null && Get.arguments is ListFormDriver) {
-      var arg = Get.arguments as ListFormDriver;
-    }
+    if (Get.arguments != null && Get.arguments is ListFormDriver) {}
     super.initState();
   }
 
@@ -36,7 +35,7 @@ class _HistoryFormDetailsScreenState extends State<HistoryFormDetailsScreen> {
       builder: (context) => SafeArea(
         child: Scaffold(
             appBar: AppBar(
-              title: Text("Thông tin chi tiết"),
+              title: const Text("Thông tin chi tiết"),
               leading: IconButton(
                   onPressed: () {
                     Get.back();
@@ -47,17 +46,17 @@ class _HistoryFormDetailsScreenState extends State<HistoryFormDetailsScreen> {
                   )),
             ),
             body: Padding(
-              padding: EdgeInsets.only(top: 20),
+              padding: const EdgeInsets.only(top: 20),
               child: Column(
                 children: [
                   textForm(size, "Company", "${agr.companyname}"),
                   textForm(size, "Tổ chức", "${agr.carfleedname}"),
                   textForm(size, "Xe", "${agr.transportname}"),
                   textForm(size, "Kho", "${agr.warehousename}"),
-                  textForm(size, "Ngày/tháng",
-                      "${day.format(DateTime.parse(datetime))}"),
-                  textForm(size, "Giờ vào",
-                      "${hour.format(DateTime.parse(datetime))}"),
+                  textForm(
+                      size, "Ngày/tháng", day.format(DateTime.parse(datetime))),
+                  textForm(
+                      size, "Giờ vào", hour.format(DateTime.parse(datetime))),
                 ],
               ),
             )),

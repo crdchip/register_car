@@ -20,7 +20,7 @@ class _StatusScreenState extends State<StatusScreen> {
       child: Scaffold(
         appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back_ios),
+            icon: const Icon(Icons.arrow_back_ios),
             color: Colors.white.withOpacity(0.4),
             onPressed: () {},
           ),
@@ -52,21 +52,19 @@ class _StatusScreenState extends State<StatusScreen> {
             builder: ((context, snapshot) {
               if (snapshot.hasData) {
                 var items = snapshot.data as List<WareHome>;
-                print(items);
+
                 return ListView.builder(
                   scrollDirection: Axis.vertical,
                   itemCount: items.length,
                   itemBuilder: (context, index) {
                     return InkWell(
                       onTap: () {
-                        print(index);
                         Get.to(
                           () => StatusDetailsScreen(
                             gateLeft: items[index].gateLeft,
                             gateRight: items[index].gateRight,
                           ),
                         );
-                        print(items[index].gateLeft!.length);
                       },
                       child: Card(
                         child: ListTile(

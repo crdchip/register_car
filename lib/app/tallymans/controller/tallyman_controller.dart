@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:get/get.dart' hide Response;
 import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/model/id/id_model.dart';
@@ -23,7 +24,7 @@ class TallyManController extends GetxController {
     Map<String, dynamic> headers = {
       HttpHeaders.authorizationHeader: "Bearer $token"
     };
-    final url = '${AppConstants.urlBase}/Client/getuser';
+    const url = '${AppConstants.urlBase}/Client/getuser';
 
     try {
       final response = await dio.get(url, options: Options(headers: headers));
@@ -32,7 +33,6 @@ class TallyManController extends GetxController {
         var userModel = response.data["data"];
         return userModel;
       } else {
-        print('${response.statusCode} : ${response.data.toString()}');
         return response.data;
       }
     } catch (error) {
@@ -134,10 +134,11 @@ class TallyManController extends GetxController {
     response =
         await dio.put(url, options: Options(headers: headers), data: jsonData);
     if (response.statusCode == 200) {
-      print("TallyMan : Oke");
       Get.toNamed(Routes.TALLYMAN_PAGE);
     } else {
-      print(response.statusCode);
+      if (kDebugMode) {
+        print(response.statusCode);
+      }
     }
   }
 
@@ -148,7 +149,6 @@ class TallyManController extends GetxController {
     Map<String, dynamic> headers = {
       HttpHeaders.authorizationHeader: "Bearer $token"
     };
-
     var idModel = IdModel(id: id);
 
     var jsonData = idModel.toJson();
@@ -157,12 +157,11 @@ class TallyManController extends GetxController {
     response =
         await dio.put(url, options: Options(headers: headers), data: jsonData);
     if (response.statusCode == 200) {
-      print("TallyMan : Đã xog");
-      // Get.toNamed(Routes.TALLYMAN_PAGE);
-      // var currentScreen = TallymanWorkingScreen();
       Get.back();
     } else {
-      print(response.statusCode);
+      if (kDebugMode) {
+        print(response.statusCode);
+      }
     }
   }
 }
