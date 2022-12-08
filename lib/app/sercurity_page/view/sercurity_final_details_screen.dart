@@ -15,7 +15,7 @@ class SercurityFinalDetailsScreen extends StatefulWidget {
 
 class _SercurityFinalDetailsScreenState
     extends State<SercurityFinalDetailsScreen> {
-  var items = Get.arguments as Trackinglv0;
+  var items = Get.arguments as Tracking;
   final String routes = "/sercurity_final_details_screen";
   @override
   Widget build(BuildContext context) {

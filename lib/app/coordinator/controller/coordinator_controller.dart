@@ -13,7 +13,7 @@ class CoordinatorController extends GetxController {
   void onInit() {
     super.onInit();
     getTrackinglv1();
-    getStatusLine();
+    // getStatusLine();
     getData();
   }
 
@@ -59,7 +59,7 @@ class CoordinatorController extends GetxController {
     }
   }
 
-  Future<List<Trackinglv0>> getTrackinglv1() async {
+  Future<List<Tracking>> getTrackinglv1() async {
     var dio = Dio();
     Response response;
     var token = await TokenApi().getToken();
@@ -75,7 +75,7 @@ class CoordinatorController extends GetxController {
       if (response.statusCode == 200) {
         List<dynamic> tracking = response.data;
 
-        return tracking.map((e) => Trackinglv0.fromJson(e)).toList();
+        return tracking.map((e) => Tracking.fromJson(e)).toList();
       } else {
         return response.data;
       }

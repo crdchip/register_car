@@ -38,7 +38,7 @@ class _CoordinatorPageState extends State<CoordinatorPage> {
             child: _drawer(size, controller),
           ),
           appBar: AppBar(
-            title: const Text("CoordinatorPage"),
+            title: const Text("Coordinator Page"),
             centerTitle: true,
             backgroundColor: CustomColor.backgroundAppbar,
           ),
@@ -52,140 +52,149 @@ class _CoordinatorPageState extends State<CoordinatorPage> {
   }
 
   Widget _drawer(Size size, CoordinatorController controller) {
-    return Column(
-      children: [
-        Column(
-          children: [
-            FutureBuilder(
-              future: controller.getData(),
-              builder: ((context, snapshot) {
-                if (snapshot.hasData) {
-                  var items = snapshot.data;
-
-                  return Container(
-                    decoration: BoxDecoration(
-                      image: DecorationImage(
-                        image: Image.network(
-                                "https://anhdepfree.com/wp-content/uploads/2020/11/hinh-anh-background-troi-dem-day-sao-1920x1080.jpg")
-                            .image,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
-                    height: size.height * 0.3,
-                    child: Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(left: 10),
-                          height: size.height * 0.2,
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            height: size.height * 0.1,
-                            width: size.height * 0.1,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Colors.redAccent,
-                            ),
-                            child: _urlIamge(
-                                "https://th.bing.com/th/id/OIP.AFt9Z1kjCPEqviYmS5C7QwHaHa?pid=ImgDet&rs=1"),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 10),
-                          height: size.height * 0.1,
-                          width: size.width,
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Họ và tên : ${items["client"]["name"]}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Số điện thoại : ${items["client"]["phone"]}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Chức vụ : ${items["role"]["roleName"]}",
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  );
-                }
-                return Container();
-              }),
-            ),
-            ListTile(
-              onTap: () {
-                setState(() {
-                  currentScreen = const CoordinatorScreen();
-                  closeDrawer();
-                });
-              },
-              leading: const Icon(Icons.home),
-              title: const Text("Trang chủ"),
-            ),
-            Divider(
-                height: 5,
-                indent: size.width * 0.1,
-                endIndent: size.width * 0.1,
-                thickness: 2),
-            ListTile(
-              onTap: () {
-                setState(() {
-                  currentScreen = const WareHouseScreen();
-
-                  closeDrawer();
-                });
-              },
-              leading: const Icon(Icons.menu_book),
-              title: const Text("Danh sách đã đăng ký"),
-            ),
-            Divider(
-                height: 5,
-                indent: size.width * 0.1,
-                endIndent: size.width * 0.1,
-                thickness: 2),
-            ListTile(
-              onTap: () {},
-              leading: const Icon(Icons.settings),
-              title: const Text("Cài đặt"),
-            ),
-            Divider(
-                height: 5,
-                indent: size.width * 0.1,
-                endIndent: size.width * 0.1,
-                thickness: 2),
-            ListTile(
-              onTap: () {
-                postLogout();
-              },
-              leading: const Icon(Icons.logout),
-              title: const Text("Đăng xuất"),
-            ),
+    return Container(
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          colors: [
+            Colors.orangeAccent.withOpacity(0.4),
+            Colors.white.withOpacity(0.4)
           ],
-        )
-      ],
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          stops: const [0.4, 0.9],
+        ),
+      ),
+      child: Column(
+        children: [
+          Column(
+            children: [
+              FutureBuilder(
+                future: controller.getData(),
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    var items = snapshot.data;
+                    return SizedBox(
+                      height: size.height * 0.3,
+                      child: Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(left: 10),
+                            height: size.height * 0.15,
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              height: size.height * 0.1,
+                              width: size.height * 0.1,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.redAccent,
+                              ),
+                              child:
+                                  // getImageBase64("${items["client"]["dataimg"]}"),
+                                  _urlIamge(
+                                      "https://th.bing.com/th/id/OIP.AFt9Z1kjCPEqviYmS5C7QwHaHa?pid=ImgDet&rs=1"),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 10),
+                            height: size.height * 0.1,
+                            width: size.width,
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Họ và tên : ${items["client"]["name"]}",
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Số điện thoại : ${items["client"]["phone"]}",
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Chức vụ : ${items["role"]["roleName"]}",
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  }
+                  return Container();
+                }),
+              ),
+              ListTile(
+                onTap: () {
+                  setState(() {
+                    currentScreen = const CoordinatorScreen();
+                    closeDrawer();
+                  });
+                },
+                leading: const Icon(Icons.home),
+                title: const Text("Trang chủ"),
+              ),
+              Divider(
+                  height: 5,
+                  indent: size.width * 0.1,
+                  endIndent: size.width * 0.1,
+                  thickness: 2),
+              ListTile(
+                onTap: () {
+                  setState(() {
+                    currentScreen = const WareHouseScreen();
+
+                    closeDrawer();
+                  });
+                },
+                leading: const Icon(Icons.menu_book),
+                title: const Text("Danh sách đã đăng ký"),
+              ),
+              Divider(
+                  height: 5,
+                  indent: size.width * 0.1,
+                  endIndent: size.width * 0.1,
+                  thickness: 2),
+              ListTile(
+                onTap: () {},
+                leading: const Icon(Icons.settings),
+                title: const Text("Cài đặt"),
+              ),
+              Divider(
+                  height: 5,
+                  indent: size.width * 0.1,
+                  endIndent: size.width * 0.1,
+                  thickness: 2),
+              ListTile(
+                onTap: () {
+                  postLogout();
+                },
+                leading: const Icon(Icons.logout),
+                title: const Text("Đăng xuất"),
+              ),
+            ],
+          )
+        ],
+      ),
     );
   }
 

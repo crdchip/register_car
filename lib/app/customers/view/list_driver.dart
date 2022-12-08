@@ -50,7 +50,21 @@ class _ListDriverScreenState extends State<ListDriverScreen> {
                       ),
                       child: ListTile(
                         onTap: () {
-                          controller.postStatusS(id);
+                          // getDialog();
+                          if (items[index].clientCompany!.status == true) {
+                            controller.postStatusS(id);
+                          } else {
+                            Get.defaultDialog(
+                              middleText: "Tài xế chưa đăng ký phiếu",
+                              textConfirm: "Xác nhận",
+                              confirmTextColor: Colors.white,
+                              backgroundColor: Colors.white,
+                              onConfirm: () {
+                                Get.back();
+                              },
+                              buttonColor: Colors.orangeAccent.withOpacity(0.4),
+                            );
+                          }
                         },
                         leading: _urlIamge(
                             "https://i.pinimg.com/736x/c8/d0/c9/c8d0c9ecf1324757eda4f815543cba64.jpg"),
@@ -105,6 +119,23 @@ class _ListDriverScreenState extends State<ListDriverScreen> {
           fit: BoxFit.cover,
         ),
       ),
+    );
+  }
+
+  void getDialog() {
+    Get.defaultDialog(
+      title: "Loading",
+      confirm: CircularProgressIndicator(
+        color: Colors.orangeAccent.withOpacity(0.7),
+      ),
+      middleText: "",
+      textConfirm: null,
+      confirmTextColor: Colors.white,
+      backgroundColor: Colors.white,
+      onConfirm: () {
+        Get.back();
+      },
+      buttonColor: Colors.orangeAccent.withOpacity(0.4),
     );
   }
 }

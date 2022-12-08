@@ -18,7 +18,7 @@ class _TallymanWorkingDetailsScreenState
   final String routes = "/tallyman_working_details_screen";
   var tallymanController = Get.put(TallyManController());
 
-  var items = Get.arguments as Trackinglv0;
+  var items = Get.arguments as Tracking;
 
   @override
   Widget build(BuildContext context) {

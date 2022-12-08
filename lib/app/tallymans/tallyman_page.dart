@@ -41,7 +41,13 @@ class _TallymanPageState extends State<TallymanPage> {
             centerTitle: true,
             backgroundColor: CustomColor.backgroundAppbar,
             actions: [
-              IconButton(onPressed: () {}, icon: const Icon(Icons.home))
+              IconButton(
+                  onPressed: () {
+                    setState(() {
+                      currentScreen = TallymanScreen();
+                    });
+                  },
+                  icon: const Icon(Icons.home))
             ],
           ),
           body: PageStorage(
@@ -157,7 +163,7 @@ class _TallymanPageState extends State<TallymanPage> {
                   });
                 },
                 leading: const Icon(Icons.home),
-                title: const Text("Home Page"),
+                title: const Text("Trang chủ"),
               ),
               Divider(
                   height: 5,
@@ -172,7 +178,7 @@ class _TallymanPageState extends State<TallymanPage> {
                   });
                 },
                 leading: const Icon(Icons.menu_book),
-                title: const Text("Woking "),
+                title: const Text("Danh sách xe đang làm "),
               ),
               Divider(
                   height: 5,
@@ -188,7 +194,7 @@ class _TallymanPageState extends State<TallymanPage> {
                   });
                 },
                 leading: const Icon(Icons.menu_book),
-                title: const Text("Final"),
+                title: const Text("Danh sách xe đã làm xong"),
               ),
               Divider(
                   height: 5,
@@ -198,7 +204,7 @@ class _TallymanPageState extends State<TallymanPage> {
               ListTile(
                 onTap: () {},
                 leading: const Icon(Icons.settings),
-                title: const Text("Settings"),
+                title: const Text("Cài đặt"),
               ),
               Divider(
                   height: 5,
@@ -210,7 +216,7 @@ class _TallymanPageState extends State<TallymanPage> {
                   postLogout();
                 },
                 leading: const Icon(Icons.logout),
-                title: const Text("Logout"),
+                title: const Text("Đăng xuất"),
               ),
             ],
           )

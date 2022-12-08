@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:register_driver_car/app/driver_page/view/driver_page.dart';
+import 'package:register_driver_car/app/driver_page/driver_page.dart';
 import 'package:register_driver_car/config/model/driver/form_post_account.dart';
 import 'package:register_driver_car/config/widget/text_feilds.dart';
 // ignore: depend_on_referenced_packages

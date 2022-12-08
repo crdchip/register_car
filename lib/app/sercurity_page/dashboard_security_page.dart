@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:register_driver_car/app/driver_page/widget/search_user.dart';
 import 'package:register_driver_car/app/sercurity_page/view/dashboard_sercurity_screen.dart';
 import 'package:register_driver_car/app/sercurity_page/view/sercurity_final_screen.dart';
 import 'package:register_driver_car/config/core/constants/constants.dart';
@@ -36,12 +37,20 @@ class _DashBoardSecurityPageState extends State<DashBoardSecurityPage> {
               key: _scaffoldKey,
               appBar: AppBar(
                 title: const Text(
-                  "Security Page",
-                  style: TextStyle(color: Colors.white, fontSize: 16),
+                  "TBS Logistic",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
                 centerTitle: true,
                 actions: [
-                  IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
+                  IconButton(
+                      onPressed: () {
+                        showSearch(context: context, delegate: SearchUser());
+                      },
+                      icon: const Icon(Icons.search)),
                   const SizedBox(width: 15),
                 ],
                 backgroundColor: CustomColor.backgroundAppbar,
@@ -89,16 +98,17 @@ class _DashBoardSecurityPageState extends State<DashBoardSecurityPage> {
                             height: size.height * 0.15,
                             alignment: Alignment.centerLeft,
                             child: Container(
-                                height: size.height * 0.1,
-                                width: size.height * 0.1,
-                                decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(100),
-                                  color: Colors.redAccent,
-                                ),
-                                child:
-                                    // getImageBase64("${items["client"]["dataimg"]}"),
-                                    _urlIamge(
-                                        "https://th.bing.com/th/id/OIP.AFt9Z1kjCPEqviYmS5C7QwHaHa?pid=ImgDet&rs=1")),
+                              height: size.height * 0.1,
+                              width: size.height * 0.1,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.redAccent,
+                              ),
+                              child:
+                                  // getImageBase64("${items["client"]["dataimg"]}"),
+                                  _urlIamge(
+                                      "https://th.bing.com/th/id/OIP.AFt9Z1kjCPEqviYmS5C7QwHaHa?pid=ImgDet&rs=1"),
+                            ),
                           ),
                           Container(
                             padding: const EdgeInsets.only(left: 10),

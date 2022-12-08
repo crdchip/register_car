@@ -17,7 +17,7 @@ class _TallyManDetailsScreenState extends State<TallyManDetailsScreen> {
   var tallymanController = Get.put(TallyManController());
   bool checkStatus = false;
 
-  var items = Get.arguments as Trackinglv0;
+  var items = Get.arguments as Tracking;
 
   @override
   Widget build(BuildContext context) {

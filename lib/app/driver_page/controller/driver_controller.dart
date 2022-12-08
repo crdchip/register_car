@@ -4,8 +4,10 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart' hide Response;
+import 'package:register_driver_car/app/driver_page/model/list_form_driver_model.dart';
 import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/model/driver/form_post_account.dart';
+import 'package:register_driver_car/config/model/id/id_model.dart';
 import 'package:register_driver_car/config/model/token/token_api.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
 
@@ -74,7 +76,7 @@ class DriverController extends GetxController {
     var token = await TokenApi().getToken();
 
     Response response;
-    var dio = Dio();
+    var _dio = Dio();
     Map<String, String> headers = {
       HttpHeaders.authorizationHeader: "Bearer $token",
     };
@@ -99,7 +101,7 @@ class DriverController extends GetxController {
     var jsonData = formRegister.toJson();
     String url = "${AppConstants.urlBase}/dangtai/create_formin";
     try {
-      response = await dio.post(
+      response = await _dio.post(
         url,
         options: Options(
           headers: headers,
@@ -108,7 +110,23 @@ class DriverController extends GetxController {
       );
 
       if (response.statusCode == 201) {
+        print("oke");
         if (response.data["status_code"] == 204) {
+          var detail = response.data["detail"];
+          print(detail);
+          Get.defaultDialog(
+            title: "Thông báo",
+            middleText: "$detail",
+            textConfirm: "Oke",
+            confirmTextColor: Colors.white,
+            backgroundColor: Colors.white,
+            onConfirm: () {
+              Get.back();
+            },
+            buttonColor: Colors.orangeAccent.withOpacity(0.4),
+          );
+
+          print("Da dang ky");
         } else {
           Get.toNamed(
             Routes.DRIVER_DETAILS_PAGE,
@@ -134,9 +152,34 @@ class DriverController extends GetxController {
         }
       }
     } catch (e) {
-      if (kDebugMode) {
-        print(e);
+      print(e);
+    }
+  }
+
+  Future<void> listFormDriver(int id) async {
+    var token = await TokenApi().getToken();
+    Response response;
+    var _dio = Dio();
+    Map<String, String> headers = {};
+    String url = "${AppConstants.urlBase}/dangtai/list/fominbyidclient";
+    var idModel = IdModel(id: id);
+    var jsonData = idModel.toJson();
+    try {
+      response = await _dio.post(
+        url,
+        data: jsonData,
+      );
+      if (response.statusCode == 200) {
+        List<dynamic> jsonResponse = response.data;
+
+        print(jsonResponse);
+        Get.toNamed(
+          Routes.LIST_FORM_DRIVER_SCREEN,
+          arguments: jsonResponse,
+        );
       }
+    } catch (e) {
+      print(e);
     }
   }
 }

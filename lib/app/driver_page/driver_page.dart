@@ -23,20 +23,23 @@ class _DriverPageState extends State<DriverPage> {
   Widget currentScreen = const DriverScreen();
   var leaderController = Get.put(DriverController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+    // var items = Get.arguments;
     return GetBuilder<DriverController>(
       init: DriverController(),
       builder: (controller) => SafeArea(
         child: Scaffold(
           key: _scaffoldKey,
           appBar: AppBar(
-            title: const Text(
-              "Driver Page",
-              style: TextStyle(fontSize: 16, color: Colors.blueGrey),
+            title: Text(
+              "TBS Logistic ",
+              style: TextStyle(fontSize: 20, color: Colors.white),
             ),
             backgroundColor: CustomColor.backgroundAppbar,
+            // backgroundColor: Colors.white,
             centerTitle: true,
           ),
           drawer: Drawer(
@@ -155,24 +158,35 @@ class _DriverPageState extends State<DriverPage> {
                   });
                 },
                 leading: const Icon(Icons.home),
-                title: const Text("Home Page"),
+                title: const Text("Trang chủ"),
               ),
               Divider(
                   height: 5,
                   indent: size.width * 0.05,
                   endIndent: size.width * 0.05,
                   thickness: 2),
-              ListTile(
-                onTap: () {
-                  // Get.to(() => HistoryListDriverCompanyScreen());
-                  setState(() {
-                    // currentScreen = const CoordinatorsScreen();
-                    // currentScreen = const HistorySercurityScreen(arg: "");
-                    closeDrawer();
-                  });
-                },
-                leading: const Icon(Icons.menu_book),
-                title: const Text("History Form Driver"),
+              FutureBuilder(
+                future: controller.getData(),
+                builder: ((context, snapshot) {
+                  if (snapshot.hasData) {
+                    var items = snapshot.data;
+                    var idUser = items['client']["id"];
+                    return ListTile(
+                      onTap: () {
+                        // Get.to(() => HistoryListDriverCompanyScreen());
+                        setState(() {
+                          // currentScreen = const CoordinatorsScreen();
+                          // currentScreen = const HistorySercurityScreen(arg: "");
+                          print("object");
+                          controller.listFormDriver(idUser);
+                        });
+                      },
+                      leading: const Icon(Icons.menu_book),
+                      title: const Text("Danh sách các phiếu đã đăng ký"),
+                    );
+                  }
+                  return Container();
+                }),
               ),
               Divider(
                   height: 5,
@@ -182,7 +196,7 @@ class _DriverPageState extends State<DriverPage> {
               ListTile(
                 onTap: () {},
                 leading: const Icon(Icons.settings),
-                title: const Text("Settings"),
+                title: const Text("Cài đặt"),
               ),
               Divider(
                   height: 5,
@@ -194,7 +208,7 @@ class _DriverPageState extends State<DriverPage> {
                   postLogout();
                 },
                 leading: const Icon(Icons.logout),
-                title: const Text("Logout"),
+                title: const Text("Đăng xuất"),
               ),
             ],
           )

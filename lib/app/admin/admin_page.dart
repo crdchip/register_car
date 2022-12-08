@@ -4,7 +4,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/admin/controller/admin_controller.dart';
-import 'package:register_driver_car/app/admin/view/admin_screen.dart';
+import 'package:register_driver_car/app/admin/view/coordinator/admin_coordinator_screen.dart';
+import 'package:register_driver_car/app/admin/view/coordinator/admin_warehouse_screen.dart';
+import 'package:register_driver_car/app/admin/view/driver/admin_driver_screen.dart';
+import 'package:register_driver_car/app/admin/view/sercurity/admin_sercurity_final_screen.dart';
+import 'package:register_driver_car/app/admin/view/sercurity/admin_sercurity_screen.dart';
+import 'package:register_driver_car/app/admin/view/tallyman/admin_car_out_screen.dart';
+import 'package:register_driver_car/app/admin/view/tallyman/view/admin_tallyman_screen.dart';
+import 'package:register_driver_car/app/admin/view/tallyman/view/admin_tallyman_woking_screen.dart';
+import 'package:register_driver_car/app/driver_page/view/driver_screen.dart';
 import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/data/colors.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
@@ -21,7 +29,7 @@ class _AdminPageState extends State<AdminPage> {
   final String routes = "/admin_page";
 
   PageStorageBucket bucket = PageStorageBucket();
-  Widget currentScreen = const AdminScreen();
+  Widget currentScreen = const AdminDriverScreen();
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
   @override
   Widget build(BuildContext context) {
@@ -29,6 +37,7 @@ class _AdminPageState extends State<AdminPage> {
     return GetBuilder<AdminController>(
       init: AdminController(),
       builder: (controller) => Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           title: const Text(
             "Dash Board",
@@ -38,7 +47,11 @@ class _AdminPageState extends State<AdminPage> {
           backgroundColor: CustomColor.backgroundAppbar,
           actions: [
             IconButton(
-              onPressed: () {},
+              onPressed: () {
+                setState(() {
+                  currentScreen = AdminDriverScreen();
+                });
+              },
               icon: const Icon(
                 Icons.home,
                 size: 24,
@@ -58,151 +71,249 @@ class _AdminPageState extends State<AdminPage> {
   }
 
   Widget _drawer(Size size, AdminController controller) {
-    return Container(
-      decoration: BoxDecoration(
-        gradient: LinearGradient(
-          colors: [
-            Colors.orangeAccent.withOpacity(0.4),
-            Colors.white.withOpacity(0.4)
-          ],
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          stops: const [0.4, 0.7],
-        ),
-      ),
-      child: Column(
-        children: [
-          Column(
-            children: [
-              FutureBuilder(
-                future: controller.getData(),
-                builder: ((context, snapshot) {
-                  if (snapshot.hasData) {
-                    var items = snapshot.data;
-
-                    return Column(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.only(left: 10),
-                          height: size.height * 0.2,
-                          alignment: Alignment.centerLeft,
-                          child: Container(
-                            height: size.height * 0.1,
-                            width: size.height * 0.1,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(100),
-                              color: Colors.redAccent,
-                            ),
-                            child: _urlIamge(
-                                "https://th.bing.com/th/id/OIP.AFt9Z1kjCPEqviYmS5C7QwHaHa?pid=ImgDet&rs=1"),
-                          ),
-                        ),
-                        Container(
-                          padding: const EdgeInsets.only(left: 10),
-                          margin: const EdgeInsets.only(bottom: 10),
-                          height: size.height * 0.1,
-                          width: size.width,
-                          alignment: Alignment.centerLeft,
-                          child: Column(
-                            children: [
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Họ và tên : ${items["client"]["name"]}",
-                                  style: const TextStyle(
-                                    color: Colors.blueGrey,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Số điện thoại : ${items["client"]["phone"]}",
-                                  style: const TextStyle(
-                                    color: Colors.blueGrey,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              Container(
-                                alignment: Alignment.centerLeft,
-                                child: Text(
-                                  "Chức vụ : ${items["role"]["roleName"]}",
-                                  style: const TextStyle(
-                                    color: Colors.blueGrey,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    );
-                  }
-                  return Container();
-                }),
-              ),
-              Divider(
-                  height: 5,
-                  indent: size.width * 0.05,
-                  endIndent: size.width * 0.05,
-                  thickness: 2),
-              ListTile(
-                onTap: () {
-                  setState(() {
-                    // currentScreen = const CoordinatorScreen();
-                    closeDrawer();
-                  });
-                },
-                leading: const Icon(Icons.home),
-                title: const Text("Home Page"),
-              ),
-              Divider(
-                  height: 5,
-                  indent: size.width * 0.05,
-                  endIndent: size.width * 0.05,
-                  thickness: 2),
-              ListTile(
-                onTap: () {
-                  // Get.to(() => HistoryListDriverCompanyScreen());
-                  setState(() {
-                    // currentScreen = const WareHouseScreen();
-
-                    closeDrawer();
-                  });
-                },
-                leading: const Icon(Icons.menu_book),
-                title: const Text("History Form Driver"),
-              ),
-              Divider(
-                  height: 5,
-                  indent: size.width * 0.05,
-                  endIndent: size.width * 0.05,
-                  thickness: 2),
-              ListTile(
-                onTap: () {},
-                leading: const Icon(Icons.settings),
-                title: const Text("Settings"),
-              ),
-              Divider(
-                  height: 5,
-                  indent: size.width * 0.05,
-                  endIndent: size.width * 0.05,
-                  thickness: 2),
-              ListTile(
-                onTap: () {
-                  postLogout();
-                },
-                leading: const Icon(Icons.logout),
-                title: const Text("Logout"),
-              ),
+    return SingleChildScrollView(
+      scrollDirection: Axis.vertical,
+      child: Container(
+        decoration: BoxDecoration(
+          gradient: LinearGradient(
+            colors: [
+              Colors.orangeAccent.withOpacity(0.4),
+              Colors.white.withOpacity(0.4)
             ],
-          )
-        ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            stops: const [0.4, 0.7],
+          ),
+        ),
+        child: Column(
+          children: [
+            Column(
+              children: [
+                FutureBuilder(
+                  future: controller.getData(),
+                  builder: ((context, snapshot) {
+                    if (snapshot.hasData) {
+                      var items = snapshot.data;
+
+                      return Column(
+                        children: [
+                          Container(
+                            padding: const EdgeInsets.only(left: 10),
+                            height: size.height * 0.2,
+                            alignment: Alignment.centerLeft,
+                            child: Container(
+                              height: size.height * 0.1,
+                              width: size.height * 0.1,
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(100),
+                                color: Colors.redAccent,
+                              ),
+                              child: _urlIamge(
+                                  "https://th.bing.com/th/id/OIP.AFt9Z1kjCPEqviYmS5C7QwHaHa?pid=ImgDet&rs=1"),
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.only(left: 10),
+                            margin: const EdgeInsets.only(bottom: 10),
+                            height: size.height * 0.1,
+                            width: size.width,
+                            alignment: Alignment.centerLeft,
+                            child: Column(
+                              children: [
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Họ và tên : ${items["client"]["name"]}",
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Số điện thoại : ${items["client"]["phone"]}",
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(height: 5),
+                                Container(
+                                  alignment: Alignment.centerLeft,
+                                  child: Text(
+                                    "Chức vụ : ${items["role"]["roleName"]}",
+                                    style: const TextStyle(
+                                      color: Colors.blueGrey,
+                                      fontSize: 16,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      );
+                    }
+                    return Container();
+                  }),
+                ),
+                Divider(
+                    height: 5,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.05,
+                    thickness: 2),
+                ListTile(
+                  onTap: () {
+                    setState(() {
+                      currentScreen = const DriverScreen();
+                      closeDrawer();
+                    });
+                  },
+                  leading: const Icon(Icons.home),
+                  title: const Text("Đăng ký phiếu vào"),
+                ),
+                Divider(
+                    height: 5,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.05,
+                    thickness: 2),
+                ListTile(
+                  onTap: () {
+                    setState(() {
+                      currentScreen = const AdminSercurityScreen();
+
+                      closeDrawer();
+                    });
+                  },
+                  leading: const Icon(Icons.menu_book),
+                  title: const Text("Danh sách xe đã đăng ký"),
+                ),
+                Divider(
+                    height: 5,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.05,
+                    thickness: 2),
+                ListTile(
+                  onTap: () {
+                    setState(() {
+                      currentScreen = const AdminCoordinatorScreen();
+
+                      closeDrawer();
+                    });
+                  },
+                  leading: const Icon(Icons.menu_book),
+                  title: const Text("Danh sách xe đã vào cổng"),
+                ),
+                Divider(
+                    height: 5,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.05,
+                    thickness: 2),
+                ListTile(
+                  onTap: () {
+                    setState(() {
+                      currentScreen = const AdminTallymanScreen();
+
+                      closeDrawer();
+                    });
+                  },
+                  leading: const Icon(Icons.menu_book),
+                  title: const Text("Danh sách xe đã vào line"),
+                ),
+                Divider(
+                    height: 5,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.05,
+                    thickness: 2),
+                ListTile(
+                  onTap: () {
+                    setState(() {
+                      currentScreen = const AdminWareHouseScreen();
+
+                      closeDrawer();
+                    });
+                  },
+                  leading: const Icon(Icons.menu_book),
+                  title: const Text("Tình trạng line của kho"),
+                ),
+                Divider(
+                    height: 5,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.05,
+                    thickness: 2),
+                ListTile(
+                  onTap: () {
+                    setState(() {
+                      currentScreen = const AdminTallymanWorkingScreen();
+
+                      closeDrawer();
+                    });
+                  },
+                  leading: const Icon(Icons.menu_book),
+                  title: const Text("Danh sách xe đang lên hàng"),
+                ),
+                Divider(
+                    height: 5,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.05,
+                    thickness: 2),
+                ListTile(
+                  onTap: () {
+                    setState(() {
+                      currentScreen = const AdminSercurityFinalScreen();
+
+                      closeDrawer();
+                    });
+                  },
+                  leading: const Icon(Icons.menu_book),
+                  title: const Text("Danh sách xe lên hàng xong"),
+                ),
+                Divider(
+                    height: 5,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.05,
+                    thickness: 2),
+                ListTile(
+                  onTap: () {
+                    setState(() {
+                      currentScreen = const AdminCarOutScreen();
+
+                      closeDrawer();
+                    });
+                  },
+                  leading: const Icon(Icons.menu_book),
+                  title: const Text("Danh sách xe đã ra cổng"),
+                ),
+                Divider(
+                    height: 5,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.05,
+                    thickness: 2),
+                ListTile(
+                  onTap: () {},
+                  leading: const Icon(Icons.settings),
+                  title: const Text("Settings"),
+                ),
+                Divider(
+                    height: 5,
+                    indent: size.width * 0.05,
+                    endIndent: size.width * 0.05,
+                    thickness: 2),
+                ListTile(
+                  onTap: () {
+                    postLogout();
+                  },
+                  leading: const Icon(Icons.logout),
+                  title: const Text("Logout"),
+                ),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

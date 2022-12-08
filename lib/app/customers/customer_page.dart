@@ -1,13 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
-
 import 'package:register_driver_car/app/customers/controller/customer_controller.dart';
+import 'package:register_driver_car/app/customers/view/create_form_screen.dart';
 import 'package:register_driver_car/app/customers/view/list_driver.dart';
-import 'package:register_driver_car/app/driver_page/view/driver_screen.dart';
-
+import 'package:register_driver_car/app/customers/view/list_form_register_screen.dart';
 import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/data/colors.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
@@ -55,7 +53,7 @@ class _CustomerPageState extends State<CustomerPage> {
                   setState(() {
                     checkPage = !checkPage;
                     if (checkPage) {
-                      currentScreen = const DriverScreen();
+                      currentScreen = const FormRegisterInCustomerScreen();
                     } else {
                       currentScreen = const ListDriverScreen();
                     }
@@ -177,12 +175,12 @@ class _CustomerPageState extends State<CustomerPage> {
               ListTile(
                 onTap: () {
                   setState(() {
-                    // currentScreen = HistorySercurityScreen(arg: "");
+                    currentScreen = const ListDriverScreen();
                     closeDrawer();
                   });
                 },
                 leading: const Icon(Icons.home),
-                title: const Text("Home Page"),
+                title: const Text("Trang chủ"),
               ),
               Divider(
                   height: 5,
@@ -193,13 +191,13 @@ class _CustomerPageState extends State<CustomerPage> {
                 onTap: () {
                   // Get.to(() => HistoryListDriverCompanyScreen());
                   setState(() {
-                    // currentScreen = const CoordinatorsScreen();
+                    currentScreen = const ListFormRegisterScreen();
 
                     closeDrawer();
                   });
                 },
                 leading: const Icon(Icons.menu_book),
-                title: const Text("History Form Driver"),
+                title: const Text("Lịch sử phiếu đã đăng ký"),
               ),
               Divider(
                   height: 5,
@@ -209,7 +207,7 @@ class _CustomerPageState extends State<CustomerPage> {
               ListTile(
                 onTap: () {},
                 leading: const Icon(Icons.settings),
-                title: const Text("Settings"),
+                title: const Text("Cài đặt"),
               ),
               Divider(
                   height: 5,
@@ -221,7 +219,7 @@ class _CustomerPageState extends State<CustomerPage> {
                   postLogout();
                 },
                 leading: const Icon(Icons.logout),
-                title: const Text("Logout"),
+                title: const Text("Đăng xuất"),
               ),
             ],
           )
@@ -238,20 +236,6 @@ class _CustomerPageState extends State<CustomerPage> {
         _scaffoldKey.currentState!.closeEndDrawer();
       }
     }
-  }
-
-  getImageBase64(String image) {
-    const Base64Codec base64 = Base64Codec();
-    Uint8List bytes = base64.decode(image);
-    return ClipRRect(
-      borderRadius: BorderRadius.circular(100.0),
-      child: Image.memory(
-        bytes,
-        width: 50,
-        height: 50,
-        fit: BoxFit.cover,
-      ),
-    );
   }
 
   Widget _urlIamge(String src) {

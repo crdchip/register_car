@@ -40,7 +40,40 @@ class SercurityController extends GetxController {
     }
   }
 
-  Future<List<Trackinglv0>> getTracking() async {
+  Future<List<Tracking>> searchTracking(String? query) async {
+    var dio = Dio();
+    Response response;
+    var token = await TokenApi().getToken();
+    Map<String, dynamic> headers = {
+      HttpHeaders.authorizationHeader: "Bearer $token"
+    };
+    List<Tracking> results = [];
+
+    const url = "${AppConstants.urlBase}/tracking/Lv0";
+
+    try {
+      response = await dio.get(url, options: Options(headers: headers));
+      if (response.statusCode == 200) {
+        List<dynamic> tracking = response.data;
+
+        results = tracking.map((e) => Tracking.fromJson(e)).toList();
+        if (query != null) {
+          results = results
+              .where((element) => element.formIns!.clientInformation!.name!
+                  .toLowerCase()
+                  .contains((query.toLowerCase())))
+              .toList();
+        }
+      } else {
+        return response.data;
+      }
+    } catch (e) {
+      rethrow;
+    }
+    return results;
+  }
+
+  Future<List<Tracking>> getTracking() async {
     var dio = Dio();
     Response response;
     var token = await TokenApi().getToken();
@@ -55,7 +88,7 @@ class SercurityController extends GetxController {
       if (response.statusCode == 200) {
         List<dynamic> tracking = response.data;
 
-        return tracking.map((e) => Trackinglv0.fromJson(e)).toList();
+        return tracking.map((e) => Tracking.fromJson(e)).toList();
       } else {
         return response.data;
       }
@@ -64,7 +97,7 @@ class SercurityController extends GetxController {
     }
   }
 
-  Future<List<Trackinglv0>> getTracking4() async {
+  Future<List<Tracking>> getTracking4() async {
     var dio = Dio();
     Response response;
     var token = await TokenApi().getToken();
@@ -79,7 +112,7 @@ class SercurityController extends GetxController {
       if (response.statusCode == 200) {
         List<dynamic> tracking = response.data;
 
-        return tracking.map((e) => Trackinglv0.fromJson(e)).toList();
+        return tracking.map((e) => Tracking.fromJson(e)).toList();
       } else {
         return response.data;
       }
@@ -105,6 +138,7 @@ class SercurityController extends GetxController {
     // print(response.statusCode);
     if (response.statusCode == 200) {
       Get.toNamed(Routes.DASHBOARD_SECURITY_PAGE);
+      print("oke");
     } else {
       if (kDebugMode) {
         print(response.statusCode);
@@ -129,7 +163,7 @@ class SercurityController extends GetxController {
         await dio.put(url, options: Options(headers: headers), data: jsonData);
     // print(response.statusCode);
     if (response.statusCode == 200) {
-      Get.toNamed(Routes.DASHBOARD_SECURITY_PAGE);
+      Get.toNamed(Routes.ADMIN_PAGE);
     } else {
       if (kDebugMode) {
         print(response.statusCode);

@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:register_driver_car/app/driver_page/controller/driver_controller.dart';
 import 'package:register_driver_car/config/widget/checkbox.dart';
 import 'package:register_driver_car/config/widget/dropdownButton.dart';
+import 'package:register_driver_car/config/widget/form_button_bottom.dart';
 import 'package:register_driver_car/config/widget/text_form.dart';
 
 class DriverScreen extends StatefulWidget {
@@ -49,8 +50,9 @@ class _DriverScreenState extends State<DriverScreen> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
+
     return Container(
-      padding: const EdgeInsets.only(top: 10),
+      padding: const EdgeInsets.only(top: 15),
       decoration: BoxDecoration(
         gradient: LinearGradient(
           colors: [
@@ -67,9 +69,25 @@ class _DriverScreenState extends State<DriverScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Center(
+              child: Text(
+                "Đăng ký phiếu vào",
+                style: TextStyle(
+                  color: Colors.blueGrey,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
             //Tài xế
-            formText(size, "Tài xế", _driverController.nameDriver, Icons.abc,
-                "Nguyễn Văn A"),
+
+            TextForm(
+              title: "Tài xế",
+              controller: _driverController.nameDriver,
+              hintText: "Nguyễn Văn A",
+              icon: Icons.abc,
+            ),
             //Đội xe
             DropdownButton2(
               text: "Đội xe",
@@ -197,11 +215,14 @@ class _DriverScreenState extends State<DriverScreen> {
             //form chọn ngày tháng
             formDate(size, "Ngày/tháng vào"),
             //Nút submit
-            formButton(
-              () {
-                postRegis();
+            ButtonFormBottom(
+              onPressed: () {
+                setState(() {
+                  postRegis();
+                  print("oke");
+                });
               },
-              size,
+              text: "Đăng ký",
             ),
             const SizedBox(height: 20)
           ],
@@ -238,11 +259,13 @@ class _DriverScreenState extends State<DriverScreen> {
           width: size.width * 0.8,
           height: 60,
           child: DateTimePicker(
+            cursorColor: Colors.white,
             decoration: const InputDecoration(
               border: InputBorder.none,
               focusedBorder: InputBorder.none,
               enabledBorder: InputBorder.none,
               disabledBorder: InputBorder.none,
+              fillColor: Colors.white,
             ),
             type: DateTimePickerType.dateTimeSeparate,
             dateMask: 'd MMM, yyyy',
@@ -252,14 +275,14 @@ class _DriverScreenState extends State<DriverScreen> {
             icon: const Icon(Icons.event),
             dateLabelText: 'Date',
             timeLabelText: "Hour",
-            selectableDayPredicate: (date) {
-              // Disable weekend days to select from the calendar
-              if (date.weekday == 7) {
-                return false;
-              }
+            // selectableDayPredicate: (date) {
+            //   // Disable weekend days to select from the calendar
+            //   if (date.weekday == 7) {
+            //     return false;
+            //   }
 
-              return true;
-            },
+            //   return true;
+            // },
             onChanged: (val) {
               setState(() {
                 valueTime = val;
@@ -281,77 +304,6 @@ class _DriverScreenState extends State<DriverScreen> {
           ),
         )
       ],
-    );
-  }
-
-  Widget formText(Size size, String text, TextEditingController controller,
-      IconData icon, String? hintText) {
-    return Column(
-      children: [
-        Container(
-          padding: EdgeInsets.only(left: size.width * 0.1),
-          child: Row(
-            children: [
-              Text(
-                text,
-                textAlign: TextAlign.left,
-                style: const TextStyle(color: Colors.blueGrey, fontSize: 16),
-              ),
-            ],
-          ),
-        ),
-        Container(
-          decoration: BoxDecoration(
-            border: Border.all(width: 1, color: Colors.black.withOpacity(0.4)),
-            borderRadius: BorderRadius.circular(20.0),
-            color: Colors.white,
-          ),
-          padding: const EdgeInsets.only(top: 10, left: 10),
-          height: 60,
-          width: size.width * 0.8,
-          margin: EdgeInsets.symmetric(vertical: size.height * 0.02),
-          child: TextFormField(
-            validator: (value) {
-              if (value == null || value.isEmpty) {
-                return 'Please enter "$text" .';
-              }
-              return null;
-            },
-            controller: controller,
-            decoration: InputDecoration(
-              hintText: hintText,
-              border: InputBorder.none,
-              icon: Icon(
-                icon,
-                size: 26,
-              ),
-              isDense: true,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget formButton(VoidCallback onPressed, Size size) {
-    return GestureDetector(
-      onTap: onPressed,
-      child: Container(
-        decoration: BoxDecoration(
-          color: Colors.orangeAccent.withOpacity(0.8),
-          borderRadius: const BorderRadius.all(Radius.circular(20.0)),
-        ),
-        margin: const EdgeInsets.only(top: 20),
-        width: size.width * 0.8,
-        height: 60,
-        child: Center(
-          child: Text(
-            "Đăng ký",
-            style: TextStyle(
-                color: Colors.blueGrey.withOpacity(0.8), fontSize: 18),
-          ),
-        ),
-      ),
     );
   }
 

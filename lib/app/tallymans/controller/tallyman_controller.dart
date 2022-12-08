@@ -40,7 +40,7 @@ class TallyManController extends GetxController {
     }
   }
 
-  Future<List<Trackinglv0>> getTrackinglv2() async {
+  Future<List<Tracking>> getTrackinglv2() async {
     var dio = Dio();
     Response response;
     var token = await TokenApi().getToken();
@@ -57,7 +57,7 @@ class TallyManController extends GetxController {
 
         // print(
         //     "tracing : ${tracking.map((e) => Trackinglv0.fromJson(e)).toList()}");
-        return tracking.map((e) => Trackinglv0.fromJson(e)).toList();
+        return tracking.map((e) => Tracking.fromJson(e)).toList();
       } else {
         return response.data;
       }
@@ -66,7 +66,7 @@ class TallyManController extends GetxController {
     }
   }
 
-  Future<List<Trackinglv0>> getTrackinglv3() async {
+  Future<List<Tracking>> getTrackinglv3() async {
     var dio = Dio();
     Response response;
     var token = await TokenApi().getToken();
@@ -83,7 +83,7 @@ class TallyManController extends GetxController {
 
         // print(
         //     "tracing : ${tracking.map((e) => Trackinglv0.fromJson(e)).toList()}");
-        return tracking.map((e) => Trackinglv0.fromJson(e)).toList();
+        return tracking.map((e) => Tracking.fromJson(e)).toList();
       } else {
         return response.data;
       }
@@ -92,7 +92,7 @@ class TallyManController extends GetxController {
     }
   }
 
-  Future<List<Trackinglv0>> getTrackinglv4() async {
+  Future<List<Tracking>> getTrackinglv4() async {
     var dio = Dio();
     Response response;
     var token = await TokenApi().getToken();
@@ -109,7 +109,7 @@ class TallyManController extends GetxController {
 
         // print(
         //     "tracing : ${tracking.map((e) => Trackinglv0.fromJson(e)).toList()}");
-        return tracking.map((e) => Trackinglv0.fromJson(e)).toList();
+        return tracking.map((e) => Tracking.fromJson(e)).toList();
       } else {
         return response.data;
       }
@@ -157,7 +157,7 @@ class TallyManController extends GetxController {
     response =
         await dio.put(url, options: Options(headers: headers), data: jsonData);
     if (response.statusCode == 200) {
-      Get.back();
+      Get.toNamed(Routes.TALLYMAN_PAGE);
     } else {
       if (kDebugMode) {
         print(response.statusCode);

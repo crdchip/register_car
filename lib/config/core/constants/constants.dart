@@ -14,5 +14,5 @@ class AppConstants {
   static const String USER = "user";
 
   //Url
-  static const String urlBase = "http://192.168.1.249:8000";
+  static const String urlBase = "http://103.149.28.137:200";
 }

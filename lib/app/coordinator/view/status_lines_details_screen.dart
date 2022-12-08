@@ -3,6 +3,7 @@ import 'package:flutter_dialogs/flutter_dialogs.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/coordinator/controller/coordinator_controller.dart';
 import 'package:register_driver_car/app/status/model/ware_home.dart';
+import 'package:register_driver_car/config/data/colors.dart';
 
 class StatusLinesDetailsScreen extends StatefulWidget {
   const StatusLinesDetailsScreen({
@@ -37,15 +38,16 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
             },
           ),
           title: Text(
-            "${items.name} ${items.id}",
+            "${items.name} ",
             style: const TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontSize: 16,
+              fontWeight: FontWeight.bold,
             ),
           ),
           centerTitle: true,
 
-          backgroundColor: Colors.amber,
+          backgroundColor: CustomColor.backgroundAppbar,
         ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -109,11 +111,18 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                     builder: (context) => BasicDialogAlert(
                                       title: const Text("Bạn có xác nhận !"),
                                       content: Text(
-                                          "${gateLeft[index].lines![0].id}"),
+                                          "${gateLeft[index].lines![1].id}"),
                                       actions: <Widget>[
                                         BasicDialogAction(
                                           title: const Text("Oke"),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            setState(() {
+                                              controller.putTrackinglv2(
+                                                gateLeft[index].lines![0].id,
+                                                idForm,
+                                              );
+                                            });
+                                          },
                                         ),
                                         BasicDialogAction(
                                           title: const Text("Hủy"),
@@ -137,11 +146,18 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                     builder: (context) => BasicDialogAlert(
                                       title: const Text("Bạn có xác nhận !"),
                                       content: Text(
-                                          "${gateLeft[index].lines![0].id}"),
+                                          "${gateLeft[index].lines![2].id}"),
                                       actions: <Widget>[
                                         BasicDialogAction(
                                           title: const Text("Oke"),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            setState(() {
+                                              controller.putTrackinglv2(
+                                                gateLeft[index].lines![0].id,
+                                                idForm,
+                                              );
+                                            });
+                                          },
                                         ),
                                         BasicDialogAction(
                                           title: const Text("Hủy"),
@@ -190,7 +206,14 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                       actions: <Widget>[
                                         BasicDialogAction(
                                           title: const Text("Oke"),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            setState(() {
+                                              controller.putTrackinglv2(
+                                                gateRight[index].lines![0].id,
+                                                idForm,
+                                              );
+                                            });
+                                          },
                                         ),
                                         BasicDialogAction(
                                           title: const Text("Hủy"),
@@ -214,11 +237,18 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                     builder: (context) => BasicDialogAlert(
                                       title: const Text("Bạn có xác nhận !"),
                                       content: Text(
-                                          "${gateRight[index].lines![0].id}"),
+                                          "${gateRight[index].lines![1].id}"),
                                       actions: <Widget>[
                                         BasicDialogAction(
                                           title: const Text("Oke"),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            setState(() {
+                                              controller.putTrackinglv2(
+                                                gateRight[index].lines![1].id,
+                                                idForm,
+                                              );
+                                            });
+                                          },
                                         ),
                                         BasicDialogAction(
                                           title: const Text("Hủy"),
@@ -242,11 +272,18 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                     builder: (context) => BasicDialogAlert(
                                       title: const Text("Bạn có xác nhận !"),
                                       content: Text(
-                                          "${gateRight[index].lines![0].id}"),
+                                          "${gateRight[index].lines![2].id}"),
                                       actions: <Widget>[
                                         BasicDialogAction(
                                           title: const Text("Oke"),
-                                          onPressed: () {},
+                                          onPressed: () {
+                                            setState(() {
+                                              controller.putTrackinglv2(
+                                                gateRight[index].lines![2].id,
+                                                idForm,
+                                              );
+                                            });
+                                          },
                                         ),
                                         BasicDialogAction(
                                           title: const Text("Hủy"),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/coordinator/controller/coordinator_controller.dart';
 import 'package:register_driver_car/app/status/model/ware_home.dart';
+import 'package:register_driver_car/config/data/colors.dart';
 
 class WareHouseDetailsScreen extends StatefulWidget {
   const WareHouseDetailsScreen({super.key});
@@ -32,15 +33,16 @@ class _WareHouseDetailsScreenState extends State<WareHouseDetailsScreen> {
               },
             ),
             title: Text(
-              "${items.name} ${items.id}",
+              "${items.name} ",
               style: const TextStyle(
-                color: Colors.black,
-                fontSize: 16,
+                color: Colors.white,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
               ),
             ),
             centerTitle: true,
 
-            backgroundColor: Colors.amber,
+            backgroundColor: CustomColor.backgroundAppbar,
           ),
           body: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 5, vertical: 10),

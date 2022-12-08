@@ -1,4 +1,4 @@
-class Trackinglv0 {
+class Tracking {
   int? id;
   int? formId;
   int? lineId;
@@ -6,7 +6,7 @@ class Trackinglv0 {
   FormIns? formIns;
   List<Statustracking>? statustracking;
 
-  Trackinglv0(
+  Tracking(
       {this.id,
       this.formId,
       this.lineId,
@@ -14,11 +14,10 @@ class Trackinglv0 {
       this.formIns,
       this.statustracking});
 
-  Trackinglv0.fromJson(Map<String, dynamic> json) {
+  Tracking.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     formId = json['formId'];
     lineId = json['lineId'];
-
     lines = json['lines'] != null ? Lines.fromJson(json['lines']) : null;
     formIns =
         json['formIns'] != null ? FormIns.fromJson(json['formIns']) : null;
@@ -35,13 +34,105 @@ class Trackinglv0 {
     data['id'] = id;
     data['formId'] = formId;
     data['lineId'] = lineId;
-    data['lines'] = lines;
+    if (lines != null) {
+      data['lines'] = lines!.toJson();
+    }
     if (formIns != null) {
       data['formIns'] = formIns!.toJson();
     }
     if (statustracking != null) {
       data['statustracking'] = statustracking!.map((v) => v.toJson()).toList();
     }
+    return data;
+  }
+}
+
+class Lines {
+  String? name;
+  bool? status;
+  int? id;
+  int? gateId;
+  Gate? gate;
+
+  Lines({this.name, this.status, this.id, this.gateId, this.gate});
+
+  Lines.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    status = json['status'];
+    id = json['id'];
+    gateId = json['gateId'];
+    gate = json['gate'] != null ? Gate.fromJson(json['gate']) : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['status'] = status;
+    data['id'] = id;
+    data['gateId'] = gateId;
+    if (gate != null) {
+      data['gate'] = gate!.toJson();
+    }
+    return data;
+  }
+}
+
+class Gate {
+  int? id;
+  bool? status;
+  String? name;
+  String? local;
+  String? warehouseId;
+  Warehouse? warehouse;
+
+  Gate(
+      {this.id,
+      this.status,
+      this.name,
+      this.local,
+      this.warehouseId,
+      this.warehouse});
+
+  Gate.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    status = json['status'];
+    name = json['name'];
+    local = json['local'];
+    warehouseId = json['warehouseId'];
+    warehouse = json['warehouse'] != null
+        ? Warehouse.fromJson(json['warehouse'])
+        : null;
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['id'] = id;
+    data['status'] = status;
+    data['name'] = name;
+    data['local'] = local;
+    data['warehouseId'] = warehouseId;
+    if (warehouse != null) {
+      data['warehouse'] = warehouse!.toJson();
+    }
+    return data;
+  }
+}
+
+class Warehouse {
+  String? name;
+  String? id;
+
+  Warehouse({this.name, this.id});
+
+  Warehouse.fromJson(Map<String, dynamic> json) {
+    name = json['name'];
+    id = json['id'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = <String, dynamic>{};
+    data['name'] = name;
+    data['id'] = id;
     return data;
   }
 }
@@ -78,7 +169,7 @@ class ClientInformation {
   String? phone;
   String? email;
   String? address;
-  int? companyId;
+  int? companyid;
   String? imgdata;
   String? companyname;
 
@@ -88,7 +179,7 @@ class ClientInformation {
       this.phone,
       this.email,
       this.address,
-      this.companyId,
+      this.companyid,
       this.imgdata,
       this.companyname});
 
@@ -98,7 +189,7 @@ class ClientInformation {
     phone = json['phone'];
     email = json['email'];
     address = json['address'];
-    companyId = json['companyId'];
+    companyid = json['companyid'];
     imgdata = json['imgdata'];
     companyname = json['companyname'];
   }
@@ -110,7 +201,7 @@ class ClientInformation {
     data['phone'] = phone;
     data['email'] = email;
     data['address'] = address;
-    data['companyId'] = companyId;
+    data['companyid'] = companyid;
     data['imgdata'] = imgdata;
     data['companyname'] = companyname;
     return data;
@@ -120,7 +211,9 @@ class ClientInformation {
 class Dataform {
   int? id;
   String? carfleedId;
+  String? carfleedname;
   String? transportId;
+  String? transportname;
   String? licensePlate;
   String? intendTime;
   String? warehouse;
@@ -135,11 +228,15 @@ class Dataform {
   bool? onlySeal;
   bool? lockState;
   bool? status;
+  String? timein;
+  String? timeout;
 
   Dataform(
       {this.id,
       this.carfleedId,
+      this.carfleedname,
       this.transportId,
+      this.transportname,
       this.licensePlate,
       this.intendTime,
       this.warehouse,
@@ -153,12 +250,16 @@ class Dataform {
       this.cont2seal3,
       this.onlySeal,
       this.lockState,
-      this.status});
+      this.status,
+      this.timein,
+      this.timeout});
 
   Dataform.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     carfleedId = json['carfleedId'];
+    carfleedname = json['carfleedname'];
     transportId = json['transportId'];
+    transportname = json['transportname'];
     licensePlate = json['licensePlate'];
     intendTime = json['intendTime'];
     warehouse = json['warehouse'];
@@ -173,13 +274,17 @@ class Dataform {
     onlySeal = json['onlySeal'];
     lockState = json['lockState'];
     status = json['status'];
+    timein = json['timein'];
+    timeout = json['timeout'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['carfleedId'] = carfleedId;
+    data['carfleedname'] = carfleedname;
     data['transportId'] = transportId;
+    data['transportname'] = transportname;
     data['licensePlate'] = licensePlate;
     data['intendTime'] = intendTime;
     data['warehouse'] = warehouse;
@@ -194,31 +299,8 @@ class Dataform {
     data['onlySeal'] = onlySeal;
     data['lockState'] = lockState;
     data['status'] = status;
-    return data;
-  }
-}
-
-class Lines {
-  int? id;
-  int? gateId;
-  String? name;
-  bool? status;
-
-  Lines({this.id, this.name, this.status, this.gateId});
-
-  Lines.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
-    gateId = json['gateId'];
-    name = json['name'];
-    status = json['status'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
-    data['gateId'] = gateId;
-    data['name'] = name;
-    data['status'] = status;
+    data['timein'] = timein;
+    data['timeout'] = timeout;
     return data;
   }
 }
@@ -238,10 +320,9 @@ class Statustracking {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['lv'] = lv;
     data['name'] = name;
     data['id'] = id;
-
+    data['lv'] = lv;
     return data;
   }
 }

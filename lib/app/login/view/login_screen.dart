@@ -19,39 +19,40 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool login = true;
 
-  void _fetchData(BuildContext context) async {
-    // show the loading dialog
-    showDialog(
-        // The user CANNOT close this dialog  by pressing outsite it
-        barrierDismissible: false,
-        context: context,
-        builder: (_) {
-          return Dialog(
-            // The background color
-            backgroundColor: Colors.white,
+  // void _fetchData(BuildContext context) async {
+  //   // show the loading dialog
+  //   showDialog(
+  //       // The user CANNOT close this dialog  by pressing outsite it
+  //       barrierDismissible: false,
+  //       context: context,
+  //       builder: (_) {
+  //         return Dialog(
+  //           // The background color
+  //           backgroundColor: Colors.white,
 
-            child: Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20),
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  // The loading indicator
-                  CircularProgressIndicator(
-                      color: Colors.orangeAccent.withOpacity(0.4)),
-                  const SizedBox(height: 15),
-                  // Some text
-                  Text('Loading...',
-                      style: TextStyle(
-                          color: Colors.orangeAccent.withOpacity(0.4)))
-                ],
-              ),
-            ),
-          );
-        });
-    // Tính toán không đồng bộ của bạn ở đây (tìm nạp dữ liệu từ API, xử lý tệp, chèn thứ gì đó vào cơ sở dữ liệu, v.v.)
-    await Future.delayed(const Duration(seconds: 3));
-    // Đóng hộp thoại theo chương trình
-  }
+  //           child: Padding(
+  //             padding: const EdgeInsets.symmetric(vertical: 20),
+  //             child: Column(
+  //               mainAxisSize: MainAxisSize.min,
+  //               children: [
+  //                 // The loading indicator
+  //                 CircularProgressIndicator(
+  //                     color: Colors.orangeAccent.withOpacity(0.4)),
+  //                 const SizedBox(height: 15),
+  //                 // Some text
+  //                 Text('Loading...',
+  //                     style: TextStyle(
+  //                         color: Colors.orangeAccent.withOpacity(0.4)))
+  //               ],
+  //             ),
+  //           ),
+  //         );
+  //       });
+  //   // Tính toán không đồng bộ của bạn ở đây (tìm nạp dữ liệu từ API, xử lý tệp, chèn thứ gì đó vào cơ sở dữ liệu, v.v.)
+  //   await Future.delayed(const Duration(seconds: 3));
+  //   // Đóng hộp thoại theo chương trình
+  //   Get.back();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -131,7 +132,7 @@ class _LoginScreenState extends State<LoginScreen> {
             buttonForm(
               size,
               () async {
-                _fetchData(context);
+                // _fetchData(context);
                 _loginController.loginDrivers(
                   _loginController.accountController.text,
                   _loginController.passController.text,

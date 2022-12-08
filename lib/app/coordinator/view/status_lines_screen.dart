@@ -27,7 +27,7 @@ class _StatusLinesScreenState extends State<StatusLinesScreen> {
           },
           icon: const Icon(Icons.arrow_back_ios_new),
         ),
-        title: Text("Chọn kho $idForm"),
+        title: Text("Chọn kho"),
         centerTitle: true,
         backgroundColor: CustomColor.backgroundAppbar,
       ),
