@@ -3,28 +3,26 @@
 import 'package:flutter/material.dart';
 import 'package:register_driver_car/config/widget/image_base64.dart';
 
-class CustomListTitle extends StatefulWidget {
-  const CustomListTitle({
+class CustomTitle extends StatefulWidget {
+  const CustomTitle({
     super.key,
     required this.Stt,
     required this.nameDriver,
     required this.numberPhone,
     required this.customer,
     required this.status,
-    required this.image,
   });
   final String Stt;
   final String nameDriver;
   final String numberPhone;
   final String customer;
   final String status;
-  final String image;
 
   @override
-  State<CustomListTitle> createState() => _CustomListTitleState();
+  State<CustomTitle> createState() => _CustomTitleState();
 }
 
-class _CustomListTitleState extends State<CustomListTitle> {
+class _CustomTitleState extends State<CustomTitle> {
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -53,26 +51,32 @@ class _CustomListTitleState extends State<CustomListTitle> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   SizedBox(
-                    width: 20,
+                    width: 15,
                     child: Center(
                       child: Text(widget.Stt),
                     ),
                   ),
-                  const SizedBox(width: 5),
-                  ImageBase64(image: widget.image),
+                  // const SizedBox(width: 5),
+                  // ImageBase64(image: widget.image),
                   Expanded(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Center(
-                          child: Text(widget.nameDriver,
-                              style: const TextStyle(
-                                  color: Colors.blueGrey, fontSize: 14)),
+                        Text(
+                          widget.nameDriver,
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            color: Colors.blueGrey,
+                            fontSize: 15,
+                          ),
                         ),
-                        Center(
-                          child: Text(widget.numberPhone,
-                              style: const TextStyle(
-                                  color: Colors.blueGrey, fontSize: 14)),
+                        Text(
+                          widget.numberPhone,
+                          textAlign: TextAlign.left,
+                          style: const TextStyle(
+                            color: Colors.blueGrey,
+                            fontSize: 15,
+                          ),
                         ),
                       ],
                     ),

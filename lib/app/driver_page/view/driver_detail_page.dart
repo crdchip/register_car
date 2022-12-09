@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/driver_page/driver_page.dart';
+import 'package:register_driver_car/config/data/colors.dart';
 import 'package:register_driver_car/config/model/driver/form_post_account.dart';
 import 'package:register_driver_car/config/widget/text_feilds.dart';
 // ignore: depend_on_referenced_packages
@@ -33,13 +34,14 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     String dateTime = items.intendTime.toString();
-    final day = DateFormat("yyyy - MM -- dd");
+    final day = DateFormat("yyyy - MM - dd");
     final hour = DateFormat.jm();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text("Thông tin đã đăng ký"),
         centerTitle: true,
+        backgroundColor: CustomColor.backgroundAppbar,
         actions: [
           IconButton(
               onPressed: () {
@@ -49,17 +51,39 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
         ],
       ),
       body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.only(top: 20),
+        child: Container(
+          height: size.height,
+          width: size.width,
+          decoration: BoxDecoration(
+              gradient: LinearGradient(
+            colors: [
+              Colors.orangeAccent.withOpacity(0.4),
+              Colors.white.withOpacity(0.4)
+            ],
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            stops: const [0.4, 0.7],
+          )),
+          padding: const EdgeInsets.symmetric(
+            vertical: 15,
+            horizontal: 15,
+          ),
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            mainAxisSize: MainAxisSize.max,
             children: [
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  CustomText(title: "Đội xe", content: "${items.carfleedId}"),
+                  Expanded(
+                      child: CustomText(
+                          title: "Đội xe", content: "${items.carfleedId}")),
+                  Expanded(
+                      child: CustomText(
+                          title: "Đội xe", content: "${items.companyId}")),
                 ],
               ),
-              horizontalLine(size),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Expanded(
@@ -74,95 +98,92 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
                   ),
                 ],
               ),
-              items.contNumber1 != "" ? horizontalLine(size) : Container(),
               items.contNumber1 != ""
-                  ? Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: CustomText(
-                              title: "Số công 1",
-                              content: "${items.contNumber1}"),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: Column(
-                            children: [
-                              CustomText(
-                                  title: "Số seal 1",
-                                  content: "${items.cont1seal1}"),
-                              const SizedBox(height: 10),
-                              CustomText(
-                                  title: "Số seal 2",
-                                  content: "${items.cont1seal2}"),
-                              const SizedBox(height: 10),
-                              CustomText(
-                                  title: "Số seal 3",
-                                  content: "${items.cont1seal3}"),
-                            ],
+                  ? Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: CustomText(
+                                title: "Số công 1",
+                                content: "${items.contNumber1}"),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            flex: 3,
+                            child: Column(
+                              children: [
+                                CustomText(
+                                    title: "Số seal 1",
+                                    content: "${items.cont1seal1}"),
+                                const SizedBox(height: 10),
+                                CustomText(
+                                    title: "Số seal 2",
+                                    content: "${items.cont1seal2}"),
+                                const SizedBox(height: 10),
+                                CustomText(
+                                    title: "Số seal 3",
+                                    content: "${items.cont1seal3}"),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     )
                   : Container(),
-              items.contNumber2 != "" ? horizontalLine(size) : Container(),
               items.contNumber2 != ""
-                  ? Row(
-                      children: [
-                        Expanded(
-                          flex: 3,
-                          child: CustomText(
-                              title: "Số công 2",
-                              content: "${items.contNumber2}"),
-                        ),
-                        Expanded(
-                          flex: 3,
-                          child: Column(
-                            children: [
-                              CustomText(
-                                  title: "Số seal 1",
-                                  content: "${items.cont2seal1}"),
-                              const SizedBox(height: 10),
-                              CustomText(
-                                  title: "Số seal 2",
-                                  content: "${items.cont2seal2}"),
-                              const SizedBox(height: 10),
-                              CustomText(
-                                  title: "Số seal 3",
-                                  content: "${items.cont2seal3}"),
-                            ],
+                  ? Container(
+                      margin: const EdgeInsets.only(top: 10),
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 3,
+                            child: CustomText(
+                                title: "Số công 2",
+                                content: "${items.contNumber2}"),
                           ),
-                        ),
-                      ],
+                          Expanded(
+                            flex: 3,
+                            child: Column(
+                              children: [
+                                CustomText(
+                                    title: "Số seal 1",
+                                    content: "${items.cont2seal1}"),
+                                const SizedBox(height: 10),
+                                CustomText(
+                                    title: "Số seal 2",
+                                    content: "${items.cont2seal2}"),
+                                const SizedBox(height: 10),
+                                CustomText(
+                                    title: "Số seal 3",
+                                    content: "${items.cont2seal3}"),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     )
                   : Container(),
-              horizontalLine(size),
+              const SizedBox(height: 10),
               Row(
                 children: [
-                  CustomText(
-                      title: "Ngày/tháng",
-                      content: day.format(DateTime.parse(dateTime))),
-                  CustomText(
-                      title: "Giờ vào",
-                      content: hour.format(DateTime.parse(dateTime))),
+                  Expanded(
+                    flex: 1,
+                    child: CustomText(
+                        title: "Ngày/tháng",
+                        content: day.format(DateTime.parse(dateTime))),
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: CustomText(
+                        title: "Giờ vào",
+                        content: hour.format(DateTime.parse(dateTime))),
+                  ),
                 ],
               )
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget horizontalLine(Size size) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Divider(
-        height: 5,
-        indent: size.width * 0.05,
-        endIndent: size.width * 0.05,
-        color: Colors.black.withOpacity(0.4),
-        thickness: 2,
       ),
     );
   }

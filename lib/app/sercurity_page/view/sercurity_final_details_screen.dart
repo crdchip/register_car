@@ -36,6 +36,7 @@ class _SercurityFinalDetailsScreenState
         body: Stack(
           children: [
             Container(
+              
               decoration: BoxDecoration(
                 gradient: LinearGradient(
                   colors: [

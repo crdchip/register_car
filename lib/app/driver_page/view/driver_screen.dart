@@ -69,7 +69,7 @@ class _DriverScreenState extends State<DriverScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Center(
+            const Center(
               child: Text(
                 "Đăng ký phiếu vào",
                 style: TextStyle(
@@ -213,7 +213,8 @@ class _DriverScreenState extends State<DriverScreen> {
                     hintText: '')
                 : Container(),
             //form chọn ngày tháng
-            formDate(size, "Ngày/tháng vào"),
+            formDate(size, "Ngày vào"),
+
             //Nút submit
             ButtonFormBottom(
               onPressed: () {
@@ -259,16 +260,21 @@ class _DriverScreenState extends State<DriverScreen> {
           width: size.width * 0.8,
           height: 60,
           child: DateTimePicker(
-            cursorColor: Colors.white,
+            initialEntryMode: DatePickerEntryMode.calendar,
+            cancelText: "Hủy",
+            confirmText: "Đồng ý",
+            calendarTitle: "Chọn ngày",
+            dateMask: "d/MM/yyyy",
+            use24HourFormat: false,
             decoration: const InputDecoration(
               border: InputBorder.none,
-              focusedBorder: InputBorder.none,
-              enabledBorder: InputBorder.none,
-              disabledBorder: InputBorder.none,
               fillColor: Colors.white,
+              focusColor: Colors.white,
+              hoverColor: Colors.white,
             ),
             type: DateTimePickerType.dateTimeSeparate,
-            dateMask: 'd MMM, yyyy',
+
+            // dateMask: 'd MMM, yyyy',
             initialValue: DateTime.now().toString(),
             firstDate: DateTime(2022),
             lastDate: DateTime(2100),

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:register_driver_car/app/tallymans/controller/tallyman_controller.dart';
 import 'package:register_driver_car/config/data/colors.dart';
 import 'package:register_driver_car/config/model/tracking/form_tracking.dart';
+import 'package:register_driver_car/config/widget/form_button_bottom.dart';
 import 'package:register_driver_car/config/widget/text_feilds.dart';
 
 class TallymanWorkingDetailsScreen extends StatefulWidget {
@@ -31,11 +32,18 @@ class _TallymanWorkingDetailsScreenState
           },
           icon: Icon(
             Icons.arrow_back_ios_new,
-            size: 16,
+            size: 26,
             color: Colors.white.withOpacity(0.4),
           ),
         ),
-        title: const Text("Order Details"),
+        title: const Text(
+          "Chi tiết đơn hàng",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: CustomColor.backgroundAppbar,
       ),
@@ -122,39 +130,15 @@ class _TallymanWorkingDetailsScreenState
             ),
           ),
           Positioned(
-            bottom: 0,
-            left: 0,
-            right: 0,
-            child: SizedBox(
-              // color: Colors.amber,
-              height: 100,
-              width: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(flex: 1, child: Container()),
-                  Expanded(
-                    child: TextButton(
-                      onPressed: () {
-                        tallymanController.putTrackinglv4(items.id);
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                            Colors.orangeAccent.withOpacity(0.8)),
-                      ),
-                      child: Text(
-                        "Xác nhận",
-                        style: TextStyle(
-                          color: Colors.blueGrey.withOpacity(0.4),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Expanded(flex: 1, child: Container()),
-                ],
-              ),
-            ),
-          )
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: ButtonFormBottom(
+                onPressed: () {
+                  tallymanController.putTrackinglv4(items.id);
+                },
+                text: "Xác nhận",
+              ))
         ],
       ),
     );

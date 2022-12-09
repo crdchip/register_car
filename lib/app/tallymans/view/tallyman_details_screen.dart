@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:register_driver_car/app/tallymans/controller/tallyman_controller.dart';
 import 'package:register_driver_car/config/data/colors.dart';
 import 'package:register_driver_car/config/model/tracking/form_tracking.dart';
+import 'package:register_driver_car/config/widget/form_button_bottom.dart';
 import 'package:register_driver_car/config/widget/text_feilds.dart';
 
 class TallyManDetailsScreen extends StatefulWidget {
@@ -34,7 +35,7 @@ class _TallyManDetailsScreenState extends State<TallyManDetailsScreen> {
             color: Colors.white.withOpacity(0.4),
           ),
         ),
-        title: const Text("Order Details"),
+        title: const Text("Chi tiết đơn hàng "),
         centerTitle: true,
         backgroundColor: CustomColor.backgroundAppbar,
       ),
@@ -124,36 +125,13 @@ class _TallyManDetailsScreenState extends State<TallyManDetailsScreen> {
           ),
           Positioned(
             bottom: 0,
-            left: 0,
             right: 0,
-            child: SizedBox(
-              // color: Colors.amber,
-              height: 100,
-              width: 100,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Expanded(flex: 1, child: Container()),
-                  Expanded(
-                    flex: 1,
-                    child: TextButton(
-                      onPressed: () {
-                        tallymanController.putTrackinglv3(items.id);
-                      },
-                      style: ButtonStyle(
-                        backgroundColor: MaterialStateProperty.all<Color>(
-                          Colors.orangeAccent.withOpacity(0.8),
-                        ),
-                      ),
-                      child: const Text(
-                        "Xác nhận",
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  Expanded(flex: 1, child: Container()),
-                ],
-              ),
+            left: 0,
+            child: ButtonFormBottom(
+              onPressed: () {
+                tallymanController.putTrackinglv3(items.id);
+              },
+              text: "Xác nhận",
             ),
           )
         ],
