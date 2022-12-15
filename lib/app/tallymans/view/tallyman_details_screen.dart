@@ -132,7 +132,6 @@ class _TallyManDetailsScreenState extends State<TallyManDetailsScreen> {
           ),
           Positioned(
             bottom: 0,
-            left: 0,
             right: 0,
             child: ButtonFormBottom(
               onPressed: () {

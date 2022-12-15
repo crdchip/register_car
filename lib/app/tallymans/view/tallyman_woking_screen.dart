@@ -6,6 +6,7 @@ import 'package:register_driver_car/config/model/tracking/form_tracking.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
 import 'package:register_driver_car/config/widget/custom_list_title.dart';
 import 'package:register_driver_car/config/widget/custom_nav_list_title.dart';
+import 'package:register_driver_car/config/widget/custome_title.dart';
 
 class TallymanWorkingScreen extends StatefulWidget {
   const TallymanWorkingScreen({super.key});
@@ -105,6 +106,7 @@ class _TallymanWorkingScreenState extends State<TallymanWorkingScreen> {
                           ? ListView.builder(
                               itemCount: items.length,
                               itemBuilder: ((context, index) {
+<<<<<<< HEAD
                                 var lenght =
                                     items[index].statustracking!.length - 1;
 
@@ -129,6 +131,26 @@ class _TallymanWorkingScreenState extends State<TallymanWorkingScreen> {
                                         '${items[index].formIns!.clientInformation!.companyname}',
                                     status:
                                         '${items[index].statustracking![lenght].name}',
+=======
+                                int statusChecking =
+                                    items[index].statustracking!.length;
+                                return InkWell(
+                                  onTap: () {
+                                    Get.toNamed(
+                                        Routes.TALLYMAN_WORKING_DETAILS_SCREEN,
+                                        arguments: items[index]);
+                                  },
+                                  child: CustomTitle(
+                                    Stt: "${index + 1}",
+                                    nameDriver:
+                                        "${items[index].formIns!.clientInformation!.name}",
+                                    numberPhone:
+                                        "${items[index].formIns!.clientInformation!.phone}",
+                                    customer:
+                                        "${items[index].formIns!.clientInformation!.companyname}",
+                                    status:
+                                        "${items[index].statustracking![statusChecking - 1].name}",
+>>>>>>> 90fd99075ad4022906c1e56bfb4798e7c2c5f4ce
                                   ),
                                 );
                               }),

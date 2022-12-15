@@ -16,6 +16,7 @@ class CustomText extends StatelessWidget {
               style: const TextStyle(
                 color: Colors.orangeAccent,
                 fontSize: 16,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ],
@@ -27,7 +28,7 @@ class CustomText extends StatelessWidget {
               content,
               style: const TextStyle(
                 color: Colors.black,
-                fontSize: 15,
+                fontSize: 16,
                 fontWeight: FontWeight.bold,
               ),
             ),

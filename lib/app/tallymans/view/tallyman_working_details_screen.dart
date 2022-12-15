@@ -32,12 +32,20 @@ class _TallymanWorkingDetailsScreenState
           },
           icon: Icon(
             Icons.arrow_back_ios_new,
+<<<<<<< HEAD
             size: 20,
+=======
+            size: 26,
+>>>>>>> 90fd99075ad4022906c1e56bfb4798e7c2c5f4ce
             color: Colors.white.withOpacity(0.4),
           ),
         ),
         title: const Text(
+<<<<<<< HEAD
           "Chi tiết phiếu đang lên hàng",
+=======
+          "Chi tiết đơn hàng",
+>>>>>>> 90fd99075ad4022906c1e56bfb4798e7c2c5f4ce
           style: TextStyle(
             color: Colors.white,
             fontSize: 20,
@@ -130,6 +138,7 @@ class _TallymanWorkingDetailsScreenState
             ),
           ),
           Positioned(
+<<<<<<< HEAD
             bottom: 0,
             left: 0,
             right: 0,
@@ -140,6 +149,17 @@ class _TallymanWorkingDetailsScreenState
               text: 'Xác nhận',
             ),
           ),
+=======
+              bottom: 0,
+              left: 0,
+              right: 0,
+              child: ButtonFormBottom(
+                onPressed: () {
+                  tallymanController.putTrackinglv4(items.id);
+                },
+                text: "Xác nhận",
+              ))
+>>>>>>> 90fd99075ad4022906c1e56bfb4798e7c2c5f4ce
         ],
       ),
     );
