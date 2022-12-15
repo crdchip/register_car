@@ -134,7 +134,8 @@ class _SercurityFinalScreenState extends State<SercurityFinalScreen> {
                         );
                       }
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                            color: Colors.orangeAccent),
                       );
                     }),
                   ),

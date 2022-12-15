@@ -40,7 +40,7 @@ class _AdminPageState extends State<AdminPage> {
         key: _scaffoldKey,
         appBar: AppBar(
           title: const Text(
-            "Dash Board",
+            "Admin Page",
             style: TextStyle(color: Colors.white, fontSize: 18),
           ),
           centerTitle: true,

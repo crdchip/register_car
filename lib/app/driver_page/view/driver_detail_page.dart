@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/driver_page/driver_page.dart';
+import 'package:register_driver_car/config/data/colors.dart';
 import 'package:register_driver_car/config/model/driver/form_post_account.dart';
 import 'package:register_driver_car/config/widget/text_feilds.dart';
 // ignore: depend_on_referenced_packages
@@ -38,7 +39,15 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Thông tin đã đăng ký"),
+        title: const Text(
+          "Thông tin đã đăng ký",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: CustomColor.backgroundAppbar,
         centerTitle: true,
         actions: [
           IconButton(
@@ -50,7 +59,7 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           child: Column(
             children: [
               Row(
@@ -59,7 +68,7 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
                   CustomText(title: "Đội xe", content: "${items.carfleedId}"),
                 ],
               ),
-              horizontalLine(size),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Expanded(
@@ -74,7 +83,9 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
                   ),
                 ],
               ),
-              items.contNumber1 != "" ? horizontalLine(size) : Container(),
+              items.contNumber1 != ""
+                  ? const SizedBox(height: 10)
+                  : Container(),
               items.contNumber1 != ""
                   ? Row(
                       children: [
@@ -105,7 +116,9 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
                       ],
                     )
                   : Container(),
-              items.contNumber2 != "" ? horizontalLine(size) : Container(),
+              items.contNumber2 != ""
+                  ? const SizedBox(height: 10)
+                  : Container(),
               items.contNumber2 != ""
                   ? Row(
                       children: [
@@ -136,33 +149,24 @@ class _DriverDetailsPageState extends State<DriverDetailsPage> {
                       ],
                     )
                   : Container(),
-              horizontalLine(size),
+              const SizedBox(height: 10),
               Row(
                 children: [
-                  CustomText(
-                      title: "Ngày/tháng",
-                      content: day.format(DateTime.parse(dateTime))),
-                  CustomText(
-                      title: "Giờ vào",
-                      content: hour.format(DateTime.parse(dateTime))),
+                  Expanded(
+                    child: CustomText(
+                        title: "Ngày/tháng",
+                        content: day.format(DateTime.parse(dateTime))),
+                  ),
+                  Expanded(
+                    child: CustomText(
+                        title: "Giờ vào",
+                        content: hour.format(DateTime.parse(dateTime))),
+                  ),
                 ],
               )
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget horizontalLine(Size size) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Divider(
-        height: 5,
-        indent: size.width * 0.05,
-        endIndent: size.width * 0.05,
-        color: Colors.black.withOpacity(0.4),
-        thickness: 2,
       ),
     );
   }

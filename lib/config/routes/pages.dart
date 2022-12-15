@@ -4,6 +4,7 @@ import 'package:register_driver_car/app/admin/view/coordinator/admin_coordinator
 import 'package:register_driver_car/app/admin/view/coordinator/admin_status_lines_details_screen.dart';
 import 'package:register_driver_car/app/admin/view/coordinator/admin_status_lines_screen.dart';
 import 'package:register_driver_car/app/admin/view/coordinator/admin_warehouse_details_screen.dart';
+import 'package:register_driver_car/app/admin/view/driver/admin_driver_details.dart';
 import 'package:register_driver_car/app/admin/view/sercurity/admin_sercurity_final_details_screen.dart';
 import 'package:register_driver_car/app/admin/view/tallyman/view/admin_tallyman_details_screen.dart';
 import 'package:register_driver_car/app/admin/view/tallyman/view/admin_tallyman_working_details_screen.dart';
@@ -57,6 +58,12 @@ abstract class AppPages {
     GetPage(
       name: Routes.ADMIN_PAGE,
       page: () => const AdminPage(),
+      // binding: AdminBindings(),
+      preventDuplicates: false,
+    ),
+    GetPage(
+      name: Routes.ADMIN_DRIVER_DETAILS_PAGE,
+      page: () => const AdminDriverDetailsPage(),
       // binding: AdminBindings(),
       preventDuplicates: false,
     ),

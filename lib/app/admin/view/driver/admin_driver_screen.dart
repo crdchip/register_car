@@ -2,6 +2,7 @@ import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:register_driver_car/app/admin/controller/admin_controller.dart';
 import 'package:register_driver_car/app/driver_page/controller/driver_controller.dart';
 import 'package:register_driver_car/config/widget/checkbox.dart';
 import 'package:register_driver_car/config/widget/dropdownButton.dart';
@@ -19,6 +20,7 @@ class AdminDriverScreen extends StatefulWidget {
 class _AdminDriverScreenState extends State<AdminDriverScreen> {
   final String routes = "/admin_driver_screen";
   final DriverController _driverController = Get.put(DriverController());
+  final AdminController _adminController = Get.put(AdminController());
 
   bool isCheckProduct = false;
   bool isCheckNotProduct = true;
@@ -356,7 +358,7 @@ class _AdminDriverScreenState extends State<AdminDriverScreen> {
   }
 
   postRegis() {
-    return _driverController.postRegisterCar(
+    return _adminController.postRegisterCar(
       selectedTeamCar.toString(),
       1,
       selectedCar.toString(),

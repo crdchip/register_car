@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/customers/controller/customer_controller.dart';
 import 'package:register_driver_car/app/customers/view/create_form_screen.dart';
@@ -9,7 +10,11 @@ import 'package:register_driver_car/app/customers/view/list_form_register_screen
 import 'package:register_driver_car/config/core/constants/constants.dart';
 import 'package:register_driver_car/config/data/colors.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
+import 'package:register_driver_car/config/widget/animated_toggle.dart';
+import 'package:register_driver_car/config/widget/switch_language.dart';
+import 'package:register_driver_car/config/widget/switch_mode.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:toggle_switch/toggle_switch.dart';
 
 class CustomerPage extends StatefulWidget {
   const CustomerPage({super.key});
@@ -26,6 +31,8 @@ class _CustomerPageState extends State<CustomerPage> {
   bool checkDrawer = false;
   var customerController = Get.put(CustomerController());
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey();
+
+  int _toggleValue = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -93,134 +100,135 @@ class _CustomerPageState extends State<CustomerPage> {
       child: Column(
         children: [
           Column(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              FutureBuilder(
-                future: controller.getData(),
-                builder: ((context, snapshot) {
-                  if (snapshot.hasData) {
-                    var items = snapshot.data;
-                    return SizedBox(
-                      height: size.height * 0.3,
-                      child: Column(
-                        children: [
-                          Container(
-                            padding: const EdgeInsets.only(left: 10),
-                            height: size.height * 0.15,
-                            alignment: Alignment.centerLeft,
-                            child: Container(
-                              height: size.height * 0.1,
-                              width: size.height * 0.1,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(100),
-                                color: Colors.redAccent,
+              Column(
+                children: [
+                  FutureBuilder(
+                    future: controller.getData(),
+                    builder: ((context, snapshot) {
+                      if (snapshot.hasData) {
+                        var items = snapshot.data;
+                        return Container(
+                          padding: const EdgeInsets.only(left: 20),
+                          height: size.height * 0.3,
+                          child: Column(
+                            children: [
+                              Container(
+                                height: size.height * 0.15,
+                                alignment: Alignment.centerLeft,
+                                child: Container(
+                                  height: size.height * 0.1,
+                                  width: size.height * 0.1,
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100),
+                                    color: Colors.redAccent,
+                                  ),
+                                  child: _urlIamge(
+                                      "https://th.bing.com/th/id/OIP.AFt9Z1kjCPEqviYmS5C7QwHaHa?pid=ImgDet&rs=1"),
+                                ),
                               ),
-                              child: _urlIamge(
-                                  "https://th.bing.com/th/id/OIP.AFt9Z1kjCPEqviYmS5C7QwHaHa?pid=ImgDet&rs=1"),
-                            ),
+                              Container(
+                                height: size.height * 0.1,
+                                width: size.width,
+                                alignment: Alignment.centerLeft,
+                                child: Column(
+                                  children: [
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Họ và tên : ${items["client"]["name"]}",
+                                        style: const TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Số điện thoại : ${items["client"]["phone"]}",
+                                        style: const TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 5),
+                                    Container(
+                                      alignment: Alignment.centerLeft,
+                                      child: Text(
+                                        "Chức vụ : ${items["role"]["roleName"]}",
+                                        style: const TextStyle(
+                                          color: Colors.blueGrey,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
                           ),
-                          Container(
-                            padding: const EdgeInsets.only(left: 10),
-                            height: size.height * 0.1,
-                            width: size.width,
-                            alignment: Alignment.centerLeft,
-                            child: Column(
-                              children: [
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Họ và tên : ${items["client"]["name"]}",
-                                    style: const TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Số điện thoại : ${items["client"]["phone"]}",
-                                    style: const TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(height: 5),
-                                Container(
-                                  alignment: Alignment.centerLeft,
-                                  child: Text(
-                                    "Chức vụ : ${items["role"]["roleName"]}",
-                                    style: const TextStyle(
-                                      color: Colors.blueGrey,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                  return Container();
-                }),
-              ),
-              Divider(
-                  height: 5,
-                  indent: size.width * 0.05,
-                  endIndent: size.width * 0.05,
-                  thickness: 2),
-              ListTile(
-                onTap: () {
-                  setState(() {
-                    currentScreen = const ListDriverScreen();
-                    closeDrawer();
-                  });
-                },
-                leading: const Icon(Icons.home),
-                title: const Text("Trang chủ"),
-              ),
-              Divider(
-                  height: 5,
-                  indent: size.width * 0.05,
-                  endIndent: size.width * 0.05,
-                  thickness: 2),
-              ListTile(
-                onTap: () {
-                  // Get.to(() => HistoryListDriverCompanyScreen());
-                  setState(() {
-                    currentScreen = const ListFormRegisterScreen();
+                        );
+                      }
+                      return Container();
+                    }),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      setState(() {
+                        currentScreen = const ListDriverScreen();
+                        closeDrawer();
+                      });
+                    },
+                    leading: const Icon(Icons.home),
+                    title: const Text("Trang chủ"),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      // Get.to(() => HistoryListDriverCompanyScreen());
+                      setState(() {
+                        currentScreen = const ListFormRegisterScreen();
 
-                    closeDrawer();
-                  });
-                },
-                leading: const Icon(Icons.menu_book),
-                title: const Text("Lịch sử phiếu đã đăng ký"),
-              ),
-              Divider(
-                  height: 5,
-                  indent: size.width * 0.05,
-                  endIndent: size.width * 0.05,
-                  thickness: 2),
-              ListTile(
-                onTap: () {},
-                leading: const Icon(Icons.settings),
-                title: const Text("Cài đặt"),
-              ),
-              Divider(
-                  height: 5,
-                  indent: size.width * 0.05,
-                  endIndent: size.width * 0.05,
-                  thickness: 2),
-              ListTile(
-                onTap: () {
-                  postLogout();
-                },
-                leading: const Icon(Icons.logout),
-                title: const Text("Đăng xuất"),
-              ),
+                        closeDrawer();
+                      });
+                    },
+                    leading: const Icon(Icons.menu_book),
+                    title: const Text("Lịch sử phiếu đã đăng ký"),
+                  ),
+                  ListTile(
+                    onTap: () {},
+                    leading: const Icon(Icons.settings),
+                    title: const Text("Cài đặt"),
+                  ),
+                  ListTile(
+                    onTap: () {
+                      postLogout();
+                    },
+                    leading: const Icon(Icons.logout),
+                    title: const Text("Đăng xuất"),
+                  ),
+                  Divider(
+                    height: 2,
+                    indent: 10,
+                    endIndent: 10,
+                    thickness: 2,
+                    color: Colors.grey[400],
+                  ),
+                  // SizedBox(
+                  //   height: 140,
+                  //   child: Column(
+                  //     mainAxisAlignment: MainAxisAlignment.end,
+                  //     children: const [
+                  //       SwitchLanguage(),
+                  //       SwitchMode(),
+                  //     ],
+                  //   ),
+                  // ),
+                ],
+              )
             ],
           )
         ],

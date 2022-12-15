@@ -105,6 +105,8 @@ class _TallymanScreenState extends State<TallymanScreen> {
                           controller: _scrollBottomBarController,
                           itemCount: items.length,
                           itemBuilder: ((context, index) {
+                            var lenght =
+                                items[index].statustracking!.length - 1;
                             return InkWell(
                               onTap: () {
                                 setState(
@@ -127,14 +129,15 @@ class _TallymanScreenState extends State<TallymanScreen> {
                                 customer:
                                     '${items[index].formIns!.clientInformation!.companyname}',
                                 status:
-                                    '${items[index].statustracking![0].name}',
+                                    '${items[index].statustracking![lenght].name}',
                               ),
                             );
                           }),
                         );
                       }
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                            color: Colors.orangeAccent),
                       );
                     }),
                   ),

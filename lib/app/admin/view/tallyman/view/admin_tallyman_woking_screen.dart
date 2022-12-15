@@ -57,7 +57,9 @@ class _AdminTallymanWorkingScreenState
                             child: Text("Không có xe"),
                           );
                   }
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                      child: CircularProgressIndicator(
+                          color: Colors.orangeAccent));
                 }),
               ),
             ));

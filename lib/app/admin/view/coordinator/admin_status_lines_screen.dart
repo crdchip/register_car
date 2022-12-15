@@ -62,7 +62,8 @@ class _AdminStatusLinesScreenState extends State<AdminStatusLinesScreen> {
                         );
                       }
                       return const Center(
-                        child: CircularProgressIndicator(),
+                        child: CircularProgressIndicator(
+                            color: Colors.orangeAccent),
                       );
                     }),
                     future: controller.getStatusLine(),

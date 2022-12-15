@@ -49,7 +49,7 @@ class _HistoryListDriverCompanyScreenState
                   );
                 }
                 return const Center(
-                  child: CircularProgressIndicator(),
+                  child: CircularProgressIndicator(color: Colors.orangeAccent),
                 );
               }),
             ),

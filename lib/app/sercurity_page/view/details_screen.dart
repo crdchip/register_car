@@ -54,18 +54,8 @@ class _DetailsSercurityState extends State<DetailsSercurity> {
             SingleChildScrollView(
               child: Container(
                 height: size.height * 1.1,
-                padding: const EdgeInsets.only(top: 10),
-                // decoration: BoxDecoration(
-                //   gradient: LinearGradient(
-                //     colors: [
-                //       Colors.orangeAccent.withOpacity(0.4),
-                //       Colors.white.withOpacity(0.4)
-                //     ],
-                //     begin: Alignment.topLeft,
-                //     end: Alignment.bottomRight,
-                //     stops: const [0.4, 0.7],
-                //   ),
-                // ),
+                padding:
+                    const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
                 child: Column(
                   children: [
                     CustomText(
@@ -88,27 +78,32 @@ class _DetailsSercurityState extends State<DetailsSercurity> {
                     Row(
                       // mainAxisAlignment: MainAxisAlignment.s,
                       children: [
-                        CustomText(
-                            title: "Ngày/tháng",
-                            content: day.format(DateTime.parse(dateTime))),
-                        CustomText(
-                            title: "Giờ vào",
-                            content: hour.format(DateTime.parse(dateTime))),
+                        Expanded(
+                          child: CustomText(
+                              title: "Ngày vào",
+                              content: day.format(DateTime.parse(dateTime))),
+                        ),
+                        Expanded(
+                          child: CustomText(
+                              title: "Giờ vào",
+                              content: hour.format(DateTime.parse(dateTime))),
+                        ),
                       ],
                     ),
                     const SizedBox(height: 15),
-                    const CustomText(title: "Kho", content: "5"),
+                    CustomText(
+                        title: "Kho", content: "${widget.dataform!.warehouse}"),
                     const SizedBox(height: 15),
                     Row(
                       children: [
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: CustomText(
                               title: "Số công 1",
                               content: "${widget.dataform!.contNumber1}"),
                         ),
                         Expanded(
-                          flex: 3,
+                          flex: 1,
                           child: Column(
                             children: [
                               CustomText(
@@ -129,13 +124,13 @@ class _DetailsSercurityState extends State<DetailsSercurity> {
                     Row(
                       children: [
                         Expanded(
-                          flex: 2,
+                          flex: 1,
                           child: CustomText(
                               title: "Số công 2",
                               content: "${widget.dataform!.contNumber2}"),
                         ),
                         Expanded(
-                          flex: 3,
+                          flex: 1,
                           child: Column(
                             children: [
                               CustomText(

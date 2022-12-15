@@ -36,13 +36,14 @@ class _AdminDriverDetailsPageState extends State<AdminDriverDetailsPage> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     String dateTime = items.intendTime.toString();
-    final day = DateFormat("yyyy - MM -- dd");
+    final day = DateFormat("yyyy - MM - dd");
     final hour = DateFormat.jm();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: const Text("Thông tin đã đăng ký"),
         centerTitle: true,
+        backgroundColor: CustomColor.backgroundAppbar,
         actions: [
           IconButton(
               onPressed: () {
@@ -53,7 +54,7 @@ class _AdminDriverDetailsPageState extends State<AdminDriverDetailsPage> {
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
           child: Column(
             children: [
               Row(

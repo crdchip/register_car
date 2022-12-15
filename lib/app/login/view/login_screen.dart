@@ -19,41 +19,6 @@ class _LoginScreenState extends State<LoginScreen> {
 
   bool login = true;
 
-  // void _fetchData(BuildContext context) async {
-  //   // show the loading dialog
-  //   showDialog(
-  //       // The user CANNOT close this dialog  by pressing outsite it
-  //       barrierDismissible: false,
-  //       context: context,
-  //       builder: (_) {
-  //         return Dialog(
-  //           // The background color
-  //           backgroundColor: Colors.white,
-
-  //           child: Padding(
-  //             padding: const EdgeInsets.symmetric(vertical: 20),
-  //             child: Column(
-  //               mainAxisSize: MainAxisSize.min,
-  //               children: [
-  //                 // The loading indicator
-  //                 CircularProgressIndicator(
-  //                     color: Colors.orangeAccent.withOpacity(0.4)),
-  //                 const SizedBox(height: 15),
-  //                 // Some text
-  //                 Text('Loading...',
-  //                     style: TextStyle(
-  //                         color: Colors.orangeAccent.withOpacity(0.4)))
-  //               ],
-  //             ),
-  //           ),
-  //         );
-  //       });
-  //   // Tính toán không đồng bộ của bạn ở đây (tìm nạp dữ liệu từ API, xử lý tệp, chèn thứ gì đó vào cơ sở dữ liệu, v.v.)
-  //   await Future.delayed(const Duration(seconds: 3));
-  //   // Đóng hộp thoại theo chương trình
-  //   Get.back();
-  // }
-
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -119,13 +84,13 @@ class _LoginScreenState extends State<LoginScreen> {
             SizedBox(height: size.height * 0.05),
             textForm(
               size,
-              "Account",
+              "Tài khoản",
               Icons.person,
               _loginController.accountController,
             ),
             textFormPassword(
               size,
-              "Password",
+              "Mật khẩu",
               Icons.lock,
               _loginController.passController,
             ),
@@ -246,9 +211,9 @@ class _LoginScreenState extends State<LoginScreen> {
       child: TextButton(
         onPressed: onPressed,
         child: const Text(
-          "Login",
+          "Đăng nhập",
           style: TextStyle(
-            color: Colors.grey,
+            color: Colors.white,
             fontSize: 18,
             fontWeight: FontWeight.bold,
           ),

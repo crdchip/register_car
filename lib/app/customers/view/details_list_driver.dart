@@ -22,10 +22,9 @@ class _DetailsListDriverState extends State<DetailsListDriver> {
     if (Get.arguments != null && Get.arguments is TrackingStatus) {}
   }
 
-  var items = Get.arguments as TrackingStatus;
-
   @override
   Widget build(BuildContext context) {
+    var items = Get.arguments as TrackingStatus;
     var length = items.statustracking!.length;
     return GetBuilder<CustomerController>(
       init: CustomerController(),
@@ -58,7 +57,6 @@ class _DetailsListDriverState extends State<DetailsListDriver> {
                 stops: const [0.4, 0.7],
               ),
             ),
-            // padding: const EdgeInsets.symmetric(horizontal: 15),
             child: Timeline(
               children: <TimelineModel>[
                 length >= 1

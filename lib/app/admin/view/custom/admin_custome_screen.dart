@@ -84,7 +84,7 @@ class _AdminCustomerScreenState extends State<AdminCustomerScreen> {
                 );
               }
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: Colors.orangeAccent),
               );
             }),
             future: controller.getDriverCompany(),

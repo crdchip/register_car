@@ -51,7 +51,7 @@ class _HistoryFormDriverScreenState extends State<HistoryFormDriverScreen> {
                 );
               }
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: Colors.orangeAccent),
               );
             }),
           ),

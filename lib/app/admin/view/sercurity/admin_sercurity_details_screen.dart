@@ -125,7 +125,7 @@ class _AdminSercurityDetailsScreenState
                               "${widget.dataform!.contNumber2}"),
                         ),
                         Expanded(
-                          flex: 3,
+                          flex: 2,
                           child: Column(
                             children: [
                               textForm(size, "Sô seal 1",

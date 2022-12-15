@@ -32,7 +32,7 @@ class CustomText extends StatelessWidget {
               ),
             ),
           ],
-        )
+        ),
       ],
     );
   }

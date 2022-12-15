@@ -15,4 +15,6 @@ class AppConstants {
 
   //Url
   static const String urlBase = "http://103.149.28.137:200";
+  //  static const String urlBase = "hhttp://192.168.3.59:200/";
+  //  static const String urlBase = "hhttp://192.168.3.59:200/";
 }

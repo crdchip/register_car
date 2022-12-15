@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:register_driver_car/app/tallymans/controller/tallyman_controller.dart';
 import 'package:register_driver_car/config/model/tracking/form_tracking.dart';
 import 'package:register_driver_car/config/routes/pages.dart';
+import 'package:register_driver_car/config/widget/custom_list_title.dart';
 import 'package:register_driver_car/config/widget/custom_nav_list_title.dart';
 
 class TallymanWorkingScreen extends StatefulWidget {
@@ -104,24 +105,30 @@ class _TallymanWorkingScreenState extends State<TallymanWorkingScreen> {
                           ? ListView.builder(
                               itemCount: items.length,
                               itemBuilder: ((context, index) {
-                                int statusChecking =
-                                    items[index].statustracking!.length;
-                                return Card(
-                                  child: ListTile(
-                                    tileColor:
-                                        Colors.orangeAccent.withOpacity(0.4),
-                                    onTap: () {
+                                var lenght =
+                                    items[index].statustracking!.length - 1;
+
+                                return InkWell(
+                                  onTap: () {
+                                    setState(() {
                                       Get.toNamed(
                                           Routes
                                               .TALLYMAN_WORKING_DETAILS_SCREEN,
                                           arguments: items[index]);
-                                    },
-                                    title: Text(
-                                        "${items[index].formIns!.clientInformation!.name}"),
-                                    subtitle: Text(
-                                        "${items[index].formIns!.clientInformation!.companyname}"),
-                                    trailing: Text(
-                                        "${items[index].statustracking![statusChecking - 1].name}"),
+                                    });
+                                  },
+                                  child: CustomListTitle(
+                                    Stt: '${index + 1}',
+                                    image:
+                                        "${items[index].formIns!.clientInformation!.imgdata}",
+                                    nameDriver:
+                                        '${items[index].formIns!.clientInformation!.name}',
+                                    numberPhone:
+                                        '${items[index].formIns!.clientInformation!.phone}',
+                                    customer:
+                                        '${items[index].formIns!.clientInformation!.companyname}',
+                                    status:
+                                        '${items[index].statustracking![lenght].name}',
                                   ),
                                 );
                               }),
@@ -130,7 +137,9 @@ class _TallymanWorkingScreenState extends State<TallymanWorkingScreen> {
                               child: Text("Không có xe"),
                             );
                     }
-                    return const Center(child: CircularProgressIndicator());
+                    return const Center(
+                        child: CircularProgressIndicator(
+                            color: Colors.orangeAccent));
                   }),
                 ),
               ),

@@ -113,7 +113,7 @@ class AdminController extends GetxController {
           print("Da dang ky");
         } else {
           Get.toNamed(
-            Routes.DRIVER_DETAILS_PAGE,
+            Routes.ADMIN_DRIVER_DETAILS_PAGE,
             arguments: FormRegisterCar(
               carfleedId: carfleedId,
               companyId: companyId,

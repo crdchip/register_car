@@ -73,7 +73,7 @@ class _AdminSercurityFinalScreenState extends State<AdminSercurityFinalScreen> {
                 );
               }
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: Colors.orangeAccent),
               );
             }),
           ),

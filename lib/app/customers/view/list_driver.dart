@@ -97,7 +97,7 @@ class _ListDriverScreenState extends State<ListDriverScreen> {
                 );
               }
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: Colors.orangeAccent),
               );
             }),
             future: controller.getDriverCompany(),

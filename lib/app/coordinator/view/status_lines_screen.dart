@@ -27,7 +27,14 @@ class _StatusLinesScreenState extends State<StatusLinesScreen> {
           },
           icon: const Icon(Icons.arrow_back_ios_new),
         ),
-        title: Text("Chọn kho"),
+        title: const Text(
+          "Chọn kho",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         backgroundColor: CustomColor.backgroundAppbar,
       ),
@@ -60,7 +67,7 @@ class _StatusLinesScreenState extends State<StatusLinesScreen> {
                 );
               }
               return const Center(
-                child: CircularProgressIndicator(),
+                child: CircularProgressIndicator(color: Colors.orangeAccent),
               );
             }),
             future: coordinatorController.getStatusLine(),

@@ -119,7 +119,9 @@ class _TallymanFinalScreenState extends State<TallymanFinalScreen> {
                             child: Text("Không có xe"),
                           );
                   }
-                  return const Center(child: CircularProgressIndicator());
+                  return const Center(
+                      child: CircularProgressIndicator(
+                          color: Colors.orangeAccent));
                 }),
               ),
             )

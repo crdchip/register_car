@@ -36,11 +36,11 @@ class _CoordinatorDetailsScreenState extends State<CoordinatorDetailsScreen> {
         centerTitle: true,
         backgroundColor: CustomColor.backgroundAppbar,
       ),
-      body: SingleChildScrollView(
-        child: Stack(
-          children: [
-            Container(
-              padding: const EdgeInsets.only(top: 10, left: 10, right: 10),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            child: Container(
+              padding: const EdgeInsets.only(top: 20, left: 10, right: 10),
               height: size.height,
               width: size.width,
               child: Column(
@@ -177,22 +177,22 @@ class _CoordinatorDetailsScreenState extends State<CoordinatorDetailsScreen> {
                 ],
               ),
             ),
-            Positioned(
-              bottom: 2,
-              right: 0,
-              left: 0,
-              child: ButtonFormBottom(
-                onPressed: () {
-                  Get.toNamed(
-                    Routes.STATUS_LINES_SCREEN,
-                    arguments: items.id,
-                  );
-                },
-                text: "Select lines",
-              ),
-            )
-          ],
-        ),
+          ),
+          Positioned(
+            bottom: 0,
+            right: 0,
+            left: 0,
+            child: ButtonFormBottom(
+              onPressed: () {
+                Get.toNamed(
+                  Routes.STATUS_LINES_SCREEN,
+                  arguments: items.id,
+                );
+              },
+              text: "Chọn lines",
+            ),
+          )
+        ],
       ),
     );
   }

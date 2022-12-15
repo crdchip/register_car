@@ -92,6 +92,7 @@ class _CustomListTitleState extends State<CustomListTitle> {
               flex: 1,
               child: Center(
                 child: Text(widget.status,
+                    textAlign: TextAlign.center,
                     style:
                         const TextStyle(color: Colors.blueGrey, fontSize: 14)),
               ),

@@ -41,7 +41,7 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
             "${items.name} ",
             style: const TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 20,
               fontWeight: FontWeight.bold,
             ),
           ),
@@ -64,12 +64,21 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                         ? Container()
                         : Column(
                             children: [
-                              Center(child: Text("Door left ${index + 1}")),
+                              Center(
+                                child: Text(
+                                  "Cửa trái ${index + 1}",
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold,
+                                  ),
+                                ),
+                              ),
                               showLane(
-                                "${gateLeft[index].lines![0].name}",
+                                "Lines 1",
                                 gateLeft[index].lines![0].status == false
-                                    ? Colors.red
-                                    : Colors.green,
+                                    ? Colors.green
+                                    : Colors.redAccent,
                                 () {
                                   showPlatformDialog(
                                     context: context,
@@ -101,10 +110,10 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                 },
                               ),
                               showLane(
-                                "${gateLeft[index].lines![1].name}",
+                                "Lines 2",
                                 gateLeft[index].lines![1].status == false
-                                    ? Colors.red
-                                    : Colors.green,
+                                    ? Colors.green
+                                    : Colors.redAccent,
                                 () {
                                   showPlatformDialog(
                                     context: context,
@@ -118,7 +127,7 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                           onPressed: () {
                                             setState(() {
                                               controller.putTrackinglv2(
-                                                gateLeft[index].lines![0].id,
+                                                gateLeft[index].lines![1].id,
                                                 idForm,
                                               );
                                             });
@@ -136,10 +145,10 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                 },
                               ),
                               showLane(
-                                "${gateLeft[index].lines![2].name}",
+                                "Lines 3",
                                 gateLeft[index].lines![2].status == false
-                                    ? Colors.red
-                                    : Colors.green,
+                                    ? Colors.green
+                                    : Colors.redAccent,
                                 () {
                                   showPlatformDialog(
                                     context: context,
@@ -153,7 +162,7 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                           onPressed: () {
                                             setState(() {
                                               controller.putTrackinglv2(
-                                                gateLeft[index].lines![0].id,
+                                                gateLeft[index].lines![2].id,
                                                 idForm,
                                               );
                                             });
@@ -190,12 +199,19 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                         ? Container()
                         : Column(
                             children: [
-                              Text("Door right ${index + 0}"),
+                              Text(
+                                "Cửa phải ${index + 1}",
+                                style: const TextStyle(
+                                  color: Colors.black,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                               showLane(
-                                "${gateRight[index].lines![0].name}",
+                                "Lines 1",
                                 gateRight[index].lines![0].status == false
-                                    ? Colors.red
-                                    : Colors.green,
+                                    ? Colors.green
+                                    : Colors.redAccent,
                                 () {
                                   showPlatformDialog(
                                     context: context,
@@ -227,10 +243,10 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                 },
                               ),
                               showLane(
-                                "${gateRight[index].lines![1].name}",
+                                "Lines 2",
                                 gateRight[index].lines![1].status == false
-                                    ? Colors.red
-                                    : Colors.green,
+                                    ? Colors.green
+                                    : Colors.redAccent,
                                 () {
                                   showPlatformDialog(
                                     context: context,
@@ -262,10 +278,10 @@ class _StatusLinesDetailsScreenState extends State<StatusLinesDetailsScreen> {
                                 },
                               ),
                               showLane(
-                                "${gateRight[index].lines![2].name}",
+                                "Lines 3",
                                 gateRight[index].lines![2].status == false
-                                    ? Colors.red
-                                    : Colors.green,
+                                    ? Colors.green
+                                    : Colors.redAccent,
                                 () {
                                   showPlatformDialog(
                                     context: context,

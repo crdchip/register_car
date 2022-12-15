@@ -59,9 +59,13 @@ class SercurityController extends GetxController {
         results = tracking.map((e) => Tracking.fromJson(e)).toList();
         if (query != null) {
           results = results
-              .where((element) => element.formIns!.clientInformation!.name!
-                  .toLowerCase()
-                  .contains((query.toLowerCase())))
+              .where(
+                (element) => element.formIns!.clientInformation!.name!
+                    .toLowerCase()
+                    .contains(
+                      (query.toLowerCase()),
+                    ),
+              )
               .toList();
         }
       } else {

@@ -2,9 +2,10 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:register_driver_car/app/customers/customer_page.dart';
+import 'package:register_driver_car/config/data/colors.dart';
 import 'package:register_driver_car/config/model/driver/form_post_account.dart';
 import 'package:register_driver_car/config/widget/text_feilds.dart';
-// ignore: depend_on_referenced_packages
+
 import 'package:intl/intl.dart';
 
 class DetailsFormRegisterScreen extends StatefulWidget {
@@ -34,12 +35,19 @@ class _DetailsFormRegisterScreenState extends State<DetailsFormRegisterScreen> {
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     String dateTime = items.intendTime.toString();
-    final day = DateFormat("yyyy - MM -- dd");
+    final day = DateFormat("yyyy - MM - dd");
     final hour = DateFormat.jm();
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Thông tin đã đăng ký"),
+        title: const Text(
+          "Thông tin đã đăng ký",
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 20,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
         centerTitle: true,
         actions: [
           IconButton(
@@ -48,10 +56,11 @@ class _DetailsFormRegisterScreenState extends State<DetailsFormRegisterScreen> {
               },
               icon: const Icon(Icons.home))
         ],
+        backgroundColor: CustomColor.backgroundAppbar,
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.only(top: 20),
+          padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
           child: Column(
             children: [
               Row(
@@ -60,7 +69,7 @@ class _DetailsFormRegisterScreenState extends State<DetailsFormRegisterScreen> {
                   CustomText(title: "Đội xe", content: "${items.carfleedId}"),
                 ],
               ),
-              horizontalLine(size),
+              const SizedBox(height: 10),
               Row(
                 children: [
                   Expanded(
@@ -75,7 +84,9 @@ class _DetailsFormRegisterScreenState extends State<DetailsFormRegisterScreen> {
                   ),
                 ],
               ),
-              items.contNumber1 != "" ? horizontalLine(size) : Container(),
+              items.contNumber1 != ""
+                  ? const SizedBox(height: 10)
+                  : Container(),
               items.contNumber1 != ""
                   ? Row(
                       children: [
@@ -106,7 +117,9 @@ class _DetailsFormRegisterScreenState extends State<DetailsFormRegisterScreen> {
                       ],
                     )
                   : Container(),
-              items.contNumber2 != "" ? horizontalLine(size) : Container(),
+              items.contNumber2 != ""
+                  ? const SizedBox(height: 10)
+                  : Container(),
               items.contNumber2 != ""
                   ? Row(
                       children: [
@@ -137,33 +150,24 @@ class _DetailsFormRegisterScreenState extends State<DetailsFormRegisterScreen> {
                       ],
                     )
                   : Container(),
-              horizontalLine(size),
+              const SizedBox(height: 10),
               Row(
                 children: [
-                  CustomText(
-                      title: "Ngày/tháng",
-                      content: day.format(DateTime.parse(dateTime))),
-                  CustomText(
-                      title: "Giờ vào",
-                      content: hour.format(DateTime.parse(dateTime))),
+                  Expanded(
+                    child: CustomText(
+                        title: "Ngày/tháng",
+                        content: day.format(DateTime.parse(dateTime))),
+                  ),
+                  Expanded(
+                    child: CustomText(
+                        title: "Giờ vào",
+                        content: hour.format(DateTime.parse(dateTime))),
+                  ),
                 ],
               )
             ],
           ),
         ),
-      ),
-    );
-  }
-
-  Widget horizontalLine(Size size) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10),
-      child: Divider(
-        height: 5,
-        indent: size.width * 0.05,
-        endIndent: size.width * 0.05,
-        color: Colors.black.withOpacity(0.4),
-        thickness: 2,
       ),
     );
   }
